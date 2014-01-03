@@ -8,15 +8,19 @@
 </head>
 <body>
 
-<%= render "layouts/navbar" %>
+  <%= render "layouts/sizer" %>
 
-<h4>
-  <small>
-    This is not a real site. I'm just demonstrating my amazing web application skills
-  </small>
-</h4>
+  <%= render "layouts/navbar" %>
 
-<%= yield %>
+  <h4>
+    <small>
+      This is not a real site. I'm just demonstrating my amazing web application skills
+    </small>
+  </h4>
 
+  <%= yield %>
+  <%= render "layouts/loginModal" %>
+  <%= render "layouts/registerModal" %>
+  <%= render "layouts/forgotPwModal" %>
 </body>
 </html>
