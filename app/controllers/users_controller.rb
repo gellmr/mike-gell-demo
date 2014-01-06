@@ -4,9 +4,9 @@ class UsersController < ApplicationController
     @user = User.new(sane_user_params)
     # Try to validate the new user record
     if @user.save
-      render :json => @user, :status => 201
+      render :json => @user, :status => 201 # created
     else
-      head :bad_request
+      render :json => @user.errors.messages, :status => 400 # bad request
     end
   end
 

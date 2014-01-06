@@ -7,7 +7,7 @@ $(document).ready(function() {
       user: {
         email: $("#user_email").val(),
         password: $("#user_password").val(),
-        password_confirmation: $("#user_password").val()
+        password_confirmation: $("#user_confirm_password").val()
       }
     }
     console.log("Try to register...");
@@ -25,11 +25,13 @@ $(document).ready(function() {
           // window.location.href = '/home/' + user.id;
         },
 
-        400: function() {
-          console.log("failed");
+        // bad request
+        400: function(errorMessage) {
+          // console.log("failed. errorMessage: " + JSON.stringify(errorMessage));
+          console.log("failed. " + errorMessage.responseText);
         }
       }
-      
+
     });
   });
 });
