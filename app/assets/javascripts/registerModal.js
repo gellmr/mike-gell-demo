@@ -1,6 +1,8 @@
 $(document).ready(function() {
   $('#registerModalSubmit').click(function() {
 
+    var _modal = $('#registerModal');
+
     var params = {
       user: {
         email: $("#user_email").val(),
@@ -14,18 +16,20 @@ $(document).ready(function() {
       type:'POST',
       dataType:"json",
       data: params,
+
       statusCode: {
-        201: function() {
-          console.log("success");
-          $('#registerModal').modal('hide');
+
+        201: function(user) {
+          console.log("success! user: " + user.id);
+          _modal.modal('hide');
+          // window.location.href = '/home/' + user.id;
         },
+
         400: function() {
           console.log("failed");
-        },
+        }
       }
-    }).done(function(data){
-      console.log('done() ...data: ' + data);
+      
     });
-
   });
- });
+});
