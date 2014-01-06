@@ -26,9 +26,14 @@ $(document).ready(function() {
         },
 
         // bad request
-        400: function(errorMessage) {
-          // console.log("failed. errorMessage: " + JSON.stringify(errorMessage));
-          console.log("failed. " + errorMessage.responseText);
+        400: function(errors) {
+          // console.log("failed. " + errors.responseText);
+          $('#error_messages').empty();
+          for(var propName in errors.responseJSON) {
+            var value = errors.responseJSON[propName];
+            console.log(propName + ': ' + value);
+            $('#error_messages').append('<li>' + propName + ': ' + value + '</li>');
+          }
         }
       }
 
