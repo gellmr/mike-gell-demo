@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
   validates :password, length: { in: 10..32 }
   
   validates :email, length: { minimum: 5 }
-  validates :email, uniqueness: true
+  validates_uniqueness_of :email, :case_sensitive => false
 end
