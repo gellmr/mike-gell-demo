@@ -5,9 +5,9 @@ $(document).ready(function() {
 
     var params = {
       user: {
-        email: $("#user_email").val(),
-        password: $("#user_password").val(),
-        password_confirmation: $("#user_confirm_password").val()
+        email: $("#input_email").val(),
+        password: $("#input_password").val(),
+        password_confirmation: $("#input_password_confirmation").val()
       }
     }
     console.log("Try to register...");
