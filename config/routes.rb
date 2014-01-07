@@ -1,11 +1,10 @@
 Fuzzybear::Application.routes.draw do
-  resources :users
-
-  get "home/index"
-
-  get 'home/' => 'home#index'
 
   resources :users
+
+  get 'home/:id'   => 'home#show'
+  get "home/index" => 'home#index'
+  get 'home/'      => 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

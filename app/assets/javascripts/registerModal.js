@@ -71,7 +71,7 @@ $(document).ready(function() {
         201: function(user) {
           console.log("success! user: " + user.id);
           _modal.modal('hide');
-          // window.location.href = '/home/' + user.id;
+          window.location.href = '/home/' + user.id;
         },
 
         // bad request

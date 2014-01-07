@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(sane_user_params)
     if @user.save
+      flash[:just_signed_up] = true;
       render :json => @user, :status => 201 # created
     else
       render :json => @user.errors, :status => 400 # bad request

@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-xs-12">
+    
+    <% if flash[:just_signed_up] %>
+    <div>
+      <h3>
+        Welcome, <%= @user.email %>
+      </h3>
+    </div>
+    <% end %>
+
+    <%= form_for @user do |f| %>
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="panel-title">Account Details</h3>
+        </div>
+
+        <div class="panel-body">
+          <div id="form-group-email" class="form-group">
+            <label for="input_email">Email address</label>
+            <span class='error-message'></span>
+            <!-- <input type="email" id="input_email" class="form-control"> -->
+            <%= f.text_field :email %>
+          </div>
+
+          <button id="submitButton" type="button" class="btn btn-primary pull-right">Submit</button>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
