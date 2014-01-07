@@ -22,14 +22,14 @@ $(document).ready(function() {
         201: function(user) {
           console.log("success! You are logged in. user: " + user.id);
           _modal.modal('hide');
-          // window.location.href = '/home/' + user.id;
+          // window.location.href = '/user/' + user.id;
         },
 
         400: function() {
           console.log("failed");
         }
       }
-      
+
     });
   });
 });

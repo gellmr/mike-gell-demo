@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  def index
+  end
 
   def create
     @user = User.new(sane_user_params)
@@ -8,6 +10,16 @@ class UsersController < ApplicationController
     else
       render :json => @user.errors, :status => 400 # bad request
     end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_attributes!(sane_user_params)
+    redirect_to @user
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
   end
 
   private

@@ -2,7 +2,8 @@ Fuzzybear::Application.routes.draw do
 
   resources :users
 
-  get 'home/:id'   => 'home#show'
+  get 'user/:id' => 'users#show'
+
   get "home/index" => 'home#index'
   get 'home/'      => 'home#index'
 
