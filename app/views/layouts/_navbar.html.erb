@@ -3,9 +3,16 @@
     <nav class="navbar navbar-default" role="navigation">
       <!-- <div class="row"> -->
 
+        <%
+        def loginColor
+          return 'green' if current_user
+          return 'red'
+        end
+        %>
+
         <!-- Site Title -->
         <div class="col-xs-6 col-sm-4">
-          <a class="navbar-brand mg-navbar-title" href="#" style="margin-left: -16px;">
+          <a class="navbar-brand mg-navbar-title" href="#" style="margin-left: -16px; background-color: <%= loginColor %>;">
             Fuzzy Bear Electronics
           </a>
         </div>
@@ -13,9 +20,24 @@
         <!-- Forgot Pw, Rego, Login -->
         <div class="col-xs-6 col-sm-8" style="padding-right: 0px">
           <ol class="nav navbar-nav navbar-right" style="margin: 0px;">
+
+            <% if current_user %>
+
+            <li><a href="/logout" class="mg-navbar-link">Log Out</a></li>
+
+            <li><a href="/myaccount" class="mg-navbar-link">My Account</a></li>
+
+            <li><a href="#" class="mg-navbar-link">Change password</a></li>
+
+            <% else %>
+
             <li><a href="#" data-toggle="modal" data-target="#loginModal" class="mg-navbar-link">Login</a></li>
+
             <li><a href="#" data-toggle="modal" data-target="#registerModal" class="mg-navbar-link">Register</a></li>
+
             <li><a href="#" data-toggle="modal" data-target="#forgotPwModal" class="mg-navbar-link">Forgot my password</a></li>
+
+            <% end %>
           </ol>
         </div>
 

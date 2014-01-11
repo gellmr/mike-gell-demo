@@ -3,9 +3,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(sane_user_params)
     if @user.save
+      puts "-----> Created Account successfully!!!"
       flash[:just_signed_up] = true;
+      session[:current_user_id] = @user.id
       render :json => @user, :status => 201 # created
     else
+      puts "-----> Failed to Create Account!!!"
       render :json => @user.errors, :status => 400 # bad request
     end
   end
