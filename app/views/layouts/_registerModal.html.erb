@@ -6,35 +6,32 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Create Account</h4>
+          <h4 class="modal-title">Create Account</h4>
         </div>
 
         <div class="modal-body">
 
-          <ul id="error_messages">
-          </ul>
-
-          <div id="form-group-email" class="form-group">
-            <label for="input_email">Email address</label>
+          <div class="form-group email">
+            <label for="inputEmail">Email address</label>
             <span class='error-message'></span>
-            <input type="email" id="input_email" class="form-control">
+            <input class="form-control" type="email" name="inputEmail">
           </div>
 
-          <div id="form-group-password" class="form-group">
-            <label for="input_password">Password</label>
+          <div class="form-group password">
+            <label for="inputPassword">Password</label>
             <span class='error-message'></span>
-            <input type="password" id="input_password" class="form-control">
+            <input class="form-control" type="password" name="inputPassword">
           </div>
           
-          <div id="form-group-password-confirmation" class="form-group">
-            <label for="input_password_confirmation">Confirm Password</label>
+          <div class="form-group passwordConfirmation">
+            <label for="inputPasswordConfirmation">Confirm Password</label>
             <span class='error-message'></span>
-            <input type="password" id="input_password_confirmation" class="form-control">
+            <input class="form-control" type="password" name="inputPasswordConfirmation">
           </div>
         </div>
 
         <div class="modal-footer">
-          <button id="registerModalSubmit" type="button" class="btn btn-primary pull-right">Submit</button>
+          <button type="button" class="btn btn-primary pull-right submitButton">Submit</button>
         </div>
       </form>
     </div>

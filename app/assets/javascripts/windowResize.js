@@ -13,6 +13,8 @@ function smallMode() {
 }
 
 $(document).ready(function() {
+  
+  // This makes the navbar text become tiny, if the window is very small.
   $(window).resize( function() {
     var size = $('body nav.navbar').css('width');
     if (parseInt(size) > 382) {
@@ -21,5 +23,7 @@ $(document).ready(function() {
       smallMode();
     }
   });
+
+  // Here we ensure the navbar text is the correct size when a new window is opened.
   $(window).resize();
 });

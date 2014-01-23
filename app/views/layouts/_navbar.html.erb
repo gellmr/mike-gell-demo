@@ -25,9 +25,9 @@
 
             <li><a href="/logout" class="mg-navbar-link">Log Out</a></li>
 
-            <li><a href="/myaccount" class="mg-navbar-link">My Account</a></li>
+            <li><a href="/users/<%= current_user.id%>" class="mg-navbar-link">My Account</a></li>
 
-            <li><a href="#" class="mg-navbar-link">Change password</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#changePwModal" class="mg-navbar-link">Change password</a></li>
 
             <% else %>
 

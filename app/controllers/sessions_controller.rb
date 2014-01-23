@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
   # "Delete" a login, aka "log the user out"
   def destroy
     # Remove the user id from the session
+    puts "SessionsController#destroy ... session[#{session[:current_user_id]}] = nil"
     session[:current_user_id] = nil
-    redirect_to home_url
+    redirect_to root_url
   end
 end

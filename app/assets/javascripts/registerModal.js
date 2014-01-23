@@ -1,62 +1,82 @@
 function showErrors(errors) {
-  $('#form-group-email').removeClass('alert alert-warning');
-  $('#form-group-password').removeClass('alert alert-warning');
-  $('#form-group-password-confirmation').removeClass('alert alert-warning');
 
+  var emailDiv = $('#registerModal div.form-group.email');
+  var passwordDiv = $('#registerModal div.form-group.password');
+  var confirmPasswordDiv = $('#registerModal div.form-group.passwordConfirmation');
+
+  // clear the error classes, for all rego fields.
+  emailDiv.removeClass('alert alert-warning');
+  passwordDiv.removeClass('alert alert-warning');
+  confirmPasswordDiv.removeClass('alert alert-warning');
+
+  // Make the error classes visible, for all rego fields.
   function showWarningClass() {
-    $('#form-group-email').addClass('alert');
-    $('#form-group-password').addClass('alert');
-    $('#form-group-password-confirmation').addClass('alert');
+    emailDiv.addClass('alert');
+    passwordDiv.addClass('alert');
+    confirmPasswordDiv.addClass('alert');
   };
 
+  // Check if the error list is empty, for a given rego field.
+  function gotErrors(arr) {
+    if (typeof(arr) != "undefined" && arr.length > 0) {
+      return true;
+    }
+    return false;
+  };
+
+  // Show the error messages for a given rego field.
+  function displayErrors(errors, jqSelector) {
+    for(var propName in errors) {
+      errors[propName] = capitaliseFirstLetter(errors[propName]);
+    };
+    jqSelector.append(errors.join(', '));
+  }
+
+  // Get the list of errors, for all rego fields.
   var emailErrors = errors.responseJSON['email'];
   var pwErrors = errors.responseJSON['password'];
-  var pwConfErrors = errors.responseJSON['password_confirmation'];
+  var pwConfErrors = errors.responseJSON['passwordConfirmation'];
 
-  $('#form-group-email .error-message').empty();
-  $('#form-group-password .error-message').empty();
-  $('#form-group-password-confirmation .error-message').empty();
+  // Clear the error text content, for all rego fields.
+  emailDiv.find('span.error-message').empty();
+  passwordDiv.find('span.error-message').empty();
+  confirmPasswordDiv.find('span.error-message').empty();
 
-  if (typeof(emailErrors) != "undefined" && emailErrors.length > 0) {
+  if (gotErrors(emailErrors)) {
     showWarningClass();
-    $('#form-group-email').addClass("alert-warning");
-    for(var propName in emailErrors) {
-      emailErrors[propName] = capitaliseFirstLetter(emailErrors[propName]);
-    };
-    $('#form-group-email .error-message').append(emailErrors.join(', '));
+    emailDiv.addClass("alert-warning");
+    displayErrors(emailErrors, emailDiv.find('span.error-message'));
   }
 
-  if (typeof(pwErrors) != "undefined" && pwErrors.length > 0) {
+  if (gotErrors(pwErrors)) {
     showWarningClass();
-    $('#form-group-password').addClass("alert-warning");
-    $('#form-group-password-confirmation').addClass("alert-warning");
-    for(var propName in pwErrors) {
-      pwErrors[propName] = capitaliseFirstLetter(pwErrors[propName]);
-    };
-    $('#form-group-password .error-message').append(pwErrors.join(', '));
+    passwordDiv.addClass("alert-warning");
+    confirmPasswordDiv.addClass("alert-warning");
+    displayErrors(pwErrors, passwordDiv.find('span.error-message'));
   }
 
-  if (typeof(pwConfErrors) != "undefined" && pwConfErrors.length > 0) {
+  if (gotErrors(pwConfErrors)) {
     showWarningClass();
-    $('#form-group-password').addClass("alert-warning");
-    $('#form-group-password-confirmation').addClass("alert-warning");
-    for(var propName in pwConfErrors) {
-      pwConfErrors[propName] = capitaliseFirstLetter(pwConfErrors[propName]);
-    };
-    $('#form-group-password-confirmation .error-message').append(pwConfErrors.join(', '));
+    passwordDiv.addClass("alert-warning");
+    confirmPasswordDiv.addClass("alert-warning");
+    displayErrors(pwConfErrors, confirmPasswordDiv.find('span.error-message'));
   }
 };
 
+
 $(document).ready(function() {
-  $('#registerModalSubmit').click(function() {
+
+  $(document).on('click', '#registerModal button.submitButton', function() {
+
+    console.log("\n register modal submit button - clicked");
 
     var _modal = $('#registerModal');
 
     var params = {
       user: {
-        email: $("#input_email").val(),
-        password: $("#input_password").val(),
-        password_confirmation: $("#input_password_confirmation").val()
+        email: $("#registerModal div.email input").val(),
+        password: $("#registerModal div.password input").val(),
+        password_confirmation: $("#registerModal div.passwordConfirmation input").val()
       }
     }
     console.log("Try to register...");
@@ -70,8 +90,10 @@ $(document).ready(function() {
 
         201: function(user) {
           console.log("success! user: " + user.id);
+          _modal.on('hidden.bs.modal', function () {
+            window.location.href = '/users/' + user.id;
+          })
           _modal.modal('hide');
-          window.location.href = '/users/' + user.id;
         },
 
         // bad request
@@ -81,5 +103,6 @@ $(document).ready(function() {
       }
 
     });
+    return false;
   });
 });
