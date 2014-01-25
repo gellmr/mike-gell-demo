@@ -30,7 +30,7 @@
             <predecessor id="1" predecessor-id="3" type="FS"/>
           </predecessors>
           <task id="5" name="core" note="" work="316800" start="20140111T140000Z" end="20140122T140000Z" work-start="20140111T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
-          <task id="6" name="events" note="" work="57600" start="20140122T140000Z" end="20140124T140000Z" work-start="20140122T140000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-work">
+          <task id="6" name="events" note="" work="57600" start="20140122T140000Z" end="20140124T140000Z" work-start="20140122T140000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
             <predecessors>
               <predecessor id="1" predecessor-id="5" type="FS"/>
             </predecessors>
@@ -45,7 +45,7 @@
               <predecessor id="1" predecessor-id="7" type="FS"/>
             </predecessors>
           </task>
-          <task id="9" name="plugins" note="" work="28800" start="20140126T140000Z" end="20140127T140000Z" work-start="20140126T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <task id="9" name="plugins" note="" work="28800" start="20140126T140000Z" end="20140127T140000Z" work-start="20140126T140000Z" percent-complete="40" priority="0" type="normal" scheduling="fixed-work">
             <predecessors>
               <predecessor id="1" predecessor-id="8" type="FS"/>
             </predecessors>

@@ -11,13 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140106051053) do
+ActiveRecord::Schema.define(version: 20140125081348) do
 
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "home_phone"
+    t.string   "work_phone"
+    t.string   "mobile_phone"
+    t.string   "shipping_address_line_1"
+    t.string   "shipping_address_line_2"
+    t.string   "shipping_address_city"
+    t.string   "shipping_address_state"
+    t.string   "shipping_address_post_code"
+    t.string   "shipping_address_country_or_region"
+    t.string   "billing_address_line_1"
+    t.string   "billing_address_line_2"
+    t.string   "billing_address_city"
+    t.string   "billing_address_state"
+    t.string   "billing_address_post_code"
+    t.string   "billing_address_country_or_region"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
