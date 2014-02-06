@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <%#= form_for @store_page do |p| %>
-    
+    <%= form_for @products do |p| %>
+
       <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -10,11 +10,17 @@
         </div>
 
         <div class="panel-body">
-          <%#= p.text_field :email, type: 'email', id: 'input_email', :class => 'form-control'%>
+          <%= p.text_field :name,        id: 'input_name',        type: 'text', :class => 'form-control'%>
+          <%= p.text_field :description, id: 'input_description', type: 'text', :class => 'form-control'%>
+          <%= p.text_field :imageUrl,    id: 'input_imageUrl',    type: 'text', :class => 'form-control'%>
+
+          <%= p.text_field :unitPrice,        id: 'input_unitPrice',        type: 'text', :class => 'form-control'%>
+          <%= p.text_field :costFromSupplier, id: 'input_costFromSupplier', type: 'text', :class => 'form-control'%>
+          <%= p.text_field :quantityInStock,  id: 'input_quantityInStock',  type: 'text', :class => 'form-control'%>
         </div>
 
       </div>
 
-    <%# end %>
+    <% end %>
   </div>
 </div>
