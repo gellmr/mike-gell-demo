@@ -4,3 +4,8 @@ Completed:
 https://devcenter.heroku.com/articles/getting-started-with-rails4
 
 I have pushed to 'mike-gell-demo' on heroku, and am running unicorn with foreman.
+
+-----------------------
+
+Do not commit the .env file to source control. It should only be used for local configuration.
+See https://devcenter.heroku.com/articles/procfile
