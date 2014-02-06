@@ -1,47 +1,66 @@
 <div class="row">
   <div class="col-xs-12">
-    <nav class="navbar navbar-default" role="navigation">
-      <!-- <div class="row"> -->
+    <div class="row">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- <div class="row"> -->
 
-        <%
-        def loginColor
-          return 'green' if current_user
-          return 'red'
-        end
-        %>
+          <!-- Site Title -->
+          <div class="col-xs-6 col-sm-4 loggedInAs">
 
-        <!-- Site Title -->
-        <div class="col-xs-6 col-sm-4">
-          <a class="navbar-brand mg-navbar-title" href="#" style="margin-left: -16px; background-color: <%= loginColor %>;">
-            Fuzzy Bear Electronics
-          </a>
-        </div>
-
-        <!-- Forgot Pw, Rego, Login -->
-        <div class="col-xs-6 col-sm-8" style="padding-right: 0px">
-          <ol class="nav navbar-nav navbar-right" style="margin: 0px;">
+            <div class="row">
+              <div class="col-xs-12">
+                <a class="navbar-brand mg-navbar-title" href="#" style="margin-left: -16px;">
+                  Fuzzy Bear Electronics
+                </a>
+              </div>
+            </div>
 
             <% if current_user %>
+            <div class="row">
+              <div class="col-xs-12">
+                Logged in as...
+              </div>
+            </div>
 
-            <li><a href="/logout" class="mg-navbar-link">Log Out</a></li>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= current_user.email %>
+              </div>
+            </div>
+            <% end%>
 
-            <li><a href="/users/<%= current_user.id%>" class="mg-navbar-link">My Account</a></li>
+          </div>
 
-            <li><a href="#" data-toggle="modal" data-target="#changePwModal" class="mg-navbar-link">Change password</a></li>
+          <!-- Forgot Pw, Rego, Login -->
+          <div class="col-xs-6 col-sm-8" style="padding-right: 0px">
+            <ol class="nav navbar-nav navbar-right" style="margin: 0px;">
 
-            <% else %>
+              <li><a href="/store" class="mg-navbar-link">Store</a></li>
 
-            <li><a href="#" data-toggle="modal" data-target="#loginModal" class="mg-navbar-link">Login</a></li>
+              <li><a href="/cart" class="mg-navbar-link">Cart</a></li>
 
-            <li><a href="#" data-toggle="modal" data-target="#registerModal" class="mg-navbar-link">Register</a></li>
+              <% if current_user %>
 
-            <li><a href="#" data-toggle="modal" data-target="#forgotPwModal" class="mg-navbar-link">Forgot my password</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#changePwModal" class="mg-navbar-link">Change password</a></li>
 
-            <% end %>
-          </ol>
-        </div>
+              <li><a href="/users/<%= current_user.id%>" class="mg-navbar-link">My Account</a></li>
 
-      <!-- </div> -->
-    </nav>
+              <li><a href="/logout" class="mg-navbar-link">Log Out</a></li>
+
+              <% else %>
+
+              <li><a href="#" data-toggle="modal" data-target="#forgotPwModal" class="mg-navbar-link">Forgot my password</a></li>
+
+              <li><a href="#" data-toggle="modal" data-target="#registerModal" class="mg-navbar-link">Register</a></li>
+
+              <li><a href="#" data-toggle="modal" data-target="#loginModal" class="mg-navbar-link">Login</a></li>
+
+              <% end %>
+            </ol>
+          </div>
+
+        <!-- </div> -->
+      </nav>
+    </div>
   </div>
 </div>
