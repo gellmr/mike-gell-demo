@@ -54,4 +54,4 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-ruby "2.0.0p247" # remove p247 suffix if heroku needs "2.0.0"
+ruby "2.0.0"
