@@ -40,6 +40,7 @@ end
 
 group :production do
   gem 'rails_12factor' # required for heroku
+  gem 'unicorn'        # production server to run on heroku.
 end
 
 # Use ActiveModel has_secure_password
