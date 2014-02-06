@@ -1,0 +1,6 @@
+
+Completed:
+"Getting started with Rails 4.x on Heroku"
+https://devcenter.heroku.com/articles/getting-started-with-rails4
+
+I have pushed to 'mike-gell-demo' on heroku, and am running unicorn with foreman.
