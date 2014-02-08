@@ -1,52 +1,61 @@
 <div class="row">
   <div class="col-xs-12">
-    <table class="table">
 
-      <thead>
-        <tr>
-          <th>Unit Price</th>
-          <th></th>
-          <th>Product</th>
-          <th></th>
-          <th>Qty to Order</th>
-        </tr>
-      </thead>
+    <div class="row hidden-xs">
+      <div class="col-xs-12 col-sm-2"><strong>Unit Price</strong></div>
+      <div class="col-xs-12 col-sm-4"><strong>Product</strong></div>
+      <div class="col-xs-12 col-sm-4"></div>
+      <div class="col-xs-12 col-sm-2"><strong>Qty to Order</strong></div>
+    </div>
+    <hr>
 
-      <tbody>
-        <% @products.each do |product| %>
-          <tr>
-            <td>
-              $ <%= product.unitPrice %>
-              <br />
-              <small class="inStockText">
-                <%= product.quantityInStock %> in stock
-              </small>
-            </td>
+    <% @products.each do |product| %>
 
-            <td>
-              <% img_url = "images/120x120/#{product.imageUrl}" %>
-              <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
-            </td>
+      <div class="row">
 
-            <td>
-              <strong>
-                <%= product.name %>
-              </strong>
-              <br />
-              <%= product.description %>
-            </td>
+        <div class="hidden-xs col-sm-2">
+          <div class="unitPriceText">
+            $ <%= product.unitPrice %>
+          </div>
+          <small class="hidden-xs inStockText">
+            <%= product.quantityInStock %> in stock
+          </small>
+        </div>
 
-            <td>
-              
-            </td>
+        <div class="col-xs-12 col-sm-4">
+          <strong>
+            <%= product.name %>
+          </strong>
+          <br />
+          <small>
+            <%= product.description %>
+          </small>
+        </div>
 
-            <td>
-              <span>Field goes here</span>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
+        <div class="col-xs-12 col-sm-4">
+          <% img_url = "images/120x120/#{product.imageUrl}" %>
+          <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
+        </div>
 
-    </table>
+        <div class="col-xs-12 hidden-sm">
+          <div class="unitPriceText">
+            $ <%= product.unitPrice %>
+          </div>
+          <small class="inStockText">
+            <%= product.quantityInStock %> in stock
+          </small>
+        </div>
+
+        <div class="col-xs-12 col-sm-2">
+          <strong>Qty to Order</strong>
+          <input type="text" />
+        </div>
+
+      </div>
+      <hr>
+      <br />
+
+    <% end %>
+
   </div>
 </div>
