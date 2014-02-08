@@ -4,10 +4,10 @@
 
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Description</th>
           <th>Unit Price</th>
-          <th>Qty in Stock</th>
+          <th></th>
+          <th>Product</th>
+          <th></th>
           <th>Qty to Order</th>
         </tr>
       </thead>
@@ -16,20 +16,30 @@
         <% @products.each do |product| %>
           <tr>
             <td>
-              <%= product.name %>
+              $ <%= product.unitPrice %>
+              <br />
+              <small class="inStockText">
+                <%= product.quantityInStock %> in stock
+              </small>
+            </td>
+
+            <td>
+              <% img_url = "images/120x120/#{product.imageUrl}" %>
+              <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
+            </td>
+
+            <td>
+              <strong>
+                <%= product.name %>
+              </strong>
               <br />
               <%= product.description %>
             </td>
+
             <td>
-              <% img_url = "/120x120/#{product.imageUrl}" %>
-              <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
+              
             </td>
-            <td>
-              <%= product.unitPrice %>
-            </td>
-            <td>
-              <%= product.quantityInStock %>
-            </td>
+
             <td>
               <span>Field goes here</span>
             </td>
