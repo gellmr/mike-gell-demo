@@ -1,15 +1,7 @@
-small.inStockText {
+.greyText {
   color: grey;
 }
 
-/*div.unitPriceText {
-  height: auto;
-}
-
-@media screen and ( max-width: 768px ) {
-  div.unitPriceText {
-    display: table-cell;
-    vertical-align: bottom;
-    height: 120px;
-  }
+/*div.labelForQtyInput {
+  text-align: right;
 }*/
