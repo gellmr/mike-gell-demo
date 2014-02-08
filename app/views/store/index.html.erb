@@ -1,22 +1,21 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <%= form_for @products do |p| %>
+    <%= @products.each do |product| %>
 
       <div class="panel panel-default">
 
         <div class="panel-heading">
-          <h3 class="panel-title">Store Page...</h3>
+          <h3 class="panel-title"><%= product.name %></h3>
         </div>
 
         <div class="panel-body">
-          <%= p.text_field :name,        id: 'input_name',        type: 'text', :class => 'form-control'%>
-          <%= p.text_field :description, id: 'input_description', type: 'text', :class => 'form-control'%>
-          <%= p.text_field :imageUrl,    id: 'input_imageUrl',    type: 'text', :class => 'form-control'%>
+          <div><%= product.description %></div>
+          <div><%= product.imageUrl %></div>
 
-          <%= p.text_field :unitPrice,        id: 'input_unitPrice',        type: 'text', :class => 'form-control'%>
-          <%= p.text_field :costFromSupplier, id: 'input_costFromSupplier', type: 'text', :class => 'form-control'%>
-          <%= p.text_field :quantityInStock,  id: 'input_quantityInStock',  type: 'text', :class => 'form-control'%>
+          <div><%= product.unitPrice %></div>
+          <div><%= product.costFromSupplier %></div>
+          <div><%= product.quantityInStock %></div>
         </div>
 
       </div>
