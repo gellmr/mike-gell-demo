@@ -1,25 +1,41 @@
 <div class="row">
   <div class="col-xs-12">
+    <table class="table">
 
-    <%= @products.each do |product| %>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Unit Price</th>
+          <th>Qty in Stock</th>
+          <th>Qty to Order</th>
+        </tr>
+      </thead>
 
-      <div class="panel panel-default">
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td>
+              <%= product.name %>
+              <br />
+              <%= product.description %>
+            </td>
+            <td>
+              <%= product.imageUrl %>
+            </td>
+            <td>
+              <%= product.unitPrice %>
+            </td>
+            <td>
+              <%= product.quantityInStock %>
+            </td>
+            <td>
+              <span>Field goes here</span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
 
-        <div class="panel-heading">
-          <h3 class="panel-title"><%= product.name %></h3>
-        </div>
-
-        <div class="panel-body">
-          <div><%= product.description %></div>
-          <div><%= product.imageUrl %></div>
-
-          <div><%= product.unitPrice %></div>
-          <div><%= product.costFromSupplier %></div>
-          <div><%= product.quantityInStock %></div>
-        </div>
-
-      </div>
-
-    <% end %>
+    </table>
   </div>
 </div>
