@@ -8,6 +8,7 @@ Fuzzybear::Application.routes.draw do
   resources :sessions, only: [:create]
   get 'logout/'    => 'sessions#destroy'
   get 'login/'     => 'sessions#login_page'
+  get 'register/'  => 'sessions#register_page'
 
 
   get 'store/'     => 'store#index'

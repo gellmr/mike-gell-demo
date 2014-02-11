@@ -1,8 +1,8 @@
 function showErrors(errors) {
 
-  var emailDiv = $('#registerModal div.form-group.email');
-  var passwordDiv = $('#registerModal div.form-group.password');
-  var confirmPasswordDiv = $('#registerModal div.form-group.passwordConfirmation');
+  var emailDiv = $('form.registerForm div.form-group.email');
+  var passwordDiv = $('form.registerForm div.form-group.password');
+  var confirmPasswordDiv = $('form.registerForm div.form-group.passwordConfirmation');
 
   // clear the error classes, for all rego fields.
   emailDiv.removeClass('alert alert-warning');
@@ -66,17 +66,15 @@ function showErrors(errors) {
 
 $(document).ready(function() {
 
-  $(document).on('click', '#registerModal button.submitButton', function() {
+  $(document).on('click', 'form.registerForm button.submitButton', function() {
 
-    console.log("\n register modal submit button - clicked");
-
-    var _modal = $('#registerModal');
+    console.log("\n registerForm submit button - clicked");
 
     var params = {
       user: {
-        email: $("#registerModal div.email input").val(),
-        password: $("#registerModal div.password input").val(),
-        password_confirmation: $("#registerModal div.passwordConfirmation input").val()
+        email: $("form.registerForm div.email input").val(),
+        password: $("form.registerForm div.password input").val(),
+        password_confirmation: $("form.registerForm div.passwordConfirmation input").val()
       }
     }
     console.log("Try to register...");
@@ -90,10 +88,7 @@ $(document).ready(function() {
 
         201: function(user) {
           console.log("success! user: " + user.id);
-          _modal.on('hidden.bs.modal', function () {
-            window.location.href = '/users/' + user.id;
-          })
-          _modal.modal('hide');
+          window.location.href = '/users/' + user.id;
         },
 
         // bad request

@@ -31,4 +31,10 @@ class SessionsController < ApplicationController
   def login_page
     render template: "/layouts/loginPage"
   end
+
+  # User wants to register. Serve the rego page.
+  def register_page
+    render template: "/layouts/registerPage"
+  end
+
 end
