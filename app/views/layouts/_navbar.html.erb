@@ -39,15 +39,15 @@
 
               <li><a href="/users/<%= current_user.id%>" class="mg-navbar-link">My Account</a></li>
 
-              <li><a href="#" data-toggle="modal" data-target="#changePwModal" class="mg-navbar-link">Change password</a></li>
+              <li><a href="/change-password" class="mg-navbar-link">Change password</a></li>
 
               <% else %>
 
-              <li><a href="#" data-toggle="modal" data-target="#loginModal" class="mg-navbar-link">Login</a></li>
+              <li><a href="/login" class="mg-navbar-link">Login</a></li>
 
-              <li><a href="#" data-toggle="modal" data-target="#registerModal" class="mg-navbar-link">Register</a></li>
+              <li><a href="/register" class="mg-navbar-link">Register</a></li>
 
-              <li><a href="#" data-toggle="modal" data-target="#forgotPwModal" class="mg-navbar-link">Forgot my password</a></li>
+              <li><a href="/forgot-password" class="mg-navbar-link">Forgot my password</a></li>
 
               <% end %>
             </ol>

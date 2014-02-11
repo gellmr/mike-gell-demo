@@ -1,10 +1,8 @@
 jQuery(document).ready(function($) {
 
-  $(document).on('click', '#loginModalSubmit', function() {
+  $(document).on('click', '#loginPageSubmit', function() {
 
     var _user;
-
-    var _modal = $('#loginModal');
 
     var params = {
       user: {
@@ -34,10 +32,7 @@ jQuery(document).ready(function($) {
       complete: function(xhr, textStatus){
         //console.log("Login XHR COMPLETED with status " + textStatus + "\n");
         if (textStatus == "success") {
-          _modal.on('hidden.bs.modal', function () {
-            window.location.href = '/users/' + String(_user.id);
-          })
-          _modal.modal('hide');
+          window.location.href = '/users/' + String(_user.id);
         }
       }
 

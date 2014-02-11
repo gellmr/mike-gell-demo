@@ -26,4 +26,9 @@ class SessionsController < ApplicationController
     session[:current_user_id] = nil
     redirect_to root_url
   end
+
+  # User wants to log in. Serve the login page.
+  def login_page
+    render template: "/layouts/loginPage"
+  end
 end
