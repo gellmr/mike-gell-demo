@@ -1,8 +1,17 @@
-.loggedInAs {
-  font-size: 12px;
+.row.loggedInAs {
   color: grey;
+  font-size: 0.8em;
+  padding-bottom: 10px;
 }
 
 nav.navbar ol.nav.navbar-nav li {
   text-align: right;
+}
+
+a.mg-navbar-title {
+  color: #666666;
+}
+a.mg-navbar-title:hover {
+  color: black;
+  text-decoration: none;
 }
