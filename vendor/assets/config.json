@@ -1,6 +1,15 @@
 // Custom Bootstrap media breakpoints...
-// xs     sm     md     lg      old lg
-// 280px  480px  768px  992px   1200px
+// xs     sm     md     lg         old lg
+// 280px  480px  768px  992px      1200px
+
+//               720px  940px      1140px
+
+//        46     48     52         60
+
+//        434    720    940
+
+// --     xs     sm     md         lg
+
 {
   "vars": {
     "@gray-darker": "lighten(#000, 13.5%)",
@@ -354,11 +363,11 @@
     "@page-header-border-color": "@gray-lighter",
     "@hr-border": "@gray-lighter",
     "@component-offset-horizontal": "180px",
-    "@container-tablet": "((450 + @grid-gutter-width))",
+    "@container-tablet": "((434px + @grid-gutter-width))",
     "@container-sm": "@container-tablet",
-    "@container-desktop": "((940px + @grid-gutter-width))",
+    "@container-desktop": "((720px + @grid-gutter-width))",
     "@container-md": "@container-desktop",
-    "@container-large-desktop": "((932px + @grid-gutter-width))",
+    "@container-large-desktop": "((940px + @grid-gutter-width))",
     "@container-lg": "@container-large-desktop"
   },
   "css": [
