@@ -25,5 +25,5 @@ $(document).ready(function() {
   });
 
   // Here we ensure the navbar text is the correct size when a new window is opened.
-  $(window).resize();
+  // $(window).resize();
 });
