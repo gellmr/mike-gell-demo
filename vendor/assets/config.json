@@ -9,7 +9,6 @@
 //        434    720    940
 
 // --     xs     sm     md         lg
-
 {
   "vars": {
     "@gray-darker": "lighten(#000, 13.5%)",
@@ -257,9 +256,9 @@
     "@modal-backdrop-opacity": ".5",
     "@modal-header-border-color": "#e5e5e5",
     "@modal-footer-border-color": "@modal-header-border-color",
-    "@modal-lg": "900px",
-    "@modal-md": "600px",
-    "@modal-sm": "300px",
+    "@modal-lg": "940px - @grid-gutter-width",
+    "@modal-md": "480px - @grid-gutter-width",
+    "@modal-sm": "300px - @grid-gutter-width",
     "@alert-padding": "15px",
     "@alert-border-radius": "@border-radius-base",
     "@alert-link-font-weight": "bold",

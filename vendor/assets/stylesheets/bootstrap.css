@@ -5183,7 +5183,7 @@ button.close {
 }
 @media (min-width: 480px) {
   .modal-dialog {
-    width: 600px;
+    width: 450px;
     margin: 30px auto;
   }
   .modal-content {
@@ -5191,10 +5191,10 @@ button.close {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
   .modal-sm {
-    width: 300px;
+    width: 270px;
   }
   .modal-lg {
-    width: 900px;
+    width: 910px;
   }
 }
 .tooltip {
