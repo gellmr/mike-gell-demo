@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
   def destroy
     # Remove the user id from the session
     puts "SessionsController#destroy ... session[#{session[:current_user_id]}] = nil"
-    session[:current_user_id] = nil
-    redirect_to root_url
+    destroy_session
+    redirect_to login_path
   end
 
   # User wants to log in. Serve the login page.
@@ -37,4 +37,9 @@ class SessionsController < ApplicationController
     render template: "/layouts/registerPage"
   end
 
+  private
+    def destroy_session
+      session[:current_user_id] = nil
+      @current_user = nil
+    end
 end

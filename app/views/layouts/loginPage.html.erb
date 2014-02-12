@@ -1,8 +1,13 @@
 
-
 <br />
 
 <form role="form" class="authForm">
+
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
 
   <h4>Login Details</h4>
 
