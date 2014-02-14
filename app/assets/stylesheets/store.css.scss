@@ -3,6 +3,7 @@
 }
 
 .storeContents {
+  /* Products are displayed in a single centered column, for small screens. */
   @media screen and (max-width: 767px) {
     min-width: 193px;
     max-width: 267px;
