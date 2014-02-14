@@ -1,73 +1,77 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <div class="row hidden-xs">
-      <div class="col-xs-12 col-sm-2"><strong>Unit Price</strong></div>
-      <div class="col-xs-12 col-sm-4"><strong>Product</strong></div>
-      <div class="col-xs-12 col-sm-4"></div>
-      <!-- <div class="col-xs-12 col-sm-2"><strong>Qty to Order</strong></div> -->
+    <div class="well storeContents">
+
+      <div class="row hidden-xs">
+        <div class="col-xs-12 col-sm-2"><strong>Unit Price</strong></div>
+        <div class="col-xs-12 col-sm-4"><strong>Product</strong></div>
+        <div class="col-xs-12 col-sm-4"></div>
+        <!-- <div class="col-xs-12 col-sm-2"><strong>Qty to Order</strong></div> -->
+      </div>
+      <hr>
+
+      <form role="form">
+        <% @products.each do |product| %>
+
+          <div class="row">
+
+            <div class="col-sm-2 hidden-xs">
+              <div class="row">
+                <div class="col-xs-12">
+                  $ <%= product.unitPrice %> <small class="greyText"> each
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <%= product.quantityInStock %> in stock </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+              <strong>
+                <%= product.name %>
+              </strong>
+              <br />
+              <small>
+                <%= product.description %>
+              </small>
+            </div>
+
+            <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+              $ <%= product.unitPrice %> <small class="greyText"> each
+            </div>
+            <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+              <%= product.quantityInStock %> in stock </small>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+              <% img_url = "images/120x120/#{product.imageUrl}" %>
+              <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
+            </div>
+
+            <div class="col-xs-12 col-sm-2">
+              <div class="row">
+                <div class="form-group pull-left">
+                  <div class="col-xs-12">
+                    <label for="qtyToOrder-productId-<%=product.id%>">Qty to Order</label>
+                  </div>
+                  <div class="col-xs-8 col-sm-12">
+                    <input type="text" class="form-control" id="qtyToOrder-productId-<%=product.id%>">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <hr>
+          <br />
+
+        <% end %>
+      </form>
+
     </div>
-    <hr>
-
-    <form role="form">
-      <% @products.each do |product| %>
-
-        <div class="row">
-
-          <div class="col-sm-2 hidden-xs">
-            <div class="row">
-              <div class="col-xs-12">
-                $ <%= product.unitPrice %> <small class="greyText"> each
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12">
-                <%= product.quantityInStock %> in stock </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-12 col-sm-4">
-            <strong>
-              <%= product.name %>
-            </strong>
-            <br />
-            <small>
-              <%= product.description %>
-            </small>
-          </div>
-
-          <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-            $ <%= product.unitPrice %> <small class="greyText"> each
-          </div>
-          <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-            <%= product.quantityInStock %> in stock </small>
-          </div>
-
-          <div class="col-xs-12 col-sm-4">
-            <% img_url = "images/120x120/#{product.imageUrl}" %>
-            <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
-          </div>
-
-          <div class="col-xs-12 col-sm-2">
-            <div class="row">
-              <div class="form-group pull-left">
-                <div class="col-xs-12 labelForQtyInput">
-                  <label for="qtyToOrder-productId-<%=product.id%>">Qty to Order</label>
-                </div>
-                <div class="col-xs-8 col-sm-12">
-                  <input type="text" class="form-control" id="qtyToOrder-productId-<%=product.id%>">
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <hr>
-        <br />
-
-      <% end %>
-    </form>
 
   </div>
 </div>

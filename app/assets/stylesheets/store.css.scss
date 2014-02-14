@@ -1,0 +1,12 @@
+.greyText {
+  color: grey;
+}
+
+.storeContents {
+  @media screen and (max-width: 767px) {
+    min-width: 193px;
+    max-width: 267px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
