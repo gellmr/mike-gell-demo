@@ -1,34 +1,53 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <div class="well storeContents transparentBackground">
-
-      <div class="row hidden-xs">
-        <div class="col-xs-12 col-sm-2"><strong>Unit Price</strong></div>
-        <div class="col-xs-12 col-sm-4"><strong>Product</strong></div>
-        <div class="col-xs-12 col-sm-4"></div>
-        <!-- <div class="col-xs-12 col-sm-2"><strong>Qty to Order</strong></div> -->
-      </div>
-      <hr>
+    <!-- <div class="well storeContents transparentBackground"> -->
+    <div class="storeContents">
 
       <form role="form">
+
+        <!-- Table header, hidden xs -->
+        <div class="row well transparentBackground hidden-xs">
+
+          <div class="col-sm-2 hidden-xs">
+            <div class="row">
+              <div class="col-xs-12">
+                <strong>
+                  Unit Price
+                </strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4">
+            <strong>
+              Product
+            </strong>
+          </div>
+
+        </div>
+
         <% @products.each do |product| %>
 
-          <div class="row">
+          <div class="row well transparentBackground">
 
+            <!-- Unit price and Qty in stock (hidden xs) -->
             <div class="col-sm-2 hidden-xs">
               <div class="row">
                 <div class="col-xs-12">
-                  $ <%= product.unitPrice %> <small class="greyText"> each
+                  $ <%= product.unitPrice %> <small class="greyText"> each </small>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <%= product.quantityInStock %> in stock </small>
+                  <small class="greyText">
+                    <%= product.quantityInStock %> in stock
+                  </small>
                 </div>
               </div>
             </div>
 
+            <!-- Product name and description, Always visible. -->
             <div class="col-xs-12 col-sm-4">
               <strong>
                 <%= product.name %>
@@ -39,6 +58,7 @@
               </small>
             </div>
 
+            <!-- Price and Qty in Stock (Only visible xs) -->
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
               $ <%= product.unitPrice %> <small class="greyText"> each
             </div>
@@ -46,11 +66,13 @@
               <%= product.quantityInStock %> in stock </small>
             </div>
 
+            <!-- Image tag, always visible -->
             <div class="col-xs-12 col-sm-4">
               <% img_url = "images/120x120/#{product.imageUrl}" %>
-              <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded">
+              <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded centered-block-img">
             </div>
 
+            <!-- Input: Qty to order -->
             <div class="col-xs-12 col-sm-2">
               <div class="row">
                 <div class="form-group pull-left">
@@ -65,9 +87,7 @@
             </div>
 
           </div>
-          <hr>
-          <br />
-
+          
         <% end %>
       </form>
 

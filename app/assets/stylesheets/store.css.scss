@@ -13,4 +13,15 @@
 }
 .well.transparentBackground {
   background-color: transparent;
+  @media screen and (min-width: 768px) {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+  }
+}
+
+img.centered-block-img {
+  display: block; /* Override the default inline-block of img tag. This will allow us to set the margins to auto... */
+  margin-left: auto;
+  margin-right: auto;
 }
