@@ -10,9 +10,11 @@ Fuzzybear::Application.routes.draw do
   get 'login/'     => 'sessions#login_page', as: 'login'
   get 'register/'  => 'sessions#register_page', as: 'register'
 
-
   get 'store/'     => 'store#index'
+
+  resources :cart, only: [:update]
   get 'cart/'      => 'cart#index'
+  put 'cart/'      => 'cart#update'
 
   root 'home#index'
 
