@@ -27,27 +27,27 @@
 
           <!-- Forgot Pw, Rego, Login -->
           <div class="col-xs-6 col-sm-8" style="padding-right: 0px">
-            <ol class="nav navbar-nav navbar-right pull-right" style="margin: 0px;">
+            <ol class="nav navbar-nav navbar-right" style="margin: 0px;">
 
               <li><a href="/store" class="mg-navbar-link">Store</a></li>
 
-              <li><a href="/cart" class="mg-navbar-link">Cart</a></li>
+              <li><a href="/cart" class="mg-navbar-link">My Cart</a></li>
 
               <% if current_user %>
-
-              <li><a href="/logout" class="mg-navbar-link">Log Out</a></li>
 
               <li><a href="/users/<%= current_user.id%>" class="mg-navbar-link">My Account</a></li>
 
               <li><a href="/change-password" class="mg-navbar-link">Change password</a></li>
 
-              <% else %>
+              <li><a href="/logout" class="mg-navbar-link">Log Out</a></li>
 
-              <li><a href="/login" class="mg-navbar-link">Login</a></li>
+              <% else %>
 
               <li><a href="/register" class="mg-navbar-link">Register</a></li>
 
               <li><a href="/forgot-password" class="mg-navbar-link">Forgot my password</a></li>
+
+              <li><a href="/login" class="mg-navbar-link">Login</a></li>
 
               <% end %>
             </ol>
