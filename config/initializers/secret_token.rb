@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Fuzzybear::Application.config.secret_key_base = '4ad83a7545db973aad5b42537033b22e88b0a822d61ad9a9fcd7356b66bab0d85f707224c52a7f985d80ec4474b7ff5c3df5a863cd4df79cfeb726c7a53db555'
+Fuzzybear::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
