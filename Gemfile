@@ -52,6 +52,8 @@ gem "foreman", "~> 0.63.0"
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem "rack-timeout", "~> 0.0.4"
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
