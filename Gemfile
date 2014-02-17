@@ -46,8 +46,11 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+# Allow the .env file to store my local config ENV[] vars.
+gem "foreman", "~> 0.63.0"
+
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

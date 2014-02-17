@@ -20,8 +20,8 @@ module Fuzzybear
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     
-    config.force_ssl = true
-    
+    # config.force_ssl = true # Enable this when i buy certificates.
+
     config.i18n.enforce_available_locales = true
 
     config.generators do |g|
