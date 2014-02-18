@@ -5,4 +5,4 @@
 # for all unicorn worker processes. If the request is NOT completed in __ seconds, the unicorn worker
 # process is killed with H13 error code, but no stack trace. See /config/unicorn.rb
 
-Rack::Timeout.timeout = 10  # seconds. (Can be unreliable)
+# Rack::Timeout.timeout = 10  # seconds. (Can be unreliable)    # MOVED THIS LINE INTO /environments/production.rb

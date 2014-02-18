@@ -40,19 +40,15 @@ end
 
 group :production do
   gem 'rails_12factor' # required for heroku
-  # gem 'unicorn'        # production server to run on heroku.
+
+  # Allow the .env file to store my local config ENV[] vars.
+  gem "foreman", "~> 0.63.0"
+  gem "rack-timeout", "~> 0.0.4"
+  gem 'unicorn'
 end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Allow the .env file to store my local config ENV[] vars.
-gem "foreman", "~> 0.63.0"
-
-# Use unicorn as the app server
-gem 'unicorn'
-
-gem "rack-timeout", "~> 0.0.4"
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
