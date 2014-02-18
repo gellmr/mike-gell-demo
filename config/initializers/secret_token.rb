@@ -10,4 +10,7 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 
+# If you have secret_key_base set, your cookies will be encrypted.
+# This goes a step further than signed cookies in that encrypted cookies cannot be altered or read by users.
+# This is the default starting in Rails 4.
 Fuzzybear::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']

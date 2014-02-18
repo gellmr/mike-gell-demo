@@ -36,6 +36,9 @@ $(document).ready(function() {
           },
           400: function() {
             console.log("400 failed");
+          },
+          422: function() {
+            console.log("Your session has expired.");
           }
         },
         complete: function(xhr, textStatus){
