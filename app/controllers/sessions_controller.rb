@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
 
       temp_session = session.dup # Make a shallow copy of session
       reset_session # Prevent session fixation attack. Clears to an empty hash.
-      session.replace(temp_session) # copy each hash value into the new session.
+
+      # session.replace(temp_session) # copy each hash value into the new session.
 
       # This is all accomplished by session.replace
       # session[:athlete_id] = athlete.id # re-populate each var
@@ -36,10 +37,11 @@ class SessionsController < ApplicationController
   # "Delete" a login, aka "log the user out"
   def destroy
     # Remove the user id from the session
-    puts "SessionsController#destroy ... session[#{session[:current_user_id]}] = nil"
+    Rails.logger.debug "SessionsController#destroy ... session[#{session[:current_user_id]}] = nil"
     reset_session # Help prevent session fixation attack.
     destroy_session
-    redirect_to login_path # TODO - make a "You have logged out" page'
+    Rails.logger.debug "Session has been destroyed and reset. Redirecting now..."
+    render template: "/layouts/successfullyLoggedOut"
   end
 
   # User wants to log in. Serve the login page.
