@@ -15,7 +15,9 @@ class CartController < ApplicationController
     productId = params[:cartUpdate][:productId]
     newQty = params[:cartUpdate][:newQty]
 
-    puts "-----> Authentication failed!!!"
+    tok = request.headers['X-CSRF-Token']
+    Rails.logger.debug "Received AJAX request. X-CSRF-Token == " << tok
+    Rails.logger.debug "-----> Authentication failed!!!"
     head :bad_request # 400
   end
 
