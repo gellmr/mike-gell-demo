@@ -6,7 +6,8 @@ Fuzzybear::Application.routes.draw do
   get 'home/'      => 'home#index'
 
   resources :sessions, only: [:create]
-  delete 'logout/'    => 'sessions#destroy'
+  get 'session-expired-notice/' => 'sessions#expired_notice'
+  delete 'logout/' => 'sessions#destroy'
   get 'login/'     => 'sessions#login_page', as: 'login'
   get 'register/'  => 'sessions#register_page', as: 'register'
 
