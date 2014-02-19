@@ -28,11 +28,6 @@ $(document).ready(function() {
 
       $.ajax({
         url:"/cart",
-        // beforeSend: function( jqXHR ) {
-        //   // Include the CSRF token of the current document.
-        //   var token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
-        //   jqXHR.setRequestHeader( 'X-CSRF-Token', token );
-        // },
         type:'PUT',
         dataType:"json",
         data: params,
