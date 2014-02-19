@@ -54,6 +54,13 @@ class SessionsController < ApplicationController
     render template: "/layouts/registerPage"
   end
 
+  # The user's session has expired
+  # This controller action will render a page telling them what happened.
+  # Javascript has directed the user to this page.
+  def expired_notice
+    render template: "/layouts/sessionExpired"
+  end
+
   private
     def destroy_session
       session[:current_user_id] = nil

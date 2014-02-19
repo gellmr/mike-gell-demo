@@ -44,6 +44,7 @@ $(document).ready(function() {
           },
           422: function() {
             console.log("Your session has expired.");
+            window.location.href = '/session-expired-notice';
           }
         },
         complete: function(xhr, textStatus){
