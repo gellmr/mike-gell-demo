@@ -12,13 +12,26 @@ class CartController < ApplicationController
 
   def update
     puts 'Try to update my cart...'
+
+    if !current_user
+      head :bad_request # 400
+    end
+
     productId = params[:cartUpdate][:productId]
     newQty = params[:cartUpdate][:newQty]
 
-    tok = request.headers['X-CSRF-Token']
-    Rails.logger.debug "Received AJAX request. X-CSRF-Token == " << tok
-    Rails.logger.debug "-----> Authentication failed!!!"
-    head :bad_request # 400
+    # Check if there are sufficient quantity in stock.
+    product = Product.find(productId)
+    if product.quantityInStock >= newQty.to_i
+      session[productId] = newQty;
+      head :created # 201
+    else
+      # Send 403
+      head :forbidden, {
+        message: "Only #{product.quantityInStock} items in stock!",
+        max: product.quantityInStock
+      }
+    end
   end
 
   def handle_unverified_request

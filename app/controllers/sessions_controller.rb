@@ -61,9 +61,4 @@ class SessionsController < ApplicationController
     render template: "/layouts/sessionExpired"
   end
 
-  private
-    def destroy_session
-      session[:current_user_id] = nil
-      @current_user = nil
-    end
 end

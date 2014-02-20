@@ -5,17 +5,19 @@ var updateCart = function( event ) {
     var inputElement = $(event.target);
     var inputId = inputElement.attr('id');               // eg "qtyToOrder-productId-23"
     var productId = inputId.toString().split('-').pop(); // eg "23"
+    var parentalDiv = inputElement.parent().parent();
 
-    // console.dir(event);
+    if (productId <= 0 || newQty <= 0) {
+      // console.log("Invalid input.");
+      return;
+    }
+
     console.log(
       "submit ajax request. "       +
       " event.which:" + event.which +
       ' productId:'   + productId   +
       ' qty:'         + newQty
     );
-    inputElement.css('border-style', 'solid');
-    inputElement.css('border-width', '2px');
-    inputElement.css('border-color', 'green');
 
     var params = {
       cartUpdate: {
@@ -30,10 +32,19 @@ var updateCart = function( event ) {
       dataType:"json",
       data: params,
       statusCode: {
-        200: function(response) {
+        201: function(response) {
+          console.log("Added to cart.");
+          parentalDiv.find('.maxStockMsg small').html('');
         },
         400: function() {
           console.log("400 failed");
+        },
+        403: function(jqXHR) {
+          var message = jqXHR.getResponseHeader('message');
+          var max = jqXHR.getResponseHeader('max');
+          console.log("403 forbidden. Reason: " + message );
+          parentalDiv.find('.maxStockMsg small').html(message);
+          inputElement.val(max);
         },
         422: function() {
           console.log("Your session has expired.");
@@ -57,7 +68,8 @@ var storeReadyJs = function(e) {
   console.log("BIND keydown to--> updateCart()");
 
   var result = $('div.top-level-container').on(
-    'change keydown keyup',
+    // 'change keydown keyup',
+    'change keyup',
     'input.qtyToOrder-input',
     updateCart
   );

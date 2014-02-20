@@ -5,8 +5,13 @@ class ApplicationController < ActionController::Base
   private
  
     def current_user
-      @current_user ||= User.find_by(id: session[:current_user_id]) if session[:current_user_id]
+      @_current_user ||= session[:current_user_id] && User.find_by(id: session[:current_user_id])
     end
 
-    helper_method :current_user
+    def destroy_session
+      session[:current_user_id] = nil
+      @_current_user = nil
+    end
+
+    helper_method :current_user, :destroy_session
 end
