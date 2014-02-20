@@ -1,29 +1,43 @@
 
-function normalMode() {
-  // Normal navbar text size
-  $('.mg-navbar-link').css('font-size', '14px');
-}
+// This code relies on the navbar width.
+// We have to wait for the page to load fully.
+// We cannot use $( document ).ready
 
-function smallMode() {
-  // Shrink navbar text because window is small
-  $('.mg-navbar-link').css('font-size', '11px');
-  $('.container').css('min-width', '222px');
-}
-var c = 0;
-$(document).ready(function() {
+var windowResizeReadyJS = function (event) {
+
+  console.log("\nwindowResizeReadyJS()");
   
-  // This makes the navbar text become tiny, if the window is very small.
-  $(window).resize( function() {
-    console.log('resized' + c);
-    c = c + 1;
-    var size = $('body nav.navbar').css('width');
-    if (parseInt(size) > 382) {
-      normalMode();
+  // Make the navbar text become tiny, if the window is very small.
+  var logCount = 0;
+  $(document).on("windowResizeHandler", function( e ) {
+    console.log('Resized ' + logCount);
+    logCount = logCount + 1;
+    if (parseInt($('body nav.navbar').css('width')) > 382) {
+      $(document).trigger( "normalMode" );
     } else {
-      smallMode();
+      $(document).trigger( "smallMode" );
     }
+  }).on("normalMode", function( e ) {
+    // Normal navbar text size
+    $('.mg-navbar-link').css('font-size', '14px');
+
+  }).on("smallMode", function( e ) {
+    // Shrink navbar text because window is small
+    $('.mg-navbar-link').css('font-size', '11px');
+    $('.container').css('min-width', '222px');
   });
 
+  // Bind the window resize event to our custom handler
+  $(window).resize(function (e) {
+    $(document).trigger( "windowResizeHandler" );
+  });
+
+  // Init
   // Here we ensure the navbar text is the correct size when a new window is opened.
-  $(window).resize();
-});
+  console.log("Trigger windowResizeHandler");
+  $(document).trigger( "windowResizeHandler" );
+
+};
+// Gotta bind to both events, because we are using turbolinks.
+jQuery(document).ready(windowResizeReadyJS);
+jQuery(document).on('page:load', windowResizeReadyJS);
