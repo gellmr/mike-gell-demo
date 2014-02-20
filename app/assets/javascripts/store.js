@@ -35,6 +35,7 @@ var updateCart = function( event ) {
         201: function(response) {
           console.log("Added to cart.");
           parentalDiv.find('.maxStockMsg small').html('');
+          parentalDiv.find('.inCartIcon').show();
         },
         400: function() {
           console.log("400 failed");

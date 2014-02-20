@@ -46,24 +46,26 @@
             </div>
 
             <!-- Image tag, always visible -->
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-sm-3">
               <% img_url = "images/120x120/#{product.imageUrl}" %>
               <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded centered-block-img">
             </div>
 
             <!-- Input: Qty to order -->
-            <div class="col-xs-12 col-sm-2">
+            <div class="col-xs-12 col-sm-3">
               <div class="row">
                 <div class="form-group pull-left">
                   <div class="col-xs-12">
                     <label for="qtyToOrder-productId-<%=product.id%>">Qty to Order</label>
                   </div>
-                  <div class="col-xs-8 col-sm-12">
+                  <div class="col-xs-8 col-sm-9">
                     <input type="text" class="form-control qtyToOrder-input" id="qtyToOrder-productId-<%=product.id%>">
+                  </div>
+                  <div class="col-xs-4 col-sm-3 inCartIcon" style="display: none;">
+                    <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
                   </div>
                   <div class="col-xs-12 maxStockMsg">
                     <small>
-                      
                     </small>
                   </div>
                 </div>
