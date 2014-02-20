@@ -44,7 +44,19 @@ var updateCart = function( event ) {
           var message = jqXHR.getResponseHeader('message');
           var max = jqXHR.getResponseHeader('max');
           console.log("403 forbidden. Reason: " + message );
-          parentalDiv.find('.maxStockMsg small').html(message);
+          var maxStockElement = parentalDiv.find('.maxStockMsg small');
+          maxStockElement.html(message);
+          maxStockElement.fadeOut({
+            duration: 4000,
+            done: function(){
+              maxStockElement.html('');
+              maxStockElement.fadeIn({
+                duration: 0
+              });
+            }
+          });
+          
+          // maxStockElement.fadeOut({duration: 6000});
           inputElement.val(max);
         },
         422: function() {
