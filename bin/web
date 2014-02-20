@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "$RACK_ENV" == "development" ]; then
+  rails s
+else
+  bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+fi
