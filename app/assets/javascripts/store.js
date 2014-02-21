@@ -37,8 +37,9 @@ var updateCart = function( event ) {
           parentalDiv.find('.maxStockMsg small').html('');
           parentalDiv.find('.inCartIcon').show();
         },
-        400: function() {
-          console.log("400 failed");
+        400: function(jqXHR) {
+          var message = jqXHR.getResponseHeader('message');
+          console.log("400 failed. message:" + message);
         },
         403: function(jqXHR) {
           var message = jqXHR.getResponseHeader('message');

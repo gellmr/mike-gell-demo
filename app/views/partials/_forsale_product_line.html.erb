@@ -1,0 +1,80 @@
+
+<div class="row well transparentBackground">
+
+  <!-- Unit price and Qty in stock (hidden xs) -->
+  <div class="col-sm-2 hidden-xs">
+    <div class="row">
+      <div class="col-xs-12">
+        $ <%= product.unitPrice %> <small class="greyText"> each </small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <small class="greyText">
+          <%= product.quantityInStock %> in stock
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product name and description, Always visible. -->
+  <div class="col-xs-12 col-sm-4">
+    <strong>
+      <%= product.name %>
+    </strong>
+    <br />
+    <small>
+      <%= product.description %>
+    </small>
+  </div>
+
+  <!-- Price and Qty in Stock (Only visible xs) -->
+  <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    $ <%= product.unitPrice %> <small class="greyText"> each
+  </div>
+  <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    <%= product.quantityInStock %> in stock </small>
+  </div>
+
+  <!-- Image tag, always visible -->
+  <div class="col-xs-12 col-sm-3">
+    <% img_url = "images/120x120/#{product.imageUrl}" %>
+    <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded centered-block-img">
+  </div>
+
+  <!-- Input: Qty to order -->
+  <div class="col-xs-12 col-sm-3">
+    <div class="row">
+      <div class="form-group pull-left">
+        <div class="col-xs-12">
+          <label for="qtyToOrder-productId-<%=product.id%>">Qty to Order</label>
+        </div>
+        <div class="col-xs-8 col-sm-9">
+          <!--
+          <input type="text" class="form-control qtyToOrder-input" id="qtyToOrder-productId-<%=product.id%>" />
+          -->
+
+          <%=
+          text_field_tag(
+            'qtyToOrder-input', # name
+            product_qty,        # value
+            {
+              :type => "text",
+              :class => "form-control qtyToOrder-input",
+              :id => "qtyToOrder-productId-#{product.id}"
+            }
+          )
+          %>
+        </div>
+        <div class="col-xs-4 col-sm-3 inCartIcon" style="display: none;">
+          <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
+        </div>
+        <div class="col-xs-12 maxStockMsg">
+          <small>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

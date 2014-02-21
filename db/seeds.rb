@@ -189,7 +189,6 @@ MaxInput: { 1000V DC -/+ 0.5 }
 DC Amps: { 200 uA, 20mA, 200mA, 10A }
 Overload Protected
 AC Volts: { 200V, 750 V, maxinput 750V }
-Imedage: { 1Meg +/- 1.2% }
 Resistance: { 200, 2k, 20k, 200k Ohms, 2M Ohms -/+ 1.2% }',
     imageUrl: 'multimeter.jpg'
   }, {

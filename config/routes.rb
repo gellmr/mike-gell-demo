@@ -16,6 +16,7 @@ Fuzzybear::Application.routes.draw do
   resources :cart, only: [:update]
   get 'cart/'      => 'cart#index'
   put 'cart/'      => 'cart#update'
+  post 'cart/submit' => 'cart#submit'
 
   root 'home#index'
 

@@ -1,20 +1,23 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <%#= form_for @cart_page do |p| %>
-    
-      <div class="panel panel-default">
+    <h3 class="panel-title">
+      Your Cart:
+    </h3>
 
-        <div class="panel-heading">
-          <h3 class="panel-title">Cart Page...</h3>
-        </div>
+    <%
+    # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
+    # A remote form automatically gets its authenticity token from the page's meta tag.
+    %>
+    <%= form_tag '/cart/submit', remote: true %>
+      <% @products.each do |product| %>
 
-        <div class="panel-body">
-          <%#= p.text_field :email, type: 'email', id: 'input_email', :class => 'form-control'%>
-        </div>
+        <%= puts product.to_yaml %>
 
-      </div>
+        <%#= render "partials/forsale_product_line", product: product.record, product_qty: product.qty %>
 
-    <%# end %>
+      <% end %>
+    </form>
+
   </div>
 </div>
