@@ -26,7 +26,8 @@
           <%=
           render "partials/forsale_product_line", {
             product: product[:record],
-            product_qty: product[:cart_qty]
+            product_qty: product[:cart_qty],
+            subtotal: product[:subtotal]
           }
           %>
         <% end %>

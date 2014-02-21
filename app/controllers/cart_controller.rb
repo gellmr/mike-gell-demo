@@ -7,9 +7,11 @@ class CartController < ApplicationController
     debug_print_cart()
     @products = []
     user_cart.each_with_index do |(productId,qty),index|
+      @prod = Product.find(productId.to_s)
       @products.push({
-        record: Product.find(productId.to_s),
-        cart_qty: qty
+        record: @prod,
+        cart_qty: qty,
+        subtotal: @prod.unitPrice * qty.to_i
       })
     end
   end

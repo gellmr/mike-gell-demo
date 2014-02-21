@@ -45,15 +45,11 @@
   <!-- Input: Qty to order -->
   <div class="col-xs-12 col-sm-3">
     <div class="row">
-      <div class="form-group pull-left">
+      <div class="form-group pull-left no-margin-btm">
         <div class="col-xs-12">
           <label for="qtyToOrder-productId-<%=product.id%>">Qty to Order</label>
         </div>
         <div class="col-xs-8 col-sm-9">
-          <!--
-          <input type="text" class="form-control qtyToOrder-input" id="qtyToOrder-productId-<%=product.id%>" />
-          -->
-
           <%=
           text_field_tag(
             'qtyToOrder-input', # name
@@ -80,6 +76,11 @@
           <small>
           </small>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        Subtot: $ <%= subtotal %>
       </div>
     </div>
   </div>

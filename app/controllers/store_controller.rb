@@ -9,7 +9,8 @@ class StoreController < ApplicationController
       qty = user_cart[productId]
       @products.push({
         record: product,
-        cart_qty: qty
+        cart_qty: qty,
+        subtotal: product.unitPrice * qty.to_i
       })
     end
     # Rails.logger.debug "@products: #{@products.to_yaml}"
