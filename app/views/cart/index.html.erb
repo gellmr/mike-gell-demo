@@ -1,24 +1,30 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <h3 class="panel-title">
-      Your Cart:
-    </h3>
+    <div class="centeredProducts">
+        
+      <h3>
+        My Cart:
+      </h3>
 
-    <%
-    # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
-    # A remote form automatically gets its authenticity token from the page's meta tag.
-    %>
-    <%= form_tag '/cart/submit', remote: true %>
-      <% @products.each do |product| %>
+      <%
+      # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
+      # A remote form automatically gets its authenticity token from the page's meta tag.
+      %>
+      <%= form_tag '/cart/submit', remote: true %>
+        <% @products.each do |product| %>
+          <%=
+          render "partials/forsale_product_line", {
+            product: product[:record],
+            product_qty: product[:cart_qty]
+          }
+          %>
+        <% end %>
         <%=
-        render "partials/forsale_product_line", {
-          product: product[:record],
-          product_qty: product[:cart_qty]
-        }
+        submit_tag "Place Order", {class: "btn btn-default pull-right cart-submit-btn"}
         %>
-      <% end %>
-    </form>
+      </form>
 
+    </div>
   </div>
 </div>

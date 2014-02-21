@@ -7,7 +7,7 @@ input.qtyToOrder-input {
   height: auto;
 }
 
-.storeContents {
+.centeredProducts {
   /* Products are displayed in a single centered column, for small screens. */
   @media screen and (max-width: 767px) {
     min-width: 193px;
