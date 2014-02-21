@@ -2,3 +2,18 @@ input.btn.cart-submit-btn {
   font-size: 28px;
   margin-bottom: 30px;
 }
+
+hr.narrow-hr {
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+h3.cart-heading {
+  font-size: 35px;
+}
+
+a.btn.cart-control-btn {
+  border-style: none;
+  margin-bottom: 15px;
+}
+

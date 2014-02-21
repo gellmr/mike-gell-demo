@@ -6,9 +6,24 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="text-center">
-            <h3>
-              My Cart:
+            <h3 class="cart-heading">
+              My Cart
             </h3>
+          </div>
+        </div>
+      </div>
+      <hr class="narrow-hr"/>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="row">
+            <%= link_to "Back To Store", store_index_path, class: "btn btn-default cart-control-btn" %>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="pull-right">
+              <%= link_to "Clear My Cart", store_index_path, class: "btn btn-default cart-control-btn" %>
+            </div>
           </div>
         </div>
       </div>
