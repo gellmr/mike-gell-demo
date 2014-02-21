@@ -6,12 +6,10 @@
       <form role="form">
         <% @products.each do |product| %>
           <%=
-          render(
-            "partials/forsale_product_line", {
-              product: product[:record],
-              product_qty: product[:cart_qty]
-            }
-          )
+          render "partials/forsale_product_line", {
+            product: product[:record],
+            product_qty: product[:cart_qty]
+          }
           %>
         <% end %>
       </form>

@@ -7,7 +7,7 @@ var updateCart = function( event ) {
     var productId = inputId.toString().split('-').pop(); // eg "23"
     var parentalDiv = inputElement.parent().parent();
 
-    if (productId <= 0 || newQty < 0) {
+    if (productId <= 0) {
       // console.log("Invalid input.");
       return;
     }
@@ -32,38 +32,43 @@ var updateCart = function( event ) {
       dataType:"json",
       data: params,
       statusCode: {
-        200: function(response) {
-          console.log("Removed from cart.");
-          parentalDiv.find('.maxStockMsg small').html('');
-          parentalDiv.find('.inCartIcon').hide();
-        },
-        201: function(response) {
-          console.log("Added to cart.");
-          parentalDiv.find('.maxStockMsg small').html('');
-          parentalDiv.find('.inCartIcon').show();
+        200: function(jqXHR) {
+          var result = jqXHR.getResponseHeader('result');
+          var message = jqXHR.getResponseHeader('message');
+          console.log(message);
+          switch(result) {
+
+            case "removed-from-cart":
+            parentalDiv.find('.maxStockMsg small').html('');
+            parentalDiv.find('.inCartIcon').hide();
+            inputElement.val(0);
+            break;
+
+            case "updated-qty":
+            parentalDiv.find('.maxStockMsg small').html('');
+            parentalDiv.find('.inCartIcon').show();
+            break;
+            
+            case "set-to-max":
+            var max = jqXHR.getResponseHeader('max');
+            var maxStockElement = parentalDiv.find('.maxStockMsg small');
+            maxStockElement.html(message);
+            maxStockElement.fadeOut({
+              duration: 4000,
+              done: function(){
+                maxStockElement.html('');
+                maxStockElement.fadeIn({
+                  duration: 0
+                });
+              }
+            });
+            inputElement.val(max);
+            break;
+          }
         },
         400: function(jqXHR) {
           var message = jqXHR.getResponseHeader('message');
           console.log("400 failed. message:" + message);
-        },
-        403: function(jqXHR) {
-          var message = jqXHR.getResponseHeader('message');
-          var max = jqXHR.getResponseHeader('max');
-          console.log("403 forbidden. Reason: " + message );
-          var maxStockElement = parentalDiv.find('.maxStockMsg small');
-          maxStockElement.html(message);
-          maxStockElement.fadeOut({
-            duration: 4000,
-            done: function(){
-              maxStockElement.html('');
-              maxStockElement.fadeIn({
-                duration: 0
-              });
-            }
-          });
-          
-          // maxStockElement.fadeOut({duration: 6000});
-          inputElement.val(max);
         },
         422: function() {
           console.log("Your session has expired.");

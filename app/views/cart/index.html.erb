@@ -11,11 +11,12 @@
     %>
     <%= form_tag '/cart/submit', remote: true %>
       <% @products.each do |product| %>
-
-        <%= puts product.to_yaml %>
-
-        <%#= render "partials/forsale_product_line", product: product.record, product_qty: product.qty %>
-
+        <%=
+        render "partials/forsale_product_line", {
+          product: product[:record],
+          product_qty: product[:cart_qty]
+        }
+        %>
       <% end %>
     </form>
 

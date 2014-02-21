@@ -4,11 +4,11 @@ class CartController < ApplicationController
 
   def index
     # Get all products in the user's cart
+    debug_print_cart()
     @products = []
     user_cart.each_with_index do |(productId,qty),index|
-      Rails.logger.debug "productId:#{productId} qty:#{qty} index:#{index}"
       @products.push({
-        record: Product.find(productId),
+        record: Product.find(productId.to_s),
         cart_qty: qty
       })
     end
@@ -23,21 +23,53 @@ class CartController < ApplicationController
     # Check if there are sufficient quantity in stock.
     product = Product.find(productId)
     if product.quantityInStock >= newQty.to_i
+
+      # We have enough stock...
+
       if newQty.to_i == 0
-        # Remove from cart
+
+        # User set qty to zero. Remove this item from cart
         user_cart.delete(productId)
-        head :ok # 200
+        head :ok, {
+          result: "removed-from-cart",
+          resultCartQty: 0,
+          message: "Removed item from cart."
+        }
+
       else
-        # Update cart quantity.
-        user_cart[productId] = newQty;
-        head :created # 201
+        if newQty.to_i > 0
+
+          # User set qty to positive integer. Update cart quantity.
+          user_cart[productId] = newQty;
+          head :ok, {
+            result: "updated-qty",
+            resultCartQty: newQty,
+            message: "Updated cart."
+          }
+
+        else
+          
+          # User set qty to negative integer. Remove from cart.
+          user_cart.delete(productId)
+          head :ok, {
+            result: "removed-from-cart",
+            resultCartQty: 0,
+            message: "Removed item from cart."
+          }
+
+        end
       end
     else
-      # Send 403
-      head :forbidden, {
-        message: "Only #{product.quantityInStock} items available!",
-        max: product.quantityInStock
+
+      # User wants more than we have available. Set to max available.
+      user_cart[productId] = product.quantityInStock;
+      head :ok, {
+        result: "set-to-max",
+        max: product.quantityInStock,
+        resultCartQty: product.quantityInStock,
+        message: "Only #{product.quantityInStock} items available!"
       }
+
     end
   end
 
