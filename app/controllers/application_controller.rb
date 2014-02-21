@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
       @_user_cart = session[:cart] ||= {}
     end
 
+    def clear_cart
+      @_user_cart = session[:cart] = {}
+    end
+
     def debug_print_cart
       old_log_level = ActiveRecord::Base.logger.level
       ActiveRecord::Base.logger.level = 1

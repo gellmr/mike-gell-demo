@@ -73,6 +73,11 @@ class CartController < ApplicationController
     end
   end
 
+  def destroy
+    clear_cart()
+    redirect_to action: 'index'
+  end
+
   def submit
     # User has submitted their cart.
   end
