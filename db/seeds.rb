@@ -183,20 +183,14 @@ and uses a simple IDE which can be be freely downloaded.',
     unitPrice: 9.95,
     costFromSupplier: 5.00,
     quantityInStock: 130,
-    description: 'Specifications: DV Voltage 200mV,
-200mV,
-20V,
-200V,
-1000V<br /> MaxInput:1000V DC -/+ 0.5<br /> DC Amps: 200 uA,
-20mA,
-200mA,
-10A<br /> Overload Protected<br /> AC Volts: 200V,
-750 V,
-maxinput 750 V rms input<br /> Imedage: 1Meg +/- 1.2%<br /> Resistance: 200,
-2k,
-20k,
-200k Ohms,
-2M Ohms -/+ 1.2%',
+    description: 'Specifications:
+DV Voltage { 200mV, 200mV, 20V, 200V, 1000V }
+MaxInput: { 1000V DC -/+ 0.5 }
+DC Amps: { 200 uA, 20mA, 200mA, 10A }
+Overload Protected
+AC Volts: { 200V, 750 V, maxinput 750V }
+Imedage: { 1Meg +/- 1.2% }
+Resistance: { 200, 2k, 20k, 200k Ohms, 2M Ohms -/+ 1.2% }',
     imageUrl: 'multimeter.jpg'
   }, {
     name: 'Crimp Tool With Connectors',

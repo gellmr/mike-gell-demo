@@ -28,7 +28,7 @@ class CartController < ApplicationController
     else
       # Send 403
       head :forbidden, {
-        message: "Only #{product.quantityInStock} items in stock!",
+        message: "Only #{product.quantityInStock} items available!",
         max: product.quantityInStock
       }
     end
