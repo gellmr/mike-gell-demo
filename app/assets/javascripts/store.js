@@ -7,7 +7,7 @@ var updateCart = function( event ) {
     var productId = inputId.toString().split('-').pop(); // eg "23"
     var parentalDiv = inputElement.parent().parent();
 
-    if (productId <= 0 || newQty <= 0) {
+    if (productId <= 0 || newQty < 0) {
       // console.log("Invalid input.");
       return;
     }
