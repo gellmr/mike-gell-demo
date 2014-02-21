@@ -43,7 +43,10 @@ var updateCart = function( event ) {
             parentalDiv.find('.maxStockMsg small').html('');
             parentalDiv.find('.inCartIcon').hide();
             inputElement.val(0);
-            wellDiv.remove();
+            var page = document.URL.split('/').pop().split('?').shift();
+            if (page == "cart"){
+              wellDiv.remove();
+            }
             break;
 
             case "updated-qty":
