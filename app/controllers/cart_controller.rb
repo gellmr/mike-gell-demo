@@ -23,8 +23,15 @@ class CartController < ApplicationController
     # Check if there are sufficient quantity in stock.
     product = Product.find(productId)
     if product.quantityInStock >= newQty.to_i
-      user_cart[productId] = newQty;
-      head :created # 201
+      if newQty.to_i == 0
+        # Remove from cart
+        user_cart.delete(productId)
+        head :ok # 200
+      else
+        # Update cart quantity.
+        user_cart[productId] = newQty;
+        head :created # 201
+      end
     else
       # Send 403
       head :forbidden, {

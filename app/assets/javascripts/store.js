@@ -32,6 +32,11 @@ var updateCart = function( event ) {
       dataType:"json",
       data: params,
       statusCode: {
+        200: function(response) {
+          console.log("Removed from cart.");
+          parentalDiv.find('.maxStockMsg small').html('');
+          parentalDiv.find('.inCartIcon').hide();
+        },
         201: function(response) {
           console.log("Added to cart.");
           parentalDiv.find('.maxStockMsg small').html('');

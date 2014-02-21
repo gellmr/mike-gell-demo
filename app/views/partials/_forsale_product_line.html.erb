@@ -66,7 +66,14 @@
           )
           %>
         </div>
-        <div class="col-xs-4 col-sm-3 inCartIcon" style="display: none;">
+
+        <%
+        icon_style = "display: block;"
+        if (product_qty.nil? || product_qty.to_i == 0)
+          icon_style = "display: none;"
+        end
+        %>
+        <%= tag "div", class: "col-xs-4 col-sm-3 inCartIcon", style: icon_style %>
           <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
         </div>
         <div class="col-xs-12 maxStockMsg">
