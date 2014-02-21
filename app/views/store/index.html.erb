@@ -7,7 +7,13 @@
         Available Products:
       </h3>
 
-      <%= paginate @all_products %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <%= paginate @all_products %>
+          </div>
+        </div>
+      </div>
 
       <form role="form">
         <% @products.each do |product| %>
@@ -21,13 +27,20 @@
       </form>
 
       <div class="row">
-        <div class="col-xs-12 col-sm-6">
-          <%= paginate @all_products %>
+        <div class="col-xs-12">
+          <div class="text-center">
+            <%= paginate @all_products %>
+          </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-          <%=
-          link_to "Go To Cart", cart_index_path, class: "btn btn-default pull-right go-to-cart-btn"
-          %>
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <%=
+            link_to "Go To Cart", cart_index_path, class: "btn btn-default go-to-cart-btn"
+            %>
+          </div>
         </div>
       </div>
     </div>
