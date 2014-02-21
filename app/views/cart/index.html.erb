@@ -3,9 +3,15 @@
 
     <div class="centeredProducts">
         
-      <h3>
-        My Cart:
-      </h3>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <h3>
+              My Cart:
+            </h3>
+          </div>
+        </div>
+      </div>
 
       <%
       # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
@@ -20,10 +26,19 @@
           }
           %>
         <% end %>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <h3>
+                <%=
+                submit_tag "Place Order", {class: "btn btn-default cart-submit-btn"}
+                %>
+              </h3>
+            </div>
+          </div>
+        </div>
         
-        <%=
-        submit_tag "Place Order", {class: "btn btn-default pull-right cart-submit-btn"}
-        %>
       </form>
 
     </div>
