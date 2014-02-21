@@ -7,6 +7,8 @@
         Available Products:
       </h3>
 
+      <%= paginate @all_products %>
+      
       <form role="form">
         <% @products.each do |product| %>
           <%=
@@ -18,6 +20,7 @@
         <% end %>
       </form>
 
+      <%= paginate @all_products %>
     </div>
 
   </div>

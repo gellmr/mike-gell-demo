@@ -3,7 +3,8 @@ class StoreController < ApplicationController
     # Get all products in the store.
     # debug_print_cart()
     @products = []
-    Product.all.each do |product|
+    @all_products = Product.order("name").page(params[:page]).per(5)
+    @all_products.each do |product|
       productId = product.id.to_s
       qty = user_cart[productId]
       @products.push({
