@@ -6,12 +6,14 @@ class CartController < ApplicationController
     # Get all products in the user's cart
     debug_print_cart()
     @products = []
+    @grand_total = 0
     user_cart.each_with_index do |(productId,qty),index|
       @prod = Product.find(productId.to_s)
+      @grand_total += subtot = @prod.unitPrice * qty.to_i
       @products.push({
         record: @prod,
         cart_qty: qty,
-        subtotal: @prod.unitPrice * qty.to_i
+        subtotal: subtot
       })
     end
   end

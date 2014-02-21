@@ -78,11 +78,14 @@
         </div>
       </div>
     </div>
+
+    <% unless subtotal.nil? %>
     <div class="row">
       <div class="col-xs-12">
         Subtot: $ <%= subtotal %>
       </div>
     </div>
+    <% end %>
   </div>
 
 </div>
