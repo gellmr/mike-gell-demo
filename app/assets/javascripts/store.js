@@ -6,6 +6,7 @@ var updateCart = function( event ) {
     var inputId = inputElement.attr('id');               // eg "qtyToOrder-productId-23"
     var productId = inputId.toString().split('-').pop(); // eg "23"
     var parentalDiv = inputElement.parent().parent();
+    var wellDiv = $('.well.product-' + productId);
 
     if (productId <= 0) {
       // console.log("Invalid input.");
@@ -42,6 +43,7 @@ var updateCart = function( event ) {
             parentalDiv.find('.maxStockMsg small').html('');
             parentalDiv.find('.inCartIcon').hide();
             inputElement.val(0);
+            wellDiv.remove();
             break;
 
             case "updated-qty":
