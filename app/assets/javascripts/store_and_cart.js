@@ -47,6 +47,7 @@ var updateCart = function( event ) {
             if (page == "cart"){
               wellDiv.remove();
             }
+            $('.cart-submit-btn').trigger('check-if-no-products');
             break;
 
             case "updated-qty":
@@ -91,6 +92,17 @@ var updateCart = function( event ) {
   }
 };
 
+var checkIfNoProducts = function(e) {
+  if ($('div.well').length == 0) {
+    console.log("There are no products in the cart.")
+    $(this).hide();
+  }
+  else {
+    console.log("There are products in the cart.")
+    $(this).show();
+  }
+};
+
 var storeReadyJs = function(e) {
 
   console.log("\nstoreReadyJs()");
@@ -102,8 +114,12 @@ var storeReadyJs = function(e) {
     'input.qtyToOrder-input',
     updateCart
   );
+  
+  $('.cart-submit-btn').on('check-if-no-products', checkIfNoProducts);
+  $('.cart-submit-btn').trigger('check-if-no-products');
 };
 
 // Gotta bind to both events, because we are using turbolinks.
 jQuery(document).ready(storeReadyJs);
 jQuery(document).on('page:load', storeReadyJs);
+
