@@ -73,6 +73,10 @@ class CartController < ApplicationController
     end
   end
 
+  def submit
+    # User has submitted their cart.
+  end
+
   private
     def handle_unverified_request
       # Bad CSRF token. The user session must have expired.
