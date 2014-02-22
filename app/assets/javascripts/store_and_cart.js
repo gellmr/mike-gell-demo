@@ -54,7 +54,7 @@ var updateCart = function( event ) {
             case "updated-qty":
             parentalDiv.find('.maxStockMsg small').html('');
             parentalDiv.find('.inCartIcon').show();
-            parentalDiv.find('.subtot-input').val(resultSubTot);
+            parentalDiv.find('.subtot-input').val('$ ' + resultSubTot);
             break;
             
             case "set-to-max":
