@@ -37,6 +37,7 @@ var updateCart = function( event ) {
           var result = jqXHR.getResponseHeader('result');
           var resultSubTot = jqXHR.getResponseHeader('resultSubTot');
           var resultGrandTot = jqXHR.getResponseHeader('resultGrandTot');
+          var cartTotalItems = jqXHR.getResponseHeader('cartTotalItems');
           var message = jqXHR.getResponseHeader('message');
           console.log(message);
           switch(result) {
@@ -75,7 +76,8 @@ var updateCart = function( event ) {
             parentalDiv.find('input.subtot-input').val(resultSubTot);
             break;
           };
-          // $(".grand-total").html('$ ' + resultGrandTot);
+          console.log("sss: " + $("input.total-items").length);
+          $("input.total-items").val(cartTotalItems);
           $("input.grand-total").val('$ ' + resultGrandTot);
         },
         400: function(jqXHR) {

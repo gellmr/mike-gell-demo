@@ -38,38 +38,35 @@ class CartController < ApplicationController
 
         # User set qty to zero. Remove this item from cart
         user_cart.delete(productId)
-        head :ok, {
+        send_head_ok({
           result: "removed-from-cart",
           resultCartQty: 0,
           resultSubTot: 0,
-          resultGrandTot: cart_grand_total,
           message: "Removed item from cart."
-        }
+        })
 
       else
         if newQty.to_i > 0
 
           # User set qty to positive integer. Update cart quantity.
           user_cart[productId] = newQty;
-          head :ok, {
+          send_head_ok({
             result: "updated-qty",
             resultCartQty: newQty,
             resultSubTot: product.unitPrice * newQty.to_i,
-            resultGrandTot: cart_grand_total,
             message: "Updated cart."
-          }
+          })
 
         else
           
           # User set qty to negative integer. Remove from cart.
           user_cart.delete(productId)
-          head :ok, {
+          send_head_ok({
             result: "removed-from-cart",
             resultCartQty: 0,
             resultSubTot: 0,
-            resultGrandTot: cart_grand_total,
             message: "Removed item from cart."
-          }
+          })
 
         end
       end
@@ -77,14 +74,13 @@ class CartController < ApplicationController
 
       # User wants more than we have available. Set to max available.
       user_cart[productId] = product.quantityInStock;
-      head :ok, {
+      send_head_ok({
         result: "set-to-max",
         max: product.quantityInStock,
         resultCartQty: product.quantityInStock,
         resultSubTot: product.unitPrice * product.quantityInStock,
-        resultGrandTot: cart_grand_total,
         message: "Only #{product.quantityInStock} items available!"
-      }
+      })
 
     end
   end
@@ -104,12 +100,27 @@ class CartController < ApplicationController
       head :unprocessable_entity # 422
     end
 
+    def send_head_ok hash_args
+      head :ok, hash_args.merge({
+        resultGrandTot: cart_grand_total,
+        cartTotalItems: cart_total_items
+      })
+    end
+
     def cart_grand_total
       @grand_total = 0
       user_cart.each_with_index do |(productId,qty),index|
         @prod = Product.find(productId.to_s)
-        @grand_total += subtot = @prod.unitPrice * qty.to_i
+        @grand_total += @prod.unitPrice * qty.to_i
       end
       @grand_total
+    end
+
+    def cart_total_items
+      @cart_total_items = 0
+      user_cart.each_with_index do |(productId,qty),index|
+        @cart_total_items += qty.to_i
+      end
+      @cart_total_items
     end
 end
