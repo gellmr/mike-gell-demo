@@ -1,39 +1,29 @@
 
 <div class="row well transparentBackground product-<%=product.id%>">
 
-  <!-- Unit price and Qty in stock (hidden xs) -->
-  <div class="col-sm-2 hidden-xs">
-    <div class="row">
-      <div class="col-xs-12">
-        $ <%= product.unitPrice %> <small class="greyText"> each </small>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <small class="greyText">
-          <%= product.quantityInStock %> in stock
-        </small>
-      </div>
-    </div>
-  </div>
-
   <!-- Product name and description, Always visible. -->
   <div class="col-xs-12 col-sm-4">
-    <strong>
-      <%= product.name %>
-    </strong>
-    <br />
-    <small>
-      <%= product.description %>
-    </small>
-  </div>
+    <div class="row">
+      <strong>
+        <%= product.name %>
+      </strong>
+    </div>
 
-  <!-- Price and Qty in Stock (Only visible xs) -->
-  <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-    $ <%= product.unitPrice %> <small class="greyText"> each
-  </div>
-  <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-    <%= product.quantityInStock %> in stock </small>
+    <div class="row">
+      <small>
+        <%= product.description %>
+      </small>
+    </div>
+
+    <div class="row">
+      <small class="greyText">
+        <%= product.quantityInStock %> in stock
+      </small>
+    </div>
+
+    <div class="row">
+      $ <%= product.unitPrice %> <small class="greyText"> each </small>
+    </div>
   </div>
 
   <!-- Image tag, always visible -->
@@ -43,39 +33,33 @@
   </div>
 
   <!-- Input: Qty to order -->
-  <div class="col-xs-12 col-sm-3">
+  <div class="col-xs-9 col-sm-3">
     <div class="row">
       <div class="form-group pull-left no-margin-btm">
         <div class="col-xs-12">
-          <label for="qtyToOrder-productId-<%=product.id%>">Qty to Order</label>
+          <div class="row">
+            <label for="qtyToOrder-productId-<%=product.id%>">
+              Qty to Order
+            </label>
+          </div>
         </div>
-        <div class="col-xs-8 col-sm-9">
-          <%=
-          text_field_tag(
-            'qtyToOrder-input', # name
-            product_qty,        # value
-            {
-              :type => "text",
-              :class => "form-control qtyToOrder-input",
-              :id => "qtyToOrder-productId-#{product.id}"
-            }
-          )
-          %>
+        <div class="col-xs-12">
+          <div class="row">
+            <%=
+            text_field_tag(
+              'qtyToOrder-input', # name
+              product_qty,        # value
+              {
+                :type => "text",
+                :class => "form-control qtyToOrder-input",
+                :id => "qtyToOrder-productId-#{product.id}"
+              }
+            )
+            %>
+          </div>
         </div>
 
-        <% if inCartIcons %>
-        <%
-        # IN-CART ICON
-        icon_style = "display: block;"
-        if (product_qty.nil? || product_qty.to_i == 0)
-          icon_style = "display: none;"
-        end
-        %>
-        <%= tag "div", class: "col-xs-4 col-sm-3 inCartIcon", style: icon_style %>
-          <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
-        </div>
-        <% end %>
-
+        <%# MAX-STOCK MESSAGE appears here, thru javascript. %>
         <div class="col-xs-12 maxStockMsg">
           <small>
           </small>
@@ -86,12 +70,58 @@
     <% unless subtotal.nil? %>
     <div class="row">
       <div class="col-xs-12">
-        <small>
-          Subtotal: $ <%= subtotal %>
-        </small>
+        <div class="row">
+          <small>
+            Subtotal: $ <%= subtotal %>
+          </small>
+        </div>
       </div>
     </div>
     <% end %>
   </div>
+
+  <%# IN-CART ICON - Store only.%>
+  <% if inCartIcons %>
+  <%
+  icon_style = "display: block;"
+  if (product_qty.nil? || product_qty.to_i == 0)
+    icon_style = "display: none;"
+  end
+  %>
+  <%= tag "div", class: "col-xs-3 col-sm-2 inCartIcon", style: icon_style %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <label style="visibility:hidden;">
+            In Cart?
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
+    </div>
+  </div>
+  <% end %>
+
+  <%# SUB TOTAL - Cart only.%>
+  <% if !inCartIcons %>
+  <%= tag "div", class: "col-xs-3 col-sm-2" %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <label>
+            Sub Total:
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row sub-total-text">
+      <% unless subtotal.nil? %>
+      $ <%= subtotal %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
 
 </div>

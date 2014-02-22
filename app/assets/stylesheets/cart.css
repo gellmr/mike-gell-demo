@@ -3,17 +3,33 @@ input.btn.cart-submit-btn {
   margin-bottom: 30px;
 }
 
-hr.narrow-hr {
-  margin-top: 3px;
-  margin-bottom: 10px;
-}
-
 h3.cart-heading {
   font-size: 35px;
 }
 
 a.btn.cart-header-btn {
   border-style: none;
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
+div.centeredProducts div.row.cart-header-row {
+  border-style: solid;
+  border-color: #e3e3e3;
+  border-width:0px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-bottom: -1px;
+}
+
+div.row {
+  border: 1px dashed;
+}
+
+div.row.sub-total-text {
+  font-size: 20px;
+  padding-top: 12px;
+}
