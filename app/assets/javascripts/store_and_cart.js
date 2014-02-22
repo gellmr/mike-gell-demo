@@ -36,6 +36,7 @@ var updateCart = function( event ) {
         200: function(jqXHR) {
           var result = jqXHR.getResponseHeader('result');
           var resultSubTot = jqXHR.getResponseHeader('resultSubTot');
+          var resultGrandTot = jqXHR.getResponseHeader('resultGrandTot');
           var message = jqXHR.getResponseHeader('message');
           console.log(message);
           switch(result) {
@@ -73,7 +74,8 @@ var updateCart = function( event ) {
             inputElement.val(max);
             parentalDiv.find('input.subtot-input').val(resultSubTot);
             break;
-          }
+          };
+          $(".grand-total").html('$ ' + resultGrandTot);
         },
         400: function(jqXHR) {
           var message = jqXHR.getResponseHeader('message');

@@ -42,6 +42,7 @@ class CartController < ApplicationController
           result: "removed-from-cart",
           resultCartQty: 0,
           resultSubTot: 0,
+          resultGrandTot: cart_grand_total,
           message: "Removed item from cart."
         }
 
@@ -54,6 +55,7 @@ class CartController < ApplicationController
             result: "updated-qty",
             resultCartQty: newQty,
             resultSubTot: product.unitPrice * newQty.to_i,
+            resultGrandTot: cart_grand_total,
             message: "Updated cart."
           }
 
@@ -65,6 +67,7 @@ class CartController < ApplicationController
             result: "removed-from-cart",
             resultCartQty: 0,
             resultSubTot: 0,
+            resultGrandTot: cart_grand_total,
             message: "Removed item from cart."
           }
 
@@ -79,6 +82,7 @@ class CartController < ApplicationController
         max: product.quantityInStock,
         resultCartQty: product.quantityInStock,
         resultSubTot: product.unitPrice * product.quantityInStock,
+        resultGrandTot: cart_grand_total,
         message: "Only #{product.quantityInStock} items available!"
       }
 
@@ -98,5 +102,14 @@ class CartController < ApplicationController
     def handle_unverified_request
       # Bad CSRF token. The user session must have expired.
       head :unprocessable_entity # 422
+    end
+
+    def cart_grand_total
+      @grand_total = 0
+      user_cart.each_with_index do |(productId,qty),index|
+        @prod = Product.find(productId.to_s)
+        @grand_total += subtot = @prod.unitPrice * qty.to_i
+      end
+      @grand_total
     end
 end
