@@ -36,13 +36,13 @@ class CartController < ApplicationController
 
       if newQty.to_i == 0
 
-        # User set qty to zero. Remove this item from cart
+        # User set qty to zero.
         user_cart.delete(productId)
         send_head_ok({
-          result: "removed-from-cart",
+          result: "updated-qty",
           resultCartQty: 0,
           resultSubTot: 0,
-          message: "Removed item from cart."
+          message: "Updated cart - set qty to zero."
         })
 
       else
