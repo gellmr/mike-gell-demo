@@ -19,3 +19,7 @@ $font-folder: '../assets/fonts/bootstrap';
 .current {
   background-color: rgb(206, 206, 206);
 }
+
+nav.pagination a.btn {
+  font-size: 10px;
+}
