@@ -9,6 +9,7 @@
             <h3 class="cart-heading">
               My Cart
             </h3>
+            <%= @total_lines %> Lines, <%= @total_items %> Items
           </div>
         </div>
       </div>
@@ -38,7 +39,8 @@
           render "partials/forsale_product_line", {
             product: product[:record],
             product_qty: product[:cart_qty],
-            subtotal: product[:subtotal]
+            subtotal: product[:subtotal],
+            inCartIcons: false
           }
           %>
         <% end %>
