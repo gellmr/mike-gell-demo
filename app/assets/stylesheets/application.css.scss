@@ -15,3 +15,7 @@ $font-folder: '../assets/fonts/bootstrap';
        url('#{$font-folder}/glyphicons-halflings-regular.ttf') format('truetype'), 
        url('#{$font-folder}/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+
+.current {
+  background-color: rgb(206, 206, 206);
+}
