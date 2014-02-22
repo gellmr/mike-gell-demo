@@ -49,19 +49,12 @@
           %>
         <% end %>
 
-
-        <div class="row">
-          <div class="text-center">
-            <h4>
-              <strong>
-                Grand Total:
-              </strong>
-              <span class='grand-total'>
-                $ <%= @grand_total %>
-              </span>
-            </h4>
-          </div>
-        </div>
+        <%=
+        render "cart/partials/summaryRow", {
+          total_items: 333,
+          grand_total: @grand_total
+        }
+        %>
 
         <div class="row">
           <div class="col-xs-12">

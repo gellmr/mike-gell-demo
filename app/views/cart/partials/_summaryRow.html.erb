@@ -1,0 +1,66 @@
+
+<div class="row well transparentBackground cart-summary-row">
+
+  <div class="col-xs-12 col-sm-4">
+    <!-- Details Column -->
+  </div>
+
+  <div class="col-xs-12 col-sm-3">
+    <!-- Image Column -->
+  </div>
+
+  <div class="col-xs-12 col-sm-5">
+    <div class="row">
+      <div class="col-xs-6">
+        <label>
+          Total Items:
+        </label>
+      </div>
+      <div class="col-xs-6">
+        <label>
+          Grand Total:
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <!-- Total Items -->
+      <div class="col-xs-6">
+        <div class="row">
+          <%=
+          text_field_tag(
+            'total-items-field', # name
+            total_items,         # value
+            {
+              :type => "text",
+              :class => "form-control big-input-field",
+              :disabled => "disabled",
+              :id => "total-items"
+            }
+          )
+          %>
+        </div>
+      </div>
+
+      <!-- Grand Total -->
+      <div class="col-xs-6">
+        <div class="row">
+          <%=
+          text_field_tag(
+            'grant-total-field', # name
+            "$ #{grand_total}",  # value
+            {
+              :type => "text",
+              :class => "form-control big-input-field grand-total",
+              :disabled => "disabled",
+              :id => "grand-total"
+            }
+          )
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

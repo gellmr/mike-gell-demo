@@ -75,7 +75,8 @@ var updateCart = function( event ) {
             parentalDiv.find('input.subtot-input').val(resultSubTot);
             break;
           };
-          $(".grand-total").html('$ ' + resultGrandTot);
+          // $(".grand-total").html('$ ' + resultGrandTot);
+          $("input.grand-total").val('$ ' + resultGrandTot);
         },
         400: function(jqXHR) {
           var message = jqXHR.getResponseHeader('message');
