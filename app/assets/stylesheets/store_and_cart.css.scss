@@ -30,8 +30,13 @@ img.centered-block-img {
   display: block; /* Override the default inline-block of img tag. This will allow us to set the margins to auto... */
   margin-left: auto;
   margin-right: auto;
-  // margin-top: 12px;
-  // margin-bottom: 12px;
+}
+
+img.centered-block-img.with-vert-margins {
+  @media screen and (max-width: 767px) {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
 }
 
 div.form-group.no-margin-btm {
