@@ -3,7 +3,11 @@
 }
 
 input.qtyToOrder-input {
-  font-size: 2.0em;
+  font-size: 28px;
+  height: auto;
+}
+input.subtot-input {
+  font-size: 26px;
   height: auto;
 }
 
@@ -39,14 +43,10 @@ img.centered-block-img.with-vert-margins {
   }
 }
 
-div.form-group.no-margin-btm {
-  margin-bottom: 0px;
-}
-
 hr.narrow-hr {
   margin-top: 3px;
   margin-bottom: 10px;
 }
 img.centered-block-img {
-  border: 1px dashed;
+  // border: 1px dashed;
 }

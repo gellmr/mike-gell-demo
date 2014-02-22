@@ -25,11 +25,11 @@ div.centeredProducts div.row.cart-header-row {
   margin-bottom: -1px;
 }
 
-div.row {
-  border: 1px dashed;
+
+div {
+  /*border: 1px dotted;*/
 }
 
-div.row.sub-total-text {
-  font-size: 20px;
-  padding-top: 12px;
+div.row {
+  /*border: 1px dashed;*/
 }
