@@ -32,7 +32,7 @@
     <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded centered-block-img with-vert-margins">
   </div>
 
-  <div class="col-xs-12 col-sm-5">
+  <%= tag "div", class: "col-xs-12 col-sm-5 parentalDiv-#{product.id}" %>
     <div class="row">
       <div class="col-xs-6">
         <label for="qtyToOrder-productId-<%=product.id%>">

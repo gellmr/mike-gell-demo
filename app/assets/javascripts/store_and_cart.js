@@ -5,7 +5,7 @@ var updateCart = function( event ) {
     var inputElement = $(event.target);
     var inputId = inputElement.attr('id');               // eg "qtyToOrder-productId-23"
     var productId = inputId.toString().split('-').pop(); // eg "23"
-    var parentalDiv = inputElement.parent().parent();
+    var parentalDiv = $('div.parentalDiv-' + productId);
     var wellDiv = $('.well.product-' + productId);
 
     if (productId <= 0) {
@@ -35,6 +35,7 @@ var updateCart = function( event ) {
       statusCode: {
         200: function(jqXHR) {
           var result = jqXHR.getResponseHeader('result');
+          var resultSubTot = jqXHR.getResponseHeader('resultSubTot');
           var message = jqXHR.getResponseHeader('message');
           console.log(message);
           switch(result) {
@@ -53,6 +54,7 @@ var updateCart = function( event ) {
             case "updated-qty":
             parentalDiv.find('.maxStockMsg small').html('');
             parentalDiv.find('.inCartIcon').show();
+            parentalDiv.find('.subtot-input').val(resultSubTot);
             break;
             
             case "set-to-max":
@@ -69,6 +71,7 @@ var updateCart = function( event ) {
               }
             });
             inputElement.val(max);
+            parentalDiv.find('input.subtot-input').val(resultSubTot);
             break;
           }
         },

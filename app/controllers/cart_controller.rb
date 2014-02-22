@@ -41,6 +41,7 @@ class CartController < ApplicationController
         head :ok, {
           result: "removed-from-cart",
           resultCartQty: 0,
+          resultSubTot: 0,
           message: "Removed item from cart."
         }
 
@@ -52,6 +53,7 @@ class CartController < ApplicationController
           head :ok, {
             result: "updated-qty",
             resultCartQty: newQty,
+            resultSubTot: product.unitPrice * newQty.to_i,
             message: "Updated cart."
           }
 
@@ -62,6 +64,7 @@ class CartController < ApplicationController
           head :ok, {
             result: "removed-from-cart",
             resultCartQty: 0,
+            resultSubTot: 0,
             message: "Removed item from cart."
           }
 
@@ -75,6 +78,7 @@ class CartController < ApplicationController
         result: "set-to-max",
         max: product.quantityInStock,
         resultCartQty: product.quantityInStock,
+        resultSubTot: product.unitPrice * product.quantityInStock,
         message: "Only #{product.quantityInStock} items available!"
       }
 
