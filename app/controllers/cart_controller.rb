@@ -103,7 +103,8 @@ class CartController < ApplicationController
     def send_head_ok hash_args
       head :ok, hash_args.merge({
         resultGrandTot: cart_grand_total,
-        cartTotalItems: cart_total_items
+        cartTotalItems: cart_total_items,
+        cartTotalLines: cart_total_lines
       })
     end
 
@@ -122,5 +123,13 @@ class CartController < ApplicationController
         @cart_total_items += qty.to_i
       end
       @cart_total_items
+    end
+
+    def cart_total_lines
+      @cart_total_lines = 0
+      user_cart.each do | p |
+        @cart_total_lines += 1
+      end
+      @cart_total_lines
     end
 end
