@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
       # The user has successfully logged in.
     else
       puts "-----> Authentication failed!!!"
-      head :bad_request # 400
+      head :bad_request, { message: "Invalid login details." } # 400
     end
   end
 

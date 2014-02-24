@@ -3,6 +3,9 @@
 
 <form role="form" class="authForm">
 
+  <div class="alert alert-warning loginFailMessage" style="display:block;">
+  </div>
+
   <% flash.each do |key, value| %>
     <div class="<%= flash_class(key) %>">
       <%= value %>

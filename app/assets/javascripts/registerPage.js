@@ -35,7 +35,7 @@ function showErrors(errors) {
   // Get the list of errors, for all rego fields.
   var emailErrors = errors.responseJSON['email'];
   var pwErrors = errors.responseJSON['password'];
-  var pwConfErrors = errors.responseJSON['passwordConfirmation'];
+  var pwConfErrors = errors.responseJSON['password_confirmation'];
 
   // Clear the error text content, for all rego fields.
   emailDiv.find('span.error-message').empty();
@@ -93,6 +93,7 @@ $(document).ready(function() {
 
         // bad request
         400: function(errors) {
+          console.dir(errors);
           showErrors(errors);
         }
       }
