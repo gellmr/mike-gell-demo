@@ -88,7 +88,7 @@ $(document).ready(function() {
 
         201: function(user) {
           console.log("success! user: " + user.id);
-          window.location.href = '/users/' + user.id;
+          window.location.href = '/users/' + user.id + '/edit';
         },
 
         // bad request

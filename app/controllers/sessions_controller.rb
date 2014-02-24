@@ -41,24 +41,24 @@ class SessionsController < ApplicationController
     reset_session # Help prevent session fixation attack.
     destroy_session
     Rails.logger.debug "Session has been destroyed and reset. Redirecting now..."
-    render template: "/layouts/successfullyLoggedOut"
+    render template: "/login_logout/successfullyLoggedOut"
   end
 
   # User wants to log in. Serve the login page.
   def login_page
-    render template: "/layouts/loginPage"
+    render template: "/login_logout/loginPage"
   end
 
   # User wants to register. Serve the rego page.
   def register_page
-    render template: "/layouts/registerPage"
+    render template: "/register/registerPage"
   end
 
   # The user's session has expired
   # This controller action will render a page telling them what happened.
   # Javascript has directed the user to this page.
   def expired_notice
-    render template: "/layouts/sessionExpired"
+    render template: "/session/sessionExpired"
   end
 
 end
