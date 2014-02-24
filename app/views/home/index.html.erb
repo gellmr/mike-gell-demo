@@ -1,3 +1,28 @@
-<h4>
-  Site Index Page
-</h4>
+
+<h3>
+  Welcome
+</h3>
+<br />
+
+<div class="">
+  <p class="lead">
+    This is a <strong>pretend</strong> online store, for demonstrating my web application development skills. This site was built using Ruby on Rails.
+  </p>
+  <p class="">
+    The online store provides a list of 30 electronics products, which you can add to cart, and place an "order" - note that this is a pretend site so you don't have to pay (and won't receive anything).
+  </p>
+  <p class="">
+    For a complete implementation I would probably use braintree for payments. In the meantime I am working on the staff and customer backend system for viewing/processing orders.
+  </p>
+  <p class="">
+    You need to register if you want to place an order. Otherwise, you can look at your cart, but go no further.
+  </p>
+  <br />
+
+  <div class="text-center">
+    <%=
+    link_to "Go To Store", store_index_path, class: "btn btn-default go-to-cart-btn"
+    %>
+  </div>
+
+</div>
