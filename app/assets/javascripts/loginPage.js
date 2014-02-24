@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
       complete: function(xhr, textStatus){
         //console.log("Login XHR COMPLETED with status " + textStatus + "\n");
         if (textStatus == "success") {
-          window.location.href = '/users/' + String(_user.id);
+          window.location.href = '/users/' + String(_user.id + '/edit');
         }
       }
 

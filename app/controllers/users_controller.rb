@@ -21,13 +21,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attributes!(sane_user_params)
-    redirect_to @user
+    flash[:success] = "Successfully updated your details"
+    redirect_to edit_user_path @user
   end
 
-  # Show my account details.
+  # User has requested the 'my account' form.
   # Must be logged in
-  def show
+  def edit
     @user = User.find_by(id: params[:id])
+    # Serve the 'my account' form.
   end
 
   private
