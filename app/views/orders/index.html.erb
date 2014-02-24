@@ -1,7 +1,20 @@
 <h3>
-  All Orders
+  My Orders:
 </h3>
 
-<p>
+<% if @orders.count == 0 %>
   None at the moment.
-</p>
+<% else %>
+
+  <% @orders.each do |order| %>
+    <div class="well transparentBackground">
+    <% order.ordered_products.each do |ordered_product| %>
+      <div>
+        <p>
+          <strong><%= ordered_product.product.name %></strong>
+          Qty: <%= ordered_product.qty || 0 %> </p>
+      </div>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>
