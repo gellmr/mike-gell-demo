@@ -14,5 +14,5 @@ class User < ActiveRecord::Base
   # attr_accessible :email, :password, :password_confirmation
 
   validates_uniqueness_of :email, :case_sensitive => false
-  has_many :orders, dependent: :destroy
+  has_many :orders
 end
