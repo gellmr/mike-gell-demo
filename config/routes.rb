@@ -1,10 +1,20 @@
 Fuzzybear::Application.routes.draw do
 
-  resources :users, only: [:create, :update, :edit]
-  get "home/index" => 'home#index'
-  get 'home/'      => 'home#index'
+  resources :users, only: [:create, :update, :edit] do
+    # POST  /users             users#create    users_path
+    # PATCH /users/:id         users#update    user_path
+    # GET   /users/:id/edit    users#edit      edit_user_path
+    resources :orders, only: [:index, :show]
+      # GET  /users/:id/orders/     orders#index  user_orders_path
+      # GET  /users/:id/orders/:id  orders#show   user_order_path
+  end
+
+  get "home/index" => 'home#index'   # home_index_path
+  get 'home/'      => 'home#index'   # home_path
 
   resources :sessions, only: [:create]
+    # POST  /sessions  sessions#create   sessions_path
+
   get 'session-expired-notice/' => 'sessions#expired_notice'
   delete 'logout/' => 'sessions#destroy'
   get 'login/'     => 'sessions#login_page', as: 'login'
