@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
   # POST /cart/submit
   def create
     if place_order
+      clear_cart()
       Rails.logger.debug "Order created successfully."
       flash[:success] = "Your order was created successfully."
       head :created, {message: "Order created successfully", userId: current_user.id, orderId: @order.id}
@@ -66,10 +67,10 @@ class OrdersController < ApplicationController
 
     def require_logged_in
       unless current_user
-        Rails.logger.debug "Must be logged in to place an order."
-        flash[:warning] = "Must be logged in to place an order."
+        Rails.logger.debug "You must be logged in to place an order."
+        flash[:warning] = "You must be logged in, to place an order."
         
-        head :unauthorized, {message: "Must be logged in to place an order."}
+        head :unauthorized, {message: "You must be logged in, to place an order."}
         # redirect_to login_path # halts request cycle 
       end
     end

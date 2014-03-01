@@ -15,9 +15,12 @@ var cartSubmit = function(event, jqXHR, ajaxOptions) {
     window.location.href = '/users/' + userId + '/orders/' + orderId;
     break;
 
+    case "Unauthorized":
+    window.location.href = '/login'; // redirect to login page
+    break;
+
     case "Bad Request":
-    // redirect to login page
-    window.location.href = '/login';
+    window.location.href = '/login'; // redirect to login page
     break;
 
     case "Internal Server Error":
