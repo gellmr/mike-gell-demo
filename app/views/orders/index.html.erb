@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-xs-12">
 
+    <%= render "/partials/flash_message" %>
+
+    <%# My Orders %>
     <div class="row">
       <div class="col-xs-12">
         <h3 class="content-heading">
@@ -15,25 +18,12 @@
 
       <% @orders.each do |order| %>
         <%= link_to("/users/#{current_user.id}/orders/#{order.id}", html_options = {class: "noUnderline"}) do %>
+
           <div class="well transparentBackground">
-            
             <%= render "orders/partials/order_head", { order: order } %>
-
-            <div>
-              <% if order.ordered_products.empty? %>
-                <p>(EMPTY)</p>
-              <% else %>
-
-                <% order.ordered_products.each do |ordered_product| %>
-                <p>
-                  <%= ordered_product.product.name %>
-                  Qty: <%= ordered_product.qty || 0 %>
-                </p>
-                <% end %>
-
-              <% end %>
-            </div>
+            <%= render "orders/partials/order_line", { order: order } %>
           </div>
+          
         <% end %>
       <% end %>
     <% end %>

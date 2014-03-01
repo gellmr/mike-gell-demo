@@ -1,0 +1,33 @@
+
+<div class="row">
+  <% if order.ordered_products.empty? %>
+    <p class="mg-resizable-11-14">(EMPTY)</p>
+  <% else %>
+
+    <div class="mg-resizable-11-14">
+      
+      <div class="col-xs-10 mg-border-bottom">
+        <p><strong>Product</strong></p>
+      </div>
+      <div class="col-xs-2 mg-border-bottom">
+        <div class="text-center">
+          <p><strong>Quantity</strong></p>
+        </div>
+      </div>
+
+
+      <% order.ordered_products.each do |ordered_product| %>
+      <div class="col-xs-10">
+        <p><%= ordered_product.product.name %></p>
+      </div>
+      <div class="col-xs-2 ">
+        <div class="text-center">
+          <p><%= ordered_product.qty || 0 %></p>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+
+  <% end %>
+</div>

@@ -3,6 +3,7 @@
 
     <%= render "/partials/flash_message" %>
 
+    <%# Show all Orders %>
     <div class="row content-header-row">
       <div class="col-xs-12">
         <p>
@@ -12,18 +13,9 @@
     </div>
 
     <%= render "orders/partials/order_head", { order: @order } %>
-
     <div class="well transparentBackground">
-      <% @order.ordered_products.each do |ordered_product| %>
-      <div>
-        <p>
-          <strong><%= ordered_product.product.name %></strong>
-          Qty: <%= ordered_product.qty || 0 %>
-        </p>
-      </div>
-      <% end %>
+      <%= render "orders/partials/order_line", { order: @order } %>
     </div>
-
 
   </div>
 </div>
