@@ -9,23 +9,44 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:user][:password])
 
-      temp_session = session.dup # Make a shallow copy of session
-      reset_session # Prevent session fixation attack. Clears to an empty hash.
+      Rails.logger.debug "Create new session."
 
-      # session.replace(temp_session) # copy each hash value into the new session.
+      # Retain cart, if the user has only just logged in.
+      # Note - it would be inconvenient for the user if they lost all their cart when they log in.
+      # But clearing the session on login is 'security best practice'
+      # Not sure if this is a major security issue... Needs attention.
+      temp_cart = {}
+      user_cart.each_with_index do |(productId,qty),index|
+        quantity = qty.to_i
+        @prod = Product.find(productId.to_s)
+        if @prod.quantityInStock <= quantity
+          temp_cart[productId] = quantity # get the number requested.
+        else
+          temp_cart[productId] = @prod.quantityInStock # get as many as are available.
+        end
+      end
+      Rails.logger.debug "Clear session, to prevent session fixation attack..."
+      reset_session # Clears to an empty hash.
+      clear_cart
+      debug_print_cart
 
-      # This is all accomplished by session.replace
-      # session[:athlete_id] = athlete.id # re-populate each var
-      # session[:cart_thing] = cart_thing # re-populate each var
-      # session[:etc]        = etc        # re-populate each var
+      Rails.logger.debug "Restore cart contents for user convenience..."
+      user_cart.replace(temp_cart) # copy each hash value into the new session.
+      debug_print_cart
 
       puts "-----> Authenticated successfully!!!"
 
       # Save the user ID in the session so it can be used in subsequent requests
       session[:current_user_id] = user.id
 
+      flash[:success] = "You are now logged in as #{current_user.email}"
+      redirection = "/cart" # My Cart
+      if user_cart.empty?
+        redirection = "/users/#{user.id}/edit" # My Account
+      end
+
       # TODO: make a serialiser instead.
-      render json: {user: {id: user.id}}, :status => 201 # created
+      render json: {redirection: redirection, user: {id: user.id}}, :status => 201 # created
 
       # The user has successfully logged in.
     else

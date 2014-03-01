@@ -21,7 +21,6 @@ jQuery(document).ready(function($) {
 
         201: function(response) {
           _user = response.user;
-          // console.log("200 success! You are logged in as " + _user.id);
         },
 
         400: function(jqXHR) {
@@ -36,7 +35,8 @@ jQuery(document).ready(function($) {
       complete: function(xhr, textStatus){
         //console.log("Login XHR COMPLETED with status " + textStatus + "\n");
         if (textStatus == "success") {
-          window.location.href = '/users/' + String(_user.id + '/edit');
+          console.log("redirection: " + xhr.responseJSON.redirection);
+          window.location.href = xhr.responseJSON.redirection;
         }
       }
 

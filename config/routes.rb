@@ -4,7 +4,7 @@ Fuzzybear::Application.routes.draw do
     # POST  /users             users#create    users_path
     # PATCH /users/:id         users#update    user_path
     # GET   /users/:id/edit    users#edit      edit_user_path
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :create]
       # GET  /users/:id/orders/     orders#index  user_orders_path
       # GET  /users/:id/orders/:id  orders#show   user_order_path
   end
@@ -26,7 +26,7 @@ Fuzzybear::Application.routes.draw do
   get 'cart/'      => 'cart#index', as: 'cart_index'
   put 'cart/'      => 'cart#update'
   delete 'cart/'     => 'cart#destroy', as: 'clear_cart'
-  post 'cart/submit' => 'cart#submit'
+  post 'cart/submit' => 'orders#create' # cart_submit_path
 
   root 'home#index'
 
