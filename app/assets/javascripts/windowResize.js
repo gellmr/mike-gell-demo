@@ -17,13 +17,14 @@ var windowResizeReadyJS = function (event) {
     } else {
       $(document).trigger( "smallMode" );
     }
+    
   }).on("normalMode", function( e ) {
     // Normal navbar text size
-    $('.mg-navbar-link').css('font-size', '14px');
+    $('.mg-resizable-11-14').css('font-size', '14px');
 
   }).on("smallMode", function( e ) {
     // Shrink navbar text because window is small
-    $('.mg-navbar-link').css('font-size', '11px');
+    $('.mg-resizable-11-14').css('font-size', '11px');
     $('.top-level-container').css('min-width', '222px');
   });
 

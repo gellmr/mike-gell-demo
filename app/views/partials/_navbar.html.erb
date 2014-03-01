@@ -30,43 +30,43 @@
             <ol class="nav navbar-nav navbar-right" style="margin: 0px;">
 
               <li>
-                <%= link_to "Store", "/store", class: "mg-navbar-link" %>
+                <%= link_to "Store", "/store", class: "mg-resizable-11-14" %>
               </li>
 
               <li>
-                <%= link_to "My Cart", "/cart", class: "mg-navbar-link" %>
+                <%= link_to "My Cart", "/cart", class: "mg-resizable-11-14" %>
               </li>
 
               <% if current_user %>
 
               <li>
-                <%= link_to "My Account", "/users/#{current_user.id}/edit", class: "mg-navbar-link" %>
+                <%= link_to "My Account", "/users/#{current_user.id}/edit", class: "mg-resizable-11-14" %>
               </li>
 
               <li>
-                <%= link_to "My Orders", "/users/#{current_user.id}/orders", class: "mg-navbar-link" %>
+                <%= link_to "My Orders", "/users/#{current_user.id}/orders", class: "mg-resizable-11-14" %>
               </li>
 
               <li>
-                <%= link_to "Change password", "/change-password", class: "mg-navbar-link" %>
+                <%= link_to "Change password", "/change-password", class: "mg-resizable-11-14" %>
               </li>
 
               <li>
-                <%= link_to "Log Out", "/logout", method: :delete, class: "mg-navbar-link" %>
+                <%= link_to "Log Out", "/logout", method: :delete, class: "mg-resizable-11-14" %>
               </li>
 
               <% else %>
 
               <li>
-                <%= link_to "Register", "/register", class: "mg-navbar-link" %>
+                <%= link_to "Register", "/register", class: "mg-resizable-11-14" %>
               </li>
 
               <li>
-                <%= link_to "Forgot my password", "/forgot-password", class: "mg-navbar-link" %>
+                <%= link_to "Forgot my password", "/forgot-password", class: "mg-resizable-11-14" %>
               </li>
 
               <li>
-                <%= link_to "Login", "/login", class: "mg-navbar-link" %>
+                <%= link_to "Login", "/login", class: "mg-resizable-11-14" %>
               </li>
 
               <% end %>
