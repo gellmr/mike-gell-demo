@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-5">
+    <p class="content-heading">
+      Order Number: <%= order.id %>
+    </p>
+  </div>
+  <div class="col-xs-7">
+    <p class="pull-right">
+      <% t = order.order_date %>
+      <% ampm = t.strftime("%p").downcase %>
+      <strong>Date:</strong> <%= t.strftime("#{t.day.ordinalize} %B %Y %l:%M#{ampm} UTC") || "none" %>
+    </p>
+  </div>
+</div>

@@ -14,18 +14,11 @@
     <% else %>
 
       <% @orders.each do |order| %>
-        <%= link_to("/users/#{current_user.id}/orders/#{order.id}", html_options = {}) do %>
-          <div class="well transparentBackground order-link">
-            <h4>
-              Order Number: <%= order.id %>
-            </h4>
-            <p>
-              <small>
-                <% t = order.order_date %>
-                <% ampm = t.strftime("%p").downcase %>
-                Date: <%= t.strftime("#{t.day.ordinalize} %B %Y %l:%M#{ampm} UTC") || "none" %>
-              </small>
-            </p>
+        <%= link_to("/users/#{current_user.id}/orders/#{order.id}", html_options = {class: "noUnderline"}) do %>
+          <div class="well transparentBackground">
+            
+            <%= render "orders/partials/order_head", { order: order } %>
+
             <div>
               <% if order.ordered_products.empty? %>
                 <p>(EMPTY)</p>

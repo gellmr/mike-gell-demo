@@ -6,11 +6,7 @@
   <div class="alert alert-warning loginFailMessage" style="display:none;">
   </div>
 
-  <% flash.each do |key, value| %>
-    <div class="<%= flash_class(key) %>">
-      <%= value %>
-    </div>
-  <% end %>
+  <%= render "/partials/flash_message" %>
 
   <h4>Login Details</h4>
 
