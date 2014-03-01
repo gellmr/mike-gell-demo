@@ -28,3 +28,20 @@ div.well.solidBackground.mg-hover-static {
 .mg-table-feint {
   color: rgb(88, 88, 88);
 }
+
+div.mg-border-bottom {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgb(233, 233, 233);
+  /*margin-bottom: 15px;*/
+  margin-bottom: 0px;
+  padding-bottom: 7px;
+}
+
+div.row.row-order-line-item {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: rgb(230,230,230);
+  padding-top: 7px;
+  padding-bottom: 7px;
+}

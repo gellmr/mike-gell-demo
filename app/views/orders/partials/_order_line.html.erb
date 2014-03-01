@@ -1,41 +1,50 @@
 
-<div class="row">
-  <% if order.ordered_products.empty? %>
-    <p class="mg-resizable-11-14">(EMPTY)</p>
-  <% else %>
-
-    <div class="mg-resizable-11-14">
-      
-      <div class="col-xs-9 mg-border-bottom mg-table-feint">
-        <p><strong><small>Product</small></strong></p>
-      </div>
-      <div class="col-xs-3 mg-border-bottom mg-table-feint">
-        <div class="row">
-          <div class="text-center">
-            <p>
-              <strong><small>Quantity</small></strong>
-            </p>
-          </div>
-        </div>
-      </div>
-
-
-      <% order.ordered_products.each do |ordered_product| %>
-      <div class="col-xs-9 mg-table-feint">
-        <p>
-          <%= ordered_product.product.name %>
-        </p>
-      </div>
-      <div class="col-xs-3 mg-table-feint">
-        <div class="row">
-          <div class="text-center">
-            <p><%= ordered_product.qty || 0 %></p>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
+<div class="mg-resizable-11-14">
+  
+  <!-- <div class="row mg-border-bottom"> -->
+  <div class="row row-order-line-item">
+    <div class="col-xs-5 mg-table-feint">
+      <strong><small>Product</small></strong>
     </div>
 
+    <div class="col-xs-3 mg-table-feint">
+      <div class="row">
+        <div class="text-center">
+          <strong><small>Quantity</small></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-4 mg-table-feint">
+      <div class="pull-right">
+        <strong><small>Sub Total</small></strong>
+      </div>
+    </div>
+
+  </div>
+
+  <% order.ordered_products.each do |ordered_product| %>
+  
+  <div class="row row-order-line-item">
+    <div class="col-xs-5 mg-table-feint">
+      <%= ordered_product.product.name %>
+    </div>
+
+    <div class="col-xs-3 mg-table-feint">
+      <div class="row">
+        <div class="text-center">
+          <%= ordered_product.qty || 0 %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-xs-4 mg-table-feint">
+      <div class="pull-right">
+        <% uprice = ordered_product.product.unitPrice %>
+        $<%= sprintf '%.2f', ordered_product.qty.to_i * uprice || 0 %>
+      </div>
+    </div>
+  </div>
   <% end %>
+
 </div>
