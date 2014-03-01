@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
+
+
  
     def current_user
       @_current_user ||= session[:current_user_id] && User.find_by(id: session[:current_user_id])
@@ -19,6 +21,27 @@ class ApplicationController < ActionController::Base
 
     def clear_cart
       @_user_cart = session[:cart] = {}
+    end
+
+    def require_logged_in
+      unless current_user
+
+        @message = "Please login first."
+        if request.path == cart_submit_path
+          @message = "You need to login before you can place an order."  
+        end
+        Rails.logger.debug @message
+        flash[:warning] = @message
+
+        respond_to do |format|
+          format.js {
+            head :unauthorized, {message: @message}
+          }
+          format.html {
+            redirect_to login_path # halts request cycle 
+          }
+        end
+      end
     end
 
     def debug_print_cart

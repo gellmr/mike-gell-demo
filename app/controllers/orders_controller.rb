@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :require_logged_in, only: [:index, :show, :create]
+  before_action :require_logged_in, except: []
 
   # Get all the orders for this user.
   # GET /users/:id/orders
@@ -63,15 +63,5 @@ class OrdersController < ApplicationController
         return true # order created successfully.
       end
       false # failed to create order.
-    end
-
-    def require_logged_in
-      unless current_user
-        Rails.logger.debug "You must be logged in to place an order."
-        flash[:warning] = "You must be logged in, to place an order."
-        
-        head :unauthorized, {message: "You must be logged in, to place an order."}
-        # redirect_to login_path # halts request cycle 
-      end
     end
 end

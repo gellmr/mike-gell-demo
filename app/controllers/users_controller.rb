@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_login, except: [:create]
+  before_action :require_logged_in, except: [:create]
 
   # Try to register a new user account.
   def create
@@ -45,13 +45,5 @@ class UsersController < ApplicationController
         :work_phone,
         :mobile_phone
       )
-    end
-
-    # Before action
-    def require_login
-      unless current_user
-        flash[:warning] = "Please login first."
-        redirect_to login_path # halts request cycle
-      end
     end
 end
