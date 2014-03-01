@@ -11,6 +11,9 @@
       <h4>
         Order Number: <%= order.id %>
       </h4>
+      <p>
+        Date: <%= order.order_date || "none" %>
+      </p>
       <div>
         <% if order.ordered_products.empty? %>
           <p>(EMPTY)</p>
