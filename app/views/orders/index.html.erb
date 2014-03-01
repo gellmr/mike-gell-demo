@@ -1,33 +1,45 @@
-<h3>
-  My Orders:
-</h3>
+<div class="row">
+  <div class="col-xs-12">
 
-<% if @orders.count == 0 %>
-  None at the moment.
-<% else %>
-
-  <% @orders.each do |order| %>
-    <div class="well transparentBackground">
-      <h4>
-        Order Number: <%= order.id %>
-      </h4>
-      <p>
-        Date: <%= order.order_date || "none" %>
-      </p>
-      <div>
-        <% if order.ordered_products.empty? %>
-          <p>(EMPTY)</p>
-        <% else %>
-
-          <% order.ordered_products.each do |ordered_product| %>
-          <p>
-            <strong><%= ordered_product.product.name %></strong>
-            Qty: <%= ordered_product.qty || 0 %>
-          </p>
-          <% end %>
-
-        <% end %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3 class="content-heading">
+          My Orders
+        </h3>
       </div>
     </div>
-  <% end %>
-<% end %>
+
+    <% if @orders.count == 0 %>
+      None at the moment.
+    <% else %>
+
+      <% @orders.each do |order| %>
+        <%= link_to("/users/#{current_user.id}/orders/#{order.id}", html_options = {}) do %>
+          <div class="well transparentBackground order-link">
+            <h4>
+              Order Number: <%= order.id %>
+            </h4>
+            <p>
+              Date: <%= order.order_date || "none" %>
+            </p>
+            <div>
+              <% if order.ordered_products.empty? %>
+                <p>(EMPTY)</p>
+              <% else %>
+
+                <% order.ordered_products.each do |ordered_product| %>
+                <p>
+                  <strong><%= ordered_product.product.name %></strong>
+                  Qty: <%= ordered_product.qty || 0 %>
+                </p>
+                <% end %>
+
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

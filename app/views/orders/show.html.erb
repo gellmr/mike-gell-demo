@@ -1,20 +1,39 @@
-<% flash.each do |key, value| %>
-  <div class="<%= flash_class(key) %>">
-    <%= value %>
-  </div>
-<% end %>
+<div class="row">
+  <div class="col-xs-12">
 
-<h3>
-  Order Number: <%= @order.id %>
-</h3>
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>">
+        <%= value %>
+      </div>
+    <% end %>
 
-<div class="well transparentBackground">
-  <% @order.ordered_products.each do |ordered_product| %>
-  <div>
-    <p>
-      <strong><%= ordered_product.product.name %></strong>
-      Qty: <%= ordered_product.qty || 0 %>
-    </p>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="content-heading">
+          Order Number: <%= @order.id %>
+        </h4>
+      </div>
+    </div>
+
+    <div class="row content-header-row">
+      <div class="col-xs-6">
+        <p>
+          <%= link_to "Back To Orders", user_orders_path, class: "" %>
+        </p>
+      </div>
+    </div>
+
+    <div class="well transparentBackground">
+      <% @order.ordered_products.each do |ordered_product| %>
+      <div>
+        <p>
+          <strong><%= ordered_product.product.name %></strong>
+          Qty: <%= ordered_product.qty || 0 %>
+        </p>
+      </div>
+      <% end %>
+    </div>
+
+
   </div>
-  <% end %>
 </div>

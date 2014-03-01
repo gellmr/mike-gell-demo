@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_login, only: [:update, :show]
+  before_action :require_login, except: [:create]
 
   # Try to register a new user account.
   def create

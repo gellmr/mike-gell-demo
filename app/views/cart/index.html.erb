@@ -16,19 +16,19 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="text-center">
-            <h3 class="cart-heading">
+            <h3 class="content-heading">
               My Cart - <%= @total_lines %> Lines
             </h3>
           </div>
         </div>
       </div>
 
-      <div class="row cart-header-row">
+      <div class="row content-header-row">
         <!-- <hr class="narrow-hr" style="border-color:red;"/> -->
 
         <div class="col-xs-6">
           <div class="row">
-            <%= link_to "Back To Store", store_index_path, class: "btn btn-default cart-header-btn" %>
+            <%= link_to "Back To Store", store_index_path, class: "btn btn-default content-header-btn" %>
           </div>
         </div>
 
@@ -37,9 +37,9 @@
             <div class="pull-right">
               <%=
               if @total_lines > 0
-                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default cart-header-btn", :method => 'delete' 
+                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", :method => 'delete' 
               else
-                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default cart-header-btn", :method => 'delete', disabled: "disabled" 
+                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", :method => 'delete', disabled: "disabled" 
               end
               %>
             </div>

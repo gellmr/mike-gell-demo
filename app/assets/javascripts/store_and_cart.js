@@ -77,7 +77,7 @@ var updateCart = function( event ) {
             parentalDiv.find('input.subtot-input').val(resultSubTot);
             break;
           };
-          $("h3.cart-heading").html("My Cart - " + cartTotalLines + " Lines");
+          $("h3.content-heading").html("My Cart - " + cartTotalLines + " Lines");
           $("input.total-items").val(cartTotalItems);
           $("input.grand-total").val('$ ' + resultGrandTot);
         },
