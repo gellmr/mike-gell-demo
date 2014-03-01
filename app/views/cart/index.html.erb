@@ -3,6 +3,10 @@
 
     <div class="centeredProducts">
       
+      <div class="alert alert-warning" id="serverError" style="display:none;">
+        There was a server error.
+      </div>
+
       <% flash.each do |key, value| %>
         <div class="<%= flash_class(key) %>">
           <%= value %>

@@ -8,13 +8,23 @@
 
   <% @orders.each do |order| %>
     <div class="well transparentBackground">
-    <% order.ordered_products.each do |ordered_product| %>
+      <h4>
+        Order Number: <%= order.id %>
+      </h4>
       <div>
-        <p>
-          <strong><%= ordered_product.product.name %></strong>
-          Qty: <%= ordered_product.qty || 0 %> </p>
+        <% if order.ordered_products.empty? %>
+          <p>(EMPTY)</p>
+        <% else %>
+
+          <% order.ordered_products.each do |ordered_product| %>
+          <p>
+            <strong><%= ordered_product.product.name %></strong>
+            Qty: <%= ordered_product.qty || 0 %>
+          </p>
+          <% end %>
+
+        <% end %>
       </div>
-    <% end %>
     </div>
   <% end %>
 <% end %>

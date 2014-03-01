@@ -4,8 +4,9 @@ var cartSubmit = function(event, jqXHR, ajaxOptions) {
   if (message != null) {
     console.log(message);
   }
-  switch(ajaxOptions) {
-    case "success":
+  switch(jqXHR.statusText) {
+
+    case "Created":
     var userId = jqXHR.getResponseHeader('userId');
     var orderId = jqXHR.getResponseHeader('orderId');
     console.log("userId: "  + userId);
@@ -13,10 +14,18 @@ var cartSubmit = function(event, jqXHR, ajaxOptions) {
     // redirect self...
     window.location.href = '/users/' + userId + '/orders/' + orderId;
     break;
-    
-    case "error":
+
+    case "Bad Request":
     // redirect to login page
     window.location.href = '/login';
+    break;
+
+    case "Internal Server Error":
+    // redirect to login page
+    console.log("There was a server error!")
+    var errorDiv = $('#serverError');
+    errorDiv.html(jqXHR.statusText);
+    errorDiv.show();
     break;
   }
 };
