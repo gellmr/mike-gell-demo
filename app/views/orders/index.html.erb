@@ -20,7 +20,11 @@
               Order Number: <%= order.id %>
             </h4>
             <p>
-              Date: <%= order.order_date || "none" %>
+              <small>
+                <% t = order.order_date %>
+                <% ampm = t.strftime("%p").downcase %>
+                Date: <%= t.strftime("#{t.day.ordinalize} %B %Y %l:%M#{ampm} UTC") || "none" %>
+              </small>
             </p>
             <div>
               <% if order.ordered_products.empty? %>
@@ -29,7 +33,7 @@
 
                 <% order.ordered_products.each do |ordered_product| %>
                 <p>
-                  <strong><%= ordered_product.product.name %></strong>
+                  <%= ordered_product.product.name %>
                   Qty: <%= ordered_product.qty || 0 %>
                 </p>
                 <% end %>
