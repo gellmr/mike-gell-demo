@@ -24,7 +24,7 @@ var windowResizeReadyJS = function (event) {
   }).on("smallMode", function( e ) {
     // Shrink navbar text because window is small
     $('.mg-navbar-link').css('font-size', '11px');
-    $('.container').css('min-width', '222px');
+    $('.top-level-container').css('min-width', '222px');
   });
 
   // Bind the window resize event to our custom handler
