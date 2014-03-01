@@ -34,6 +34,7 @@ class OrdersController < ApplicationController
     def place_order
       all_valid = true
       @order = Order.new
+      @order.order_status = "Not Shipped Yet"
       @order.user = current_user
       @order.order_date = Time.now
 

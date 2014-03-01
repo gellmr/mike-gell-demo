@@ -11,4 +11,13 @@
       <strong>Date:</strong> <%= t.strftime("#{t.day.ordinalize} %B %Y %l:%M#{ampm} UTC") || "none" %>
     </p>
   </div>
+
+  <div class="col-xs-12">
+    <p class="content-heading mg-resizable-11-14">
+      <strong>Status:</strong>
+      <small>
+        <%= order.order_status || "Not Shipped Yet" %>
+      </small>
+    </p>
+  </div>
 </div>
