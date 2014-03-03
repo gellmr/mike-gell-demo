@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       user_cart.each_with_index do |(productId,qty),index|
         quantity = qty.to_i
         @prod = Product.find(productId.to_s)
-        if @prod.quantityInStock <= quantity
+        if @prod.quantityInStock >= quantity
           temp_cart[productId] = quantity # get the number requested.
         else
           temp_cart[productId] = @prod.quantityInStock # get as many as are available.
