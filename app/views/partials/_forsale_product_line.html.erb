@@ -28,7 +28,7 @@
 
   <!-- X button, visible xs -->
   <div class="col-xs-1 visible-xs pull-right">
-    <%= render "partials/x_btn_remove_from_cart", { atStore: atStore } %>
+    <%= render "partials/x_btn_remove_from_cart", { atStore: atStore, product: product } %>
   </div>
 
   <!-- Image tag, always visible -->
@@ -40,7 +40,7 @@
   <!-- X button, hidden xs -->
   <div class="col-sm-5 hidden-xs pull-right">
     <div class="row pull-right">
-      <%= render "partials/x_btn_remove_from_cart", { atStore: atStore } %>
+      <%= render "partials/x_btn_remove_from_cart", { atStore: atStore, product: product } %>
     </div>
   </div>
 

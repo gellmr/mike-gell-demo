@@ -1,19 +1,41 @@
 
 <% unless atStore %>
-  <span class="glyphicon glyphicon-remove"></span>
+
+  <!-- We are at the CART -->
+
+  <%= content_tag( :span, {
+      name: 'remove-from-cart',
+      class: "remove-from-cart-#{product.id}",
+    }) do %>
+    <span class="glyphicon glyphicon-remove"></span>
+  <% end %>
+
 <% else %>
 
+  <!-- We are at the STORE -->
+
   <div class="btn-group">
+    <%= button_tag({
+      type: 'button',
+      name: 'remove-from-cart',
+      class: "btn btn-default btn-xs dropdown-toggle remove-from-cart-#{product.id}",
+      data: {toggle: "dropdown"}
+      }) do %>
+      <span class="caret"></span>
+    <% end %>
+    <!--
     <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
       <span class="caret"></span>
     </button>
+    -->
 
     <ul class="dropdown-menu pull-right" role="menu">
       <li>
-        <a href="#">
-          Remove from Cart
-        </a>
+        <%=
+        link_to "Remove from Cart", '#'
+        %>
       </li>
     </ul>
+
   </div>
 <% end %>
