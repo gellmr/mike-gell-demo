@@ -7,7 +7,11 @@ var quantityUpdateButton = function(event) {
     var inputId = '#qtyToOrder-productId-' + String(productId);   // eg "qtyToOrder-productId-23"
     var inputElement = $(inputId);
     var qty = parseInt(inputElement.val());
-    qty += 1;
+    if (buttonId.toString().split('-')[2] == "plus") {
+      qty += 1;
+    } else {
+      qty -= 1;
+    }
     console.log("Try to update qty: " + qty );
   }
 };
@@ -142,7 +146,7 @@ var storeReadyJs = function(e) {
 
   var result = $('div.top-level-container').on(
     'click',
-    'button.qty-btn-plus',
+    'button.qty-btn-plus, button.qty-btn-minus',
     quantityUpdateButton
   );
 };
