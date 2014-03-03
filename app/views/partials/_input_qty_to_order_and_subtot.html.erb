@@ -32,12 +32,19 @@
           %>
 
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default">
+            <%= button_tag({
+              type: 'button',
+              name: 'qty-btn-minus',
+              class: "btn btn-default qty-btn-minus-#{product.id}" }) do %>
               <span class="glyphicon glyphicon-minus"></span>
-            </button>
-            <button type="button" class="btn btn-default">
+            <% end %>
+
+            <%= button_tag({
+              type: 'button',
+              name: 'qty-btn-plus',
+              class: "btn btn-default qty-btn-plus-#{product.id}" }) do %>
               <span class="glyphicon glyphicon-plus"></span>
-            </button>
+            <% end %>
           </span>
         </div>
       </div>
