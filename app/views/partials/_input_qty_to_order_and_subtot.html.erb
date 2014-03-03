@@ -35,14 +35,18 @@
             <%= button_tag({
               type: 'button',
               name: 'qty-btn-minus',
-              class: "btn btn-default qty-btn-minus-#{product.id}" }) do %>
+              class: "btn btn-default qty-btn-minus",
+              id: "qty-btn-minus-#{product.id}"
+            }) do %>
               <span class="glyphicon glyphicon-minus"></span>
             <% end %>
 
             <%= button_tag({
               type: 'button',
               name: 'qty-btn-plus',
-              class: "btn btn-default qty-btn-plus-#{product.id}" }) do %>
+              class: "btn btn-default qty-btn-plus",
+              id: "qty-btn-plus-#{product.id}"
+            }) do %>
               <span class="glyphicon glyphicon-plus"></span>
             <% end %>
           </span>

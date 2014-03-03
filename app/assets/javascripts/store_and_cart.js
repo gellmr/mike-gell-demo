@@ -1,4 +1,17 @@
 
+var quantityUpdateButton = function(event) {
+  if ( event ) {
+    var buttonElement = $(event.currentTarget);
+    var buttonId = buttonElement.attr('id');             // eg "qty-btn-minus-23"
+    var productId = buttonId.toString().split('-').pop(); // eg "23"
+    var inputId = '#qtyToOrder-productId-' + String(productId);   // eg "qtyToOrder-productId-23"
+    var inputElement = $(inputId);
+    var qty = parseInt(inputElement.val());
+    qty += 1;
+    console.log("Try to update qty: " + qty );
+  }
+};
+
 var updateCart = function( event ) {
   if ( event ) {
     var newQty = $(this).val();
@@ -117,7 +130,7 @@ var storeReadyJs = function(e) {
   console.log("\nstoreReadyJs()");
   console.log("BIND keydown to--> updateCart()");
 
-  var result = $('div.top-level-container').on(
+  $('div.top-level-container').on(
     // 'change keydown keyup',
     'change keyup',
     'input.qtyToOrder-input',
@@ -126,6 +139,12 @@ var storeReadyJs = function(e) {
   
   $('.cart-submit-btn').on('check-if-no-products', checkIfNoProducts);
   $('.cart-submit-btn').trigger('check-if-no-products');
+
+  var result = $('div.top-level-container').on(
+    'click',
+    'button.qty-btn-plus',
+    quantityUpdateButton
+  );
 };
 
 // Gotta bind to both events, because we are using turbolinks.
