@@ -7,115 +7,127 @@ var quantityUpdateButton = function(event) {
     var inputId = '#qtyToOrder-productId-' + String(productId);   // eg "qtyToOrder-productId-23"
     var inputElement = $(inputId);
     var qty = parseInt(inputElement.val());
-    if (buttonId.toString().split('-')[2] == "plus") {
-      qty += 1;
-    } else {
-      qty -= 1;
+    if (isNaN(qty)) {
+      qty = 0;
     }
-    console.log("Try to update qty: " + qty );
+
+    // Button id tells us to add or subtract.
+    if (buttonId.toString().split('-')[2] == "plus") {
+      qty += 1; // qty-btn-plus-23
+    } else {
+      qty -= 1; // qty-btn-minus-23
+    }
+    console.log("Try to update product " + productId + " -> new qty: " + qty );
+    updateCart(productId, qty, inputElement, inputId);
   }
 };
 
-var updateCart = function( event ) {
+var quantityInputField = function(event) {
   if ( event ) {
-    var newQty = $(this).val();
+    var qty = $(this).val();
     var inputElement = $(event.target);
     var inputId = inputElement.attr('id');               // eg "qtyToOrder-productId-23"
     var productId = inputId.toString().split('-').pop(); // eg "23"
-    var parentalDiv = $('div.parentalDiv-' + productId);
-    var wellDiv = $('.well.product-' + productId);
-
-    if (productId <= 0) {
-      // console.log("Invalid input.");
-      return;
-    }
-
-    console.log(
-      "submit ajax request. "       +
-      " event.which:" + event.which +
-      ' productId:'   + productId   +
-      ' qty:'         + newQty
-    );
-
-    var params = {
-      cartUpdate: {
-        productId: productId,
-        newQty: newQty
-      }
-    };
-
-    $.ajax({
-      url:"/cart",
-      type:'PUT',
-      dataType:"json",
-      data: params,
-      statusCode: {
-        200: function(jqXHR) {
-          var result = jqXHR.getResponseHeader('result');
-          var resultSubTot = jqXHR.getResponseHeader('resultSubTot');
-          var resultGrandTot = jqXHR.getResponseHeader('resultGrandTot');
-          var cartTotalItems = jqXHR.getResponseHeader('cartTotalItems');
-          var cartTotalLines = jqXHR.getResponseHeader('cartTotalLines');
-          var message = jqXHR.getResponseHeader('message');
-          console.log(message);
-          switch(result) {
-
-            case "removed-from-cart":
-            parentalDiv.find('.maxStockMsg small').html('');
-            parentalDiv.find('.inCartIcon').hide();
-            inputElement.val(0);
-            var page = document.URL.split('/').pop().split('?').shift();
-            if (page == "cart"){
-              wellDiv.remove();
-            }
-            $('.cart-submit-btn').trigger('check-if-no-products');
-            break;
-
-            case "updated-qty":
-            parentalDiv.find('.maxStockMsg small').html('');
-            parentalDiv.find('.inCartIcon').show();
-            parentalDiv.find('.subtot-input').val('$ ' + resultSubTot);
-            break;
-            
-            case "set-to-max":
-            var max = jqXHR.getResponseHeader('max');
-            var maxStockElement = parentalDiv.find('.maxStockMsg small');
-            maxStockElement.html(message);
-            maxStockElement.fadeOut({
-              duration: 4000,
-              done: function(){
-                maxStockElement.html('');
-                maxStockElement.fadeIn({
-                  duration: 0
-                });
-              }
-            });
-            inputElement.val(max);
-            parentalDiv.find('input.subtot-input').val(resultSubTot);
-            break;
-          };
-          $("h3.content-heading").html("My Cart - " + cartTotalLines + " Lines");
-          $("input.total-items").val(cartTotalItems);
-          $("input.grand-total").val('$ ' + resultGrandTot);
-        },
-        400: function(jqXHR) {
-          var message = jqXHR.getResponseHeader('message');
-          console.log("400 failed. message:" + message);
-        },
-        422: function() {
-          console.log("Your session has expired.");
-          window.location.href = '/session-expired-notice';
-        }
-      },
-      complete: function(xhr, textStatus){
-        //console.log("XHR COMPLETED with status " + textStatus + "\n");
-        if (textStatus == "success") {
-        }
-      }
-    });
-  } else {
-    console.log( "this didn't come from an event!" );
+    console.log("Try to update product " + productId + " -> new qty: " + qty );
+    updateCart(productId, qty, inputElement, inputId);
   }
+};
+
+var updateCart = function( productId, newQty, inputElement, inputId) {
+
+  var parentalDiv = $('div.parentalDiv-' + productId);
+  var wellDiv = $('.well.product-' + productId);
+  var minusBtn = $('#qty-btn-minus-' + productId);
+
+  console.log(
+    "submit ajax request. "       +
+    ' productId:'   + productId   +
+    ' qty:'         + newQty
+  );
+
+  var params = {
+    cartUpdate: {
+      productId: productId,
+      newQty: newQty
+    }
+  };
+
+  $.ajax({
+    url:"/cart",
+    type:'PUT',
+    dataType:"json",
+    data: params,
+    statusCode: {
+      200: function(jqXHR) {
+        var result = jqXHR.getResponseHeader('result');
+        var resultSubTot = jqXHR.getResponseHeader('resultSubTot');
+        var resultGrandTot = jqXHR.getResponseHeader('resultGrandTot');
+        var cartTotalItems = jqXHR.getResponseHeader('cartTotalItems');
+        var cartTotalLines = jqXHR.getResponseHeader('cartTotalLines');
+        var message = jqXHR.getResponseHeader('message');
+        console.log(message);
+        switch(result) {
+
+          case "removed-from-cart":
+          parentalDiv.find('.maxStockMsg small').html('');
+          parentalDiv.find('.inCartIcon').hide();
+          inputElement.val(0);
+          var page = document.URL.split('/').pop().split('?').shift();
+          if (page == "cart"){
+            wellDiv.remove();
+          }
+          $('.cart-submit-btn').trigger('check-if-no-products');
+          break;
+
+          case "updated-qty":
+          parentalDiv.find('.maxStockMsg small').html('');
+          parentalDiv.find('.inCartIcon').show();
+          inputElement.val(newQty);
+          if (String(newQty) == "0") {
+            minusBtn.addClass("disabled", "disabled");
+          } else {
+            minusBtn.removeClass("disabled", "disabled");
+          }
+          parentalDiv.find('.subtot-input').val('$ ' + resultSubTot);
+          break;
+          
+          case "set-to-max":
+          var max = jqXHR.getResponseHeader('max');
+          var maxStockElement = parentalDiv.find('.maxStockMsg small');
+          maxStockElement.html(message);
+          maxStockElement.fadeOut({
+            duration: 4000,
+            done: function(){
+              maxStockElement.html('');
+              maxStockElement.fadeIn({
+                duration: 0
+              });
+            }
+          });
+          inputElement.val(max);
+          parentalDiv.find('input.subtot-input').val(resultSubTot);
+          break;
+        };
+        $("h3.content-heading").html("My Cart - " + cartTotalLines + " Lines");
+        $("input.total-items").val(cartTotalItems);
+        $("input.grand-total").val('$ ' + resultGrandTot);
+      },
+      400: function(jqXHR) {
+        var message = jqXHR.getResponseHeader('message');
+        console.log("400 failed. message:" + message);
+      },
+      422: function() {
+        console.log("Your session has expired.");
+        window.location.href = '/session-expired-notice';
+      }
+    },
+    complete: function(xhr, textStatus){
+      //console.log("XHR COMPLETED with status " + textStatus + "\n");
+      if (textStatus == "success") {
+      }
+    }
+  });
+
 };
 
 var checkIfNoProducts = function(e) {
@@ -135,10 +147,9 @@ var storeReadyJs = function(e) {
   console.log("BIND keydown to--> updateCart()");
 
   $('div.top-level-container').on(
-    // 'change keydown keyup',
     'change keyup',
     'input.qtyToOrder-input',
-    updateCart
+    quantityInputField
   );
   
   $('.cart-submit-btn').on('check-if-no-products', checkIfNoProducts);
