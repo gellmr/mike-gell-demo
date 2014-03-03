@@ -1,0 +1,95 @@
+
+<%= tag "div", class: "col-xs-12 col-sm-5 parental-div parentalDiv-#{product.id}" %>
+  
+  <div class="row">
+
+    <!-- Input: Qty to order -->
+    <% if atStore %>
+    <div class="col-xs-8">
+    <% else %>
+    <div class="col-xs-6">
+    <% end %>
+
+      <div class="row">
+        <label for="qtyToOrder-productId-<%=product.id%>">
+          Qty to Order
+        </label>
+      </div>
+
+      <div class="row">
+        <div class="input-group" style="margin-right:5px;">
+
+          <%=
+          text_field_tag(
+            'qtyToOrder-input', # name
+            product_qty,        # value
+            {
+              :type => "text",
+              :class => "form-control qtyToOrder-input big-input-field",
+              :id => "qtyToOrder-productId-#{product.id}"
+            }
+          )
+          %>
+
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <%# MAX-STOCK MESSAGE appears here, thru javascript. %>
+      <div class="col-xs-12 maxStockMsg">
+        <div class="row">
+          <small>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub Total -->
+    <% if !subtotal.nil? %>
+    <div class="col-xs-6">
+      <div class="row">
+        <label>
+          Sub Total:
+        </label>
+      </div>
+      <div class="row">
+        <%=
+        text_field_tag(
+          'subtot-input',  # name
+          "$ #{subtotal}", # value
+          {
+            :type => "text",
+            :disabled => "disabled",
+            :class => "form-control subtot-input big-input-field",
+            :id => "subtot-productId-#{product.id}"
+          }
+        )
+        %>
+      </div>
+    </div>
+    <% end %>
+
+    <%# IN-CART ICON - Store only.%>
+    <% if atStore %>
+    <%
+    icon_style = "display: block;"
+    if (product_qty.nil? || product_qty.to_i == 0)
+      icon_style = "display: none;"
+    end
+    %>
+    <%= tag "div", class: "col-xs-4 inCartIcon", style: icon_style %>
+      <div class="row">
+        <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>

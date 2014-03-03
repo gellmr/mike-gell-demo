@@ -3,8 +3,22 @@
 }
 
 input.big-input-field {
-  font-size: 16px;
+  // font-size: 16px;
   height: auto;
+}
+
+span.glyphicon.glyphicon-minus {
+  font-size: 0.7em;
+}
+span.glyphicon.glyphicon-plus {
+  font-size: 0.7em;
+}
+
+span.glyphicon.glyphicon-remove {
+  color: rgb(213, 213, 213);
+}
+span.glyphicon.glyphicon-remove:hover {
+  color: rgb(180, 180, 180);
 }
 
 .centeredProducts {
@@ -15,6 +29,10 @@ input.big-input-field {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+div.parental-div {
+  margin-top: 30px;
 }
 
 .well.transparentBackground {
