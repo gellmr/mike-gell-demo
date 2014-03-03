@@ -32,9 +32,9 @@
             <div class="pull-right">
               <%=
               if @total_lines > 0
-                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", :method => 'delete' 
+                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", id: "clearMyCartBtn", :method => 'delete' 
               else
-                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", :method => 'delete', disabled: "disabled" 
+                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn disabled", id: "clearMyCartBtn", :method => 'delete'  
               end
               %>
             </div>

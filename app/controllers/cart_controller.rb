@@ -2,6 +2,10 @@ require 'json'
 
 class CartController < ApplicationController
 
+  def is_empty
+    head :ok, { message: user_cart.count }
+  end
+
   def index
     # Get all products in the user's cart
     debug_print_cart()

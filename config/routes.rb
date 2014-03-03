@@ -24,6 +24,7 @@ Fuzzybear::Application.routes.draw do
 
   resources :cart, only: [:update]
   get 'cart/'      => 'cart#index', as: 'cart_index'
+  get 'cart/is-empty' => 'cart#is_empty', as: 'cart_is_empty'
   put 'cart/'      => 'cart#update'
   delete 'cart/'     => 'cart#destroy', as: 'clear_cart'
   post 'cart/submit' => 'orders#create' # cart_submit_path

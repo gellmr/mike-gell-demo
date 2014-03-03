@@ -1,24 +1,39 @@
 
+// Get the product Id from an element whos name follows the pattern:
+//   "qty-btn-minus-23"
+//   "qty-btn-plus-23"
+//   "qtyToOrder-productId-23"
+//   "remove-from-cart-23"
+var popProductId = function(element) {
+  var elementId = element.attr('id');      // eg "qty-btn-minus-23"
+  var productId = elementId.toString().split('-').pop(); // eg "23"
+  return productId;
+}
+
+var getInputElement = function(productId) {
+  var inputId = '#qtyToOrder-productId-' + String(productId);   // eg "qtyToOrder-productId-23"
+  var inputElement = $(inputId);
+  return inputElement;
+}
+
 var quantityUpdateButton = function(event) {
   if ( event ) {
     var buttonElement = $(event.currentTarget);
-    var buttonId = buttonElement.attr('id');             // eg "qty-btn-minus-23"
-    var productId = buttonId.toString().split('-').pop(); // eg "23"
-    var inputId = '#qtyToOrder-productId-' + String(productId);   // eg "qtyToOrder-productId-23"
-    var inputElement = $(inputId);
+    var productId = popProductId(buttonElement); // eg "23"
+    var inputElement = getInputElement(productId);
     var qty = parseInt(inputElement.val());
     if (isNaN(qty)) {
       qty = 0;
     }
 
     // Button id tells us to add or subtract.
-    if (buttonId.toString().split('-')[2] == "plus") {
+    if (buttonElement.attr('id').toString().split('-')[2] == "plus") {
       qty += 1; // qty-btn-plus-23
     } else {
       qty -= 1; // qty-btn-minus-23
     }
     console.log("Try to update product " + productId + " -> new qty: " + qty );
-    updateCart(productId, qty, inputElement, inputId);
+    updateCart(productId, qty, inputElement);
   }
 };
 
@@ -26,14 +41,23 @@ var quantityInputField = function(event) {
   if ( event ) {
     var qty = $(this).val();
     var inputElement = $(event.target);
-    var inputId = inputElement.attr('id');               // eg "qtyToOrder-productId-23"
-    var productId = inputId.toString().split('-').pop(); // eg "23"
+    var productId = popProductId(inputElement); // eg "23"
     console.log("Try to update product " + productId + " -> new qty: " + qty );
-    updateCart(productId, qty, inputElement, inputId);
+    updateCart(productId, qty, inputElement);
   }
 };
 
-var updateCart = function( productId, newQty, inputElement, inputId) {
+var removeFromCart = function (event) {
+  console.log("Remove from cart!");
+    var element = $(event.currentTarget);
+    var productId = popProductId(element); // eg "23"
+    var inputElement = getInputElement(productId);
+    var qty = -1;
+    console.log("Try to update product " + productId + " -> new qty: " + qty );
+    updateCart(productId, qty, inputElement);
+};
+
+var updateCart = function( productId, newQty, inputElement) {
 
   var parentalDiv = $('div.parentalDiv-' + productId);
   var wellDiv = $('.well.product-' + productId);
@@ -131,14 +155,31 @@ var updateCart = function( productId, newQty, inputElement, inputId) {
 };
 
 var checkIfNoProducts = function(e) {
-  if ($('div.well').length == 0) {
-    console.log("There are no products in the cart.")
-    $(this).hide();
-  }
-  else {
-    console.log("There are products in the cart.")
-    $(this).show();
-  }
+  _this = $(this);
+
+  $.ajax({
+    url:"/cart/is-empty",
+    type:'GET',
+    complete: function(jqXHR, textStatus){
+      var message = jqXHR.getResponseHeader('message');
+      var cart_lines = parseInt(message);
+      console.log("cart_lines: " + cart_lines);
+
+      if (textStatus == "success") {
+
+        if (cart_lines == 0) {
+          console.log("There are no products in the cart.")
+          _this.hide();
+          $('#clearMyCartBtn').addClass("disabled");
+
+        }else{
+          console.log("There are products in the cart.")
+          _this.show();
+          $('#clearMyCartBtn').removeClass("disabled");
+        }
+      }
+    }
+  });
 };
 
 var storeReadyJs = function(e) {
@@ -155,10 +196,16 @@ var storeReadyJs = function(e) {
   $('.cart-submit-btn').on('check-if-no-products', checkIfNoProducts);
   $('.cart-submit-btn').trigger('check-if-no-products');
 
-  var result = $('div.top-level-container').on(
+  $('div.top-level-container').on(
     'click',
     'button.qty-btn-plus, button.qty-btn-minus',
     quantityUpdateButton
+  );
+
+  var result = $('div.top-level-container').on(
+    'click',
+    'span.remove-from-cart, a.remove-from-cart',
+    removeFromCart
   );
 };
 
