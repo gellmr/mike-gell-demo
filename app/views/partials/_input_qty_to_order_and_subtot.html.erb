@@ -25,7 +25,7 @@
             product_qty,        # value
             {
               :type => "text",
-              :class => "form-control qtyToOrder-input big-input-field",
+              :class => "form-control qtyToOrder-input",
               :id => "qtyToOrder-productId-#{product.id}"
             }
           )
@@ -35,7 +35,7 @@
             <%= button_tag({
               type: 'button',
               name: 'qty-btn-minus',
-              class: "btn btn-default qty-btn-minus",
+              class: "btn btn-default qty-btn qty-btn-minus",
               id: "qty-btn-minus-#{product.id}"
             }) do %>
               <span class="glyphicon glyphicon-minus"></span>
@@ -44,7 +44,7 @@
             <%= button_tag({
               type: 'button',
               name: 'qty-btn-plus',
-              class: "btn btn-default qty-btn-plus",
+              class: "btn btn-default qty-btn qty-btn-plus",
               id: "qty-btn-plus-#{product.id}"
             }) do %>
               <span class="glyphicon glyphicon-plus"></span>
@@ -78,7 +78,7 @@
           {
             :type => "text",
             :disabled => "disabled",
-            :class => "form-control subtot-input big-input-field",
+            :class => "form-control subtot-input",
             :id => "subtot-productId-#{product.id}"
           }
         )

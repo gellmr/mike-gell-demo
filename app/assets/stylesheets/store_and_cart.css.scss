@@ -2,9 +2,12 @@
   color: grey;
 }
 
-input.big-input-field {
-  // font-size: 16px;
-  height: auto;
+input.qtyToOrder-input {
+  height: 34px;
+}
+
+button.qty-btn {
+  height: 34px;
 }
 
 span.glyphicon.glyphicon-minus {
