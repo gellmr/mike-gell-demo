@@ -3,11 +3,14 @@
 
   <!-- We are at the CART -->
 
-  <%= content_tag( :span, {
-      name: 'remove-from-cart',
-      class: 'remove-from-cart',
-      id: "remove-from-cart-#{product.id}",
-    }) do %>
+  <%=
+  button_tag({
+  name: 'remove-from-cart',
+  type: 'button',
+  class: 'btn btn-default remove-from-cart',
+  id: "remove-from-cart-#{product.id}"
+  }) do
+  %>
     <span class="glyphicon glyphicon-remove"></span>
   <% end %>
 

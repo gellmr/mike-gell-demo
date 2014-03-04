@@ -20,10 +20,19 @@ span.glyphicon.glyphicon-plus {
 }
 
 span.glyphicon.glyphicon-remove {
+  font-size: 1.5em;
   color: rgb(213, 213, 213);
 }
 span.glyphicon.glyphicon-remove:hover {
   color: #7A7A7A;
+}
+button.remove-from-cart {
+  border: none;
+  background-color: transparent;
+  padding-right: 0px;
+}
+button.remove-from-cart:hover {
+  background-color: transparent;
 }
 
 .centeredProducts {

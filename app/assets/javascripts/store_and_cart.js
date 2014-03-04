@@ -204,7 +204,7 @@ var storeReadyJs = function(e) {
 
   var result = $('div.top-level-container').on(
     'click',
-    'span.remove-from-cart, a.remove-from-cart',
+    '.remove-from-cart',
     removeFromCart
   );
 };
