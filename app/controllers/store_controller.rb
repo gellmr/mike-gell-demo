@@ -17,4 +17,22 @@ class StoreController < ApplicationController
     end
     # Rails.logger.debug "@products: #{@products.to_yaml}"
   end
+
+  def product_search
+    result = Product.where("name LIKE :search_string OR description LIKE :search_string", {
+      search_string: sane_search_params[:queryString]
+    })
+    result.each do |r|
+      Rails.logger.debug "Search result: #{r}"
+    end
+    head :ok
+  end
+
+  private
+    # Strong params
+    def sane_search_params
+      params.require(:productSearch).permit(
+        :queryString
+      )
+    end
 end

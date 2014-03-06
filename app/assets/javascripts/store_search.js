@@ -6,11 +6,43 @@ var searchStore = function(e) {
 
   if ($(this).attr('name') == "product-search-button") {
     console.log("Clicked product search button. " + str);
-
   } else if ($(this).attr('name') == "product-search-input") {  
     console.log("Typed some product search string. " + str);
-
   }
+  ajaxProductSearch(str);
+};
+
+var ajaxProductSearch = function(str) {
+  var params = {
+    productSearch: {
+      queryString: str
+    }
+  };
+  $.ajax({
+    url:"/store",
+    type:'PUT',
+    dataType:"json",
+    data: params,
+    statusCode: {
+      200: function(jqXHR) {
+        var message = jqXHR.getResponseHeader('message');
+        console.log("[200] message: " + message);
+      },
+      400: function(jqXHR) {
+        var message = jqXHR.getResponseHeader('message');
+        console.log("400 failed. message:" + message);
+      },
+      422: function() {
+        console.log("Your session has expired.");
+        window.location.href = '/session-expired-notice';
+      }
+    },
+    complete: function(xhr, textStatus){
+      //console.log("XHR COMPLETED with status " + textStatus + "\n");
+      if (textStatus == "success") {
+      }
+    }
+  });
 };
 
 var storeReadyJs = function(e) {

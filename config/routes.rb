@@ -21,6 +21,7 @@ Fuzzybear::Application.routes.draw do
   get 'register/'  => 'sessions#register_page', as: 'register'
 
   get 'store/'     => 'store#index', as: 'store_index'
+  put 'store/'     => 'store#product_search'
 
   resources :cart, only: [:update]
   get 'cart/'      => 'cart#index', as: 'cart_index'
