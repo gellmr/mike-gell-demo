@@ -19,11 +19,10 @@ class StoreController < ApplicationController
   end
 
   def product_search
-    result = Product.where("lower(name) LIKE :query_string OR lower(description) LIKE :query_string OR lower(image_url) LIKE :query_string", {
-      query_string: "%#{query_pattern}%"
+    result = Product.where("lower(name) ~ :pattern OR lower(description) ~ :pattern OR lower(image_url) ~ :pattern", {
+      pattern: "#{product_regex}"
     })
     Rails.logger.debug "-------------------------------"
-    Rails.logger.debug "query_pattern: #{query_pattern}"
     Rails.logger.debug "Results: ( #{result.count} )"
     Rails.logger.debug "-------------------------------"
     result.each do |r|
@@ -33,9 +32,48 @@ class StoreController < ApplicationController
     head :ok
   end
 
-  def query_pattern
+  # Construct a search string like '^(?=.*words)(?=.*in)(?=.*any)(?=.*order).+'
+  # This regex uses "positive lookahead"
+  # So, we search can enter a search term: 'arduino pro arm7'
+  # Which will match a product like this:
+  # {
+  #   name: 'blah arduino blah',    (matches 'arduino')
+  #   description 'blah ARM7 blah', (matches 'ARM7')
+  #   image_url: 'arduinoPro.jpg'   (matches 'arduino' and 'pro')
+  # }
+  # NOTE - ALL WORDS in the search string must occur or we get no match.
+  # If we didn't have 'pro' somewhere in the product data, then the search would fail.
+  # ----------------------------------------------------
+  def product_regex
+    out_query = ['^']
     # Replace non-alphanumeric characters with '%'
-    sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%')
+    # Eg 'arduino pro arm7' becomes 'arduino%pro%arm7'
+    # Split into an array for processing, eg ['arduino', 'pro', 'arm7']
+    sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%').split('%').each do |word|
+      out_query.push "(?=.*#{word})" # use positive lookahead for each word in the search string.
+    end
+    out_query.push '.+'
+
+    Rails.logger.debug "product_regex: #{out_query.join}"
+
+    out_query.join # returns "^(?=.*arduino)(?=.*pro)(?=.*arm7).+"
+
+    # This will match if ALL TOKENS in the search string are present. (eg it uses -AND-)
+
+    # This will match
+    #   "blah arm7 arduino blah pro"
+    #   "blah arm7 pro arduino"
+    #   "pro arduino blah blah arm7"
+    #   "arm7 arduino pro"
+    #   "pro arm7 arduino"
+    #   "blah arm7 blah pro arduino blah"
+
+    # But will NOT match
+    #   "arm7"
+    #   "arduino arm7"
+    #   "arduino pro"
+    #   "arduino"
+    #   "blah arduino blah"
   end
 
   private
