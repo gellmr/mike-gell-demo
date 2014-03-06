@@ -25,8 +25,11 @@ var ajaxProductSearch = function(str) {
     data: params,
     statusCode: {
       200: function(jqXHR) {
-        var message = jqXHR.getResponseHeader('message');
+        var message = jqXHR.message;
         console.log("[200] message: " + message);
+        var form = $('div.centeredProducts form');
+        form.children().remove();
+        form.append(jqXHR.html);
       },
       400: function(jqXHR) {
         var message = jqXHR.getResponseHeader('message');
@@ -50,11 +53,11 @@ var storeReadyJs = function(e) {
   console.log("\nstoreReadyJs() " + e.type);
   console.log("BIND keydown to--> searchStore()");
 
-  $('div.top-level-container').on(
-    'keyup',
-    'input.product-search',
-    searchStore
-  );
+  // $('div.top-level-container').on(
+  //   'keyup',
+  //   'input.product-search',
+  //   searchStore
+  // );
   
   $('div.top-level-container').on(
     'click',

@@ -19,20 +19,41 @@ class StoreController < ApplicationController
   end
 
   def product_search
+    if sane_search_params[:queryString].empty?
+      head :bad_request
+    end
+    
     Rails.logger.debug "\n\n"
-    result = Product.where("lower(name) ~ :pattern OR lower(description) ~ :pattern OR lower(image_url) ~ :pattern", {
+    @result = Product.where("lower(name) ~ :pattern OR lower(description) ~ :pattern OR lower(image_url) ~ :pattern", {
       pattern: "#{product_regex}"
     })
     Rails.logger.debug "\n-------------------------------"
-    Rails.logger.debug "Search Results: ( #{result.count} )"
+    Rails.logger.debug "Search Results: ( #{@result.count} )"
     Rails.logger.debug "-------------------------------\n"
-    result.each_with_index do |r, i|
+    @result.each_with_index do |r, i|
       Rails.logger.debug "(#{i}) #{r.name}"
       Rails.logger.debug "    #{r.description}"
       Rails.logger.debug "    #{r.image_url}\n"
     end
     Rails.logger.debug "==============================="
-    head :ok
+   
+    msg = {
+      status: "ok",
+      message: "Success",
+      # products: @result,
+      html: render_to_string(
+        partial: 'store/partials/search_result.html.erb',
+        locals: {
+          result: @result
+        }
+      )
+    }
+
+    respond_to do |format|
+      format.json {
+        render :json => msg # don't do msg.to_json
+      }
+    end
   end
 
   # Construct a search string like '^(?=.*words)(?=.*in)(?=.*any)(?=.*order).+'

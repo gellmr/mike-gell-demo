@@ -1,0 +1,16 @@
+
+<small>
+  <%
+  @result.each_with_index do |r, i|
+    %>
+
+    Result (<%= i %>) <br />
+    <%= r.name %> <br />
+    <%= r.description %> <br />
+    <%= r.image_url %> <br />
+    <hr />
+
+  <%
+  end
+%>
+</small>
