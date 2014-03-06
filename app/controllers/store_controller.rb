@@ -19,12 +19,15 @@ class StoreController < ApplicationController
   end
 
   def product_search
-    result = Product.where("name LIKE :search_string OR description LIKE :search_string", {
-      search_string: sane_search_params[:queryString]
+    result = Product.where("name LIKE :query_string OR description LIKE :query_string", {
+      query_string: "%#{sane_search_params[:queryString]}%"
     })
+    Rails.logger.debug "-------------------------------"
+    Rails.logger.debug "Results: ( #{result.count} )"
     result.each do |r|
-      Rails.logger.debug "Search result: #{r}"
+      Rails.logger.debug "Search result: #{r.to_yaml}"
     end
+    Rails.logger.debug "-------------------------------"
     head :ok
   end
 
