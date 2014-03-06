@@ -191,9 +191,9 @@ var checkIfNoProducts = function(e) {
   });
 };
 
-var storeReadyJs = function(e) {
+var storeAndCartReadyJs = function(e) {
 
-  console.log("\nstoreReadyJs() " + e.type);
+  console.log("\nstoreAndCartReadyJs() " + e.type);
   console.log("BIND keydown to--> updateCart()");
 
   $('div.top-level-container').on(
@@ -219,6 +219,6 @@ var storeReadyJs = function(e) {
 };
 
 // Gotta bind to both events, because we are using turbolinks.
-jQuery(document).ready(storeReadyJs);
-jQuery(document).on('page:load', storeReadyJs);
+jQuery(document).ready(storeAndCartReadyJs);
+jQuery(document).on('page:load', storeAndCartReadyJs);
 
