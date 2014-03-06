@@ -22,7 +22,7 @@ class StoreController < ApplicationController
     if sane_search_params[:queryString].empty?
       head :bad_request
     end
-    
+
     Rails.logger.debug "\n\n"
     @result = Product.where("lower(name) ~ :pattern OR lower(description) ~ :pattern OR lower(image_url) ~ :pattern", {
       pattern: "#{product_regex}"
@@ -37,16 +37,26 @@ class StoreController < ApplicationController
     end
     Rails.logger.debug "==============================="
    
+   product_lines = []
+
+   @result.each_with_index do |record, i|
+    product_lines.push(
+      render_to_string(
+        partial: 'partials/forsale_product_line',
+        locals: {
+          product: record,
+          product_qty: 0,
+          subtotal: nil,
+          atStore: true
+        }
+      )
+    )
+   end
+
     msg = {
       status: "ok",
       message: "Success",
-      # products: @result,
-      html: render_to_string(
-        partial: 'store/partials/search_result.html.erb',
-        locals: {
-          result: @result
-        }
-      )
+      html: product_lines
     }
 
     respond_to do |format|
