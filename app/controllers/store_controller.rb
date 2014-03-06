@@ -19,14 +19,17 @@ class StoreController < ApplicationController
   end
 
   def product_search
+    Rails.logger.debug "\n\n"
     result = Product.where("lower(name) ~ :pattern OR lower(description) ~ :pattern OR lower(image_url) ~ :pattern", {
       pattern: "#{product_regex}"
     })
-    Rails.logger.debug "-------------------------------"
-    Rails.logger.debug "Results: ( #{result.count} )"
-    Rails.logger.debug "-------------------------------"
-    result.each do |r|
-      Rails.logger.debug "Search result: #{r.to_yaml}"
+    Rails.logger.debug "\n-------------------------------"
+    Rails.logger.debug "Search Results: ( #{result.count} )"
+    Rails.logger.debug "-------------------------------\n"
+    result.each_with_index do |r, i|
+      Rails.logger.debug "(#{i}) #{r.name}"
+      Rails.logger.debug "    #{r.description}"
+      Rails.logger.debug "    #{r.image_url}\n"
     end
     Rails.logger.debug "==============================="
     head :ok
@@ -34,40 +37,23 @@ class StoreController < ApplicationController
 
   # Construct a search string like '^(?=.*words)(?=.*in)(?=.*any)(?=.*order).+'
   # This regex uses "positive lookahead"
-  # So, we search can enter a search term: 'arduino pro arm7'
+  # So, we can enter a search term: 'arduino pro arm7'
   # Which will match a product like this:
   # {
   #   name: 'blah arduino blah',    (matches 'arduino')
-  #   description 'blah ARM7 blah', (matches 'ARM7')
+  #   description 'blah ARM7 blah', (matches 'arm' and '7')
   #   image_url: 'arduinoPro.jpg'   (matches 'arduino' and 'pro')
   # }
-  # NOTE - ALL WORDS in the search string must occur or we get no match.
-  # If we didn't have 'pro' somewhere in the product data, then the search would fail.
+  # NOTE - ALL WORDS in the search string must occur for the product.
+  # Otherwise the product does not appear in search results.
   # ----------------------------------------------------
   def product_regex
     out_query = ['^']
-    # Replace non-alphanumeric characters with '%'
-    # Eg 'arduino pro arm7' becomes 'arduino%pro%arm7'
-    # Split into an array for processing, eg ['arduino', 'pro', 'arm7']
-
-    # TODO
-    # I want 'cat6' to be broken into ['cat', '6']
-    # Here is how it might be done
-    # http://stackoverflow.com/questions/3720012/regular-expression-to-split-string-and-number
-
-    # Rails.logger.debug sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%')
-    Rails.logger.debug sane_search_params[:queryString].downcase.strip.split("/\w+/").join('%')
-
-    sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%').split('%').each do |word|
-      out_query.push "(?=.*#{word})" # use positive lookahead for each word in the search string.
-    end
-    out_query.push '.+'
-
-    Rails.logger.debug "product_regex: #{out_query.join}"
-
-    out_query.join # returns "^(?=.*arduino)(?=.*pro)(?=.*arm7).+"
-
-    # This will match if ALL TOKENS in the search string are present. (eg it uses -AND-)
+    # This process uses '%' characters to separate tokens.
+    # Eg 'arduino pro arm7' becomes 'arduino%pro%arm%7'
+    # ...then we split the string into an array: ['arduino', 'pro', 'arm', '7']
+    # This allows us to construct a regex:
+    # ^(?=.*arduino)(?=.*pro)(?=.*arm)(?=.*7).+
 
     # This will match
     #   "blah arm7 arduino blah pro"
@@ -76,13 +62,35 @@ class StoreController < ApplicationController
     #   "arm7 arduino pro"
     #   "pro arm7 arduino"
     #   "blah arm7 blah pro arduino blah"
-
     # But will NOT match
     #   "arm7"
     #   "arduino arm7"
     #   "arduino pro"
     #   "arduino"
     #   "blah arduino blah"
+
+    # Word boundaries - when we get numbers and letters together, like "arm7"
+    # we want a boundary between them. Eg, we want ['arm', '7']
+    # The search string "cat677aaabbb ccc9aa-a-6" will be broken into:
+    # ['cat', '677', 'aaabbb', 'ccc', '9', 'aa', 'a', '6']
+    # And forms the following regex:
+    # ^(?=.*cat)(?=.*677)(?=.*aaabbb)(?=.*ccc)(?=.*9)(?=.*aa)(?=.*a)(?=.*6).+
+    
+    s = sane_search_params[:queryString].downcase.strip
+    s = s.gsub(/[^0-9a-z]/, '%')
+    s = s.split(/([a-z%]+(?=[0-9 ]+))|([0-9%]+(?=[a-z ]+))/)
+    s.reject! {|c| c.empty?}
+    s = s.join('%')
+    s = s.split('%')
+    s.reject! {|c| c.empty?}
+
+    s.each do |word|
+      out_query.push "(?=.*#{word})" # use positive lookahead for each word in the search string.
+    end
+    out_query.push '.+'
+
+    Rails.logger.debug "product_regex: #{out_query.join}"
+    out_query.join # returns '^(?=.*arduino)(?=.*pro)(?=.*arm)(?=.*7).+'
   end
 
   private
