@@ -14,6 +14,26 @@
       </div>
 
       <div class="row">
+        <div class="col-sm-12">
+          <div class="input-group search-input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <%=
+            text_field_tag(
+              'search-input',  # name
+              "", # value
+              {
+                :type => "text",
+                :class => "form-control search-input"
+              }
+            )
+            %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-xs-12">
           <div class="text-center">
             <%= paginate @all_products, :window => 2 %>
