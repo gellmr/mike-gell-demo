@@ -32,6 +32,7 @@ var quantityUpdateButton = function(event) {
     } else {
       qty -= 1; // qty-btn-minus-23
     }
+    inputElement.val(qty);
     console.log("Try to update product " + productId + " -> new qty: " + qty );
     updateCart(productId, qty, inputElement);
   }
@@ -53,8 +54,15 @@ var removeFromCart = function (event) {
     var productId = popProductId(element); // eg "23"
     var inputElement = getInputElement(productId);
     var qty = -1;
+    inputElement.val(0);
+    hideInCartIcon(productId);
     console.log("Try to update product " + productId + " -> new qty: " + qty );
     updateCart(productId, qty, inputElement);
+};
+
+var hideInCartIcon = function(productId) {
+  var parentalDiv = $('div.parentalDiv-' + productId);
+  parentalDiv.find('.inCartIcon').hide();
 };
 
 var updateCart = function( productId, newQty, inputElement) {
@@ -89,7 +97,11 @@ var updateCart = function( productId, newQty, inputElement) {
         var cartTotalItems = jqXHR.getResponseHeader('cartTotalItems');
         var cartTotalLines = jqXHR.getResponseHeader('cartTotalLines');
         var message = jqXHR.getResponseHeader('message');
+        $("h3.content-heading").html("My Cart - " + cartTotalLines + " Lines");
+        $("input.total-items").val(cartTotalItems);
+        $("input.grand-total").val('$ ' + resultGrandTot);
         console.log(message);
+
         switch(result) {
 
           case "removed-from-cart":
@@ -132,9 +144,6 @@ var updateCart = function( productId, newQty, inputElement) {
           parentalDiv.find('input.subtot-input').val(resultSubTot);
           break;
         };
-        $("h3.content-heading").html("My Cart - " + cartTotalLines + " Lines");
-        $("input.total-items").val(cartTotalItems);
-        $("input.grand-total").val('$ ' + resultGrandTot);
       },
       400: function(jqXHR) {
         var message = jqXHR.getResponseHeader('message');
@@ -184,7 +193,7 @@ var checkIfNoProducts = function(e) {
 
 var storeReadyJs = function(e) {
 
-  console.log("\nstoreReadyJs()");
+  console.log("\nstoreReadyJs() " + e.type);
   console.log("BIND keydown to--> updateCart()");
 
   $('div.top-level-container').on(

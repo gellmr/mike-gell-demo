@@ -5,12 +5,12 @@
 
 var windowResizeReadyJS = function (event) {
 
-  console.log("\nwindowResizeReadyJS()");
+  console.log("\nwindowResizeReadyJS() " + event.type);
   
   // Make the navbar text become tiny, if the window is very small.
   var logCount = 0;
   $(document).on("windowResizeHandler", function( e ) {
-    console.log('Resized ' + logCount);
+    // console.log('Resized ' + logCount);
     logCount = logCount + 1;
     if (parseInt($('body nav.navbar').css('width')) > 382) {
       $(document).trigger( "normalMode" );
