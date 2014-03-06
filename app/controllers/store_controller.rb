@@ -19,7 +19,7 @@ class StoreController < ApplicationController
   end
 
   def product_search
-    result = Product.where("lower(name) LIKE :query_string OR lower(description) LIKE :query_string", {
+    result = Product.where("lower(name) LIKE :query_string OR lower(description) LIKE :query_string OR lower(image_url) LIKE :query_string", {
       query_string: "%#{ sane_search_params[:queryString].downcase }%"
     })
     Rails.logger.debug "-------------------------------"
