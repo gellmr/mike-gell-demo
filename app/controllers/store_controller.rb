@@ -49,6 +49,15 @@ class StoreController < ApplicationController
     # Replace non-alphanumeric characters with '%'
     # Eg 'arduino pro arm7' becomes 'arduino%pro%arm7'
     # Split into an array for processing, eg ['arduino', 'pro', 'arm7']
+
+    # TODO
+    # I want 'cat6' to be broken into ['cat', '6']
+    # Here is how it might be done
+    # http://stackoverflow.com/questions/3720012/regular-expression-to-split-string-and-number
+
+    # Rails.logger.debug sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%')
+    Rails.logger.debug sane_search_params[:queryString].downcase.strip.split("/\w+/").join('%')
+
     sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%').split('%').each do |word|
       out_query.push "(?=.*#{word})" # use positive lookahead for each word in the search string.
     end
