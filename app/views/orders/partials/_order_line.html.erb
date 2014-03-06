@@ -40,7 +40,7 @@
     
     <div class="col-xs-4 mg-table-feint">
       <div class="pull-right">
-        <% uprice = ordered_product.product.unitPrice %>
+        <% uprice = ordered_product.product.unit_price %>
         $<%= sprintf '%.2f', ordered_product.qty.to_i * uprice || 0 %>
       </div>
     </div>

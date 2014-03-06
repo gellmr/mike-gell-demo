@@ -19,10 +19,10 @@ class SessionsController < ApplicationController
       user_cart.each_with_index do |(productId,qty),index|
         quantity = qty.to_i
         @prod = Product.find(productId.to_s)
-        if @prod.quantityInStock >= quantity
+        if @prod.quantity_in_stock >= quantity
           temp_cart[productId] = quantity # get the number requested.
         else
-          temp_cart[productId] = @prod.quantityInStock # get as many as are available.
+          temp_cart[productId] = @prod.quantity_in_stock # get as many as are available.
         end
       end
       Rails.logger.debug "Clear session, to prevent session fixation attack..."

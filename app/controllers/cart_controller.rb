@@ -15,7 +15,7 @@ class CartController < ApplicationController
     @total_lines = 0
     user_cart.each_with_index do |(productId,qty),index|
       @prod = Product.find(productId.to_s)
-      @grand_total += subtot = @prod.unitPrice * qty.to_i
+      @grand_total += subtot = @prod.unit_price * qty.to_i
       @total_items += qty.to_i
       @total_lines += 1
       @products.push({
@@ -34,7 +34,7 @@ class CartController < ApplicationController
 
     # Check if there are sufficient quantity in stock.
     product = Product.find(productId)
-    if product.quantityInStock >= newQty.to_i
+    if product.quantity_in_stock >= newQty.to_i
 
       # We have enough stock...
 
@@ -57,7 +57,7 @@ class CartController < ApplicationController
           send_head_ok({
             result: "updated-qty",
             resultCartQty: newQty,
-            resultSubTot: product.unitPrice * newQty.to_i,
+            resultSubTot: product.unit_price * newQty.to_i,
             message: "Updated cart."
           })
 
@@ -77,13 +77,13 @@ class CartController < ApplicationController
     else
 
       # User wants more than we have available. Set to max available.
-      user_cart[productId] = product.quantityInStock;
+      user_cart[productId] = product.quantity_in_stock;
       send_head_ok({
         result: "set-to-max",
-        max: product.quantityInStock,
-        resultCartQty: product.quantityInStock,
-        resultSubTot: product.unitPrice * product.quantityInStock,
-        message: "Only #{product.quantityInStock} items available!"
+        max: product.quantity_in_stock,
+        resultCartQty: product.quantity_in_stock,
+        resultSubTot: product.unit_price * product.quantity_in_stock,
+        message: "Only #{product.quantity_in_stock} items available!"
       })
 
     end
@@ -112,7 +112,7 @@ class CartController < ApplicationController
       @grand_total = 0
       user_cart.each_with_index do |(productId,qty),index|
         @prod = Product.find(productId.to_s)
-        @grand_total += @prod.unitPrice * qty.to_i
+        @grand_total += @prod.unit_price * qty.to_i
       end
       @grand_total
     end

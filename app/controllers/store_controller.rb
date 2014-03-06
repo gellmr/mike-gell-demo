@@ -8,7 +8,7 @@ class StoreController < ApplicationController
     @all_products.each do |product|
       productId = product.id.to_s
       qty = user_cart[productId]
-      @grand_total += subtot = product.unitPrice * qty.to_i
+      @grand_total += subtot = product.unit_price * qty.to_i
       @products.push({
         record: product,
         cart_qty: qty,

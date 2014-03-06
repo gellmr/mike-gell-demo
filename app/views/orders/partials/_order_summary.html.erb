@@ -3,7 +3,7 @@
 @grand_total = 0
 order.ordered_products.each do |ordered_product|
   @total_items += ordered_product.qty.to_i
-  @grand_total += ordered_product.qty.to_i * ordered_product.product.unitPrice
+  @grand_total += ordered_product.qty.to_i * ordered_product.product.unit_price
 end
 %>
 
