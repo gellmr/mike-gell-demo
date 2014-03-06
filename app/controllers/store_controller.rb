@@ -24,10 +24,11 @@ class StoreController < ApplicationController
     })
     Rails.logger.debug "-------------------------------"
     Rails.logger.debug "Results: ( #{result.count} )"
+    Rails.logger.debug "-------------------------------"
     result.each do |r|
       Rails.logger.debug "Search result: #{r.to_yaml}"
     end
-    Rails.logger.debug "-------------------------------"
+    Rails.logger.debug "==============================="
     head :ok
   end
 
