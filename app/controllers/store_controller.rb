@@ -20,9 +20,10 @@ class StoreController < ApplicationController
 
   def product_search
     result = Product.where("lower(name) LIKE :query_string OR lower(description) LIKE :query_string OR lower(image_url) LIKE :query_string", {
-      query_string: "%#{ sane_search_params[:queryString].downcase }%"
+      query_string: "%#{query_pattern}%"
     })
     Rails.logger.debug "-------------------------------"
+    Rails.logger.debug "query_pattern: #{query_pattern}"
     Rails.logger.debug "Results: ( #{result.count} )"
     Rails.logger.debug "-------------------------------"
     result.each do |r|
@@ -30,6 +31,11 @@ class StoreController < ApplicationController
     end
     Rails.logger.debug "==============================="
     head :ok
+  end
+
+  def query_pattern
+    # Replace non-alphanumeric characters with '%'
+    sane_search_params[:queryString].downcase.strip.gsub(/[^0-9a-z]/i, '%')
   end
 
   private
