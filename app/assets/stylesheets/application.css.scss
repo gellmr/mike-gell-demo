@@ -1,11 +1,15 @@
 /*
- *= require_tree .
+ *= require bootstrap.min
  *= require_self
+ *= require_tree .
 */
 
-@import "bootstrap";
+// NOT DOING THIS ANYMORE, I AM USING THE MINIFIED BOOTSTRAP NOW, require'd ABOVE.
+// WILL I BE ABLE TO SET THE FONT FACE BELOW ?????
+// @import "bootstrap";
 
-$font-folder: '../assets/fonts/bootstrap';
+// The bootstrap fonts are located in /public/fonts/bootstrap/*
+$font-folder: '/fonts/bootstrap';
 
 @font-face {
   font-family: 'Glyphicons Halflings';
