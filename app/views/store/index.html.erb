@@ -27,10 +27,22 @@
             )
             %>
             <span class="input-group-btn">
+              <%= link_to( store_search_path, html_options = {
+                name: "product-search-button",
+                class: "btn btn-default product-search",
+                type: "button"
+              }) do
+              %>
+                <span class="glyphicon glyphicon-search"></span>
+                Search
+              <% end %>
+
+              <!--
               <button name="product-search-button" class="btn btn-default product-search" type="button">
                 <span class="glyphicon glyphicon-search"></span>
                 Search
               </button>
+              -->
             </span>
           </div>
         </div>

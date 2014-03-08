@@ -19,52 +19,38 @@ class StoreController < ApplicationController
   end
 
   def product_search
-    if sane_search_params[:queryString].empty?
+    if sane_search_params[:query_string].blank?
       head :bad_request
     end
 
     Rails.logger.debug "\n\n"
     
-    @result = Product.where("(name || description || image_url) ~* :pattern", {
+    @products = []
+    @grand_total = 0
+    
+    @all_products = Product.where("(name || description || image_url) ~* :pattern", {
       pattern: "#{product_regex}"
-    })
+    }).order("name").page(params[:page]).per(3)
+
     Rails.logger.debug "\n-------------------------------"
-    Rails.logger.debug "Search Results: ( #{@result.count} )"
+    Rails.logger.debug "Search Results: ( #{@all_products.count} )"
     Rails.logger.debug "-------------------------------\n"
-    @result.each_with_index do |r, i|
-      Rails.logger.debug "\n(#{i}) #{r.name}"
-      Rails.logger.debug "    #{r.description}"
-      Rails.logger.debug "    #{r.image_url}\n"
+
+    @all_products.each_with_index do |product, i|
+      Rails.logger.debug "\n(#{i}) #{product.name}"
+      Rails.logger.debug "    #{product.description}"
+      Rails.logger.debug "    #{product.image_url}\n"
+      productId = product.id.to_s
+      qty = user_cart[productId]
+      @grand_total += subtot = product.unit_price * qty.to_i
+      @products.push({
+        record: product,
+        cart_qty: qty,
+        subtotal: nil
+      })
     end
     Rails.logger.debug "==============================="
-   
-   product_lines = []
-
-   @result.each_with_index do |record, i|
-    product_lines.push(
-      render_to_string(
-        partial: 'partials/forsale_product_line',
-        locals: {
-          product: record,
-          product_qty: 0,
-          subtotal: nil,
-          atStore: true
-        }
-      )
-    )
-   end
-
-    msg = {
-      status: "ok",
-      message: "Success",
-      html: product_lines
-    }
-
-    respond_to do |format|
-      format.json {
-        render :json => msg # don't do msg.to_json
-      }
-    end
+    render template: "/store/index"
   end
 
   # Construct a search string like '^(?=.*words)(?=.*in)(?=.*any)(?=.*order).+'
@@ -108,7 +94,7 @@ class StoreController < ApplicationController
     # ^(?=.*cat)(?=.*677)(?=.*aaabbb)(?=.*ccc)(?=.*9)(?=.*aa)(?=.*a)(?=.*6).+
     
     out_query = ['^']
-    s = sane_search_params[:queryString].downcase.strip
+    s = sane_search_params[:query_string].downcase.strip
     s = s.gsub(/[^0-9a-z]/, '%')
     s = s.split(/([a-z%]+(?=[0-9 ]+))|([0-9%]+(?=[a-z ]+))/)
     s.reject! {|c| c.empty?}
@@ -128,8 +114,6 @@ class StoreController < ApplicationController
   private
     # Strong params
     def sane_search_params
-      params.require(:productSearch).permit(
-        :queryString
-      )
+      params.permit(:query_string)
     end
 end

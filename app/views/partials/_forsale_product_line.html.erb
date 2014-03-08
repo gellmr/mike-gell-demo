@@ -35,8 +35,9 @@
 
   <!-- Image tag, always visible -->
   <div class="col-xs-12 col-sm-3">
-    <% img_url = "images/120x120/#{product.image_url}" %>
-    <img src="<%= img_url %>" alt="<%= img_url %>" class="img-rounded img-responsive centered-block-img with-vert-margins"/>
+    <%= image_tag "/images/120x120/#{product.image_url}", {
+      class: "img-rounded img-responsive centered-block-img with-vert-margins"
+    }%>
   </div>
 
   <!-- X button, hidden xs -->

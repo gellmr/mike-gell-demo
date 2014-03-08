@@ -97,7 +97,10 @@
     %>
     <%= tag "div", class: "col-xs-4 inCartIcon", style: icon_style %>
       <div class="row">
-        <img src="images/inCart60x60.png" alt="(Added to cart)" class="img-rounded centered-block-img">
+        <%= image_tag "/images/inCart60x60.png", {
+          alt: "(Added to cart)",
+          class: "img-rounded centered-block-img"
+        }%>
       </div>
     </div>
     <% end %>
