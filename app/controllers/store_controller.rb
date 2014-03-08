@@ -24,14 +24,15 @@ class StoreController < ApplicationController
     end
 
     Rails.logger.debug "\n\n"
-    @result = Product.where("lower(name) ~ :pattern OR lower(description) ~ :pattern OR lower(image_url) ~ :pattern", {
+    
+    @result = Product.where("(name || description || image_url) ~* :pattern", {
       pattern: "#{product_regex}"
     })
     Rails.logger.debug "\n-------------------------------"
     Rails.logger.debug "Search Results: ( #{@result.count} )"
     Rails.logger.debug "-------------------------------\n"
     @result.each_with_index do |r, i|
-      Rails.logger.debug "(#{i}) #{r.name}"
+      Rails.logger.debug "\n(#{i}) #{r.name}"
       Rails.logger.debug "    #{r.description}"
       Rails.logger.debug "    #{r.image_url}\n"
     end
@@ -79,7 +80,6 @@ class StoreController < ApplicationController
   # Otherwise the product does not appear in search results.
   # ----------------------------------------------------
   def product_regex
-    out_query = ['^']
     # This process uses '%' characters to separate tokens.
     # Eg 'arduino pro arm7' becomes 'arduino%pro%arm%7'
     # ...then we split the string into an array: ['arduino', 'pro', 'arm', '7']
@@ -107,6 +107,7 @@ class StoreController < ApplicationController
     # And forms the following regex:
     # ^(?=.*cat)(?=.*677)(?=.*aaabbb)(?=.*ccc)(?=.*9)(?=.*aa)(?=.*a)(?=.*6).+
     
+    out_query = ['^']
     s = sane_search_params[:queryString].downcase.strip
     s = s.gsub(/[^0-9a-z]/, '%')
     s = s.split(/([a-z%]+(?=[0-9 ]+))|([0-9%]+(?=[a-z ]+))/)
@@ -115,10 +116,10 @@ class StoreController < ApplicationController
     s = s.split('%')
     s.reject! {|c| c.empty?}
 
-    s.each do |word|
-      out_query.push "(?=.*#{word})" # use positive lookahead for each word in the search string.
+    s.each_with_index do |word, idx|
+      out_query.push "(?=.*?#{word})" # use positive lookahead for each word in the search string.
     end
-    out_query.push '.+'
+    out_query.push '.*$'
 
     Rails.logger.debug "product_regex: #{out_query.join}"
     out_query.join # returns '^(?=.*arduino)(?=.*pro)(?=.*arm)(?=.*7).+'
