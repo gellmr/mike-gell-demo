@@ -6,6 +6,12 @@
 
 nav.navbar ol.nav.navbar-nav li {
   text-align: right;
+  border-style: dashed;
+  border-width: 1px;
+  a {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
 }
 
 a.mg-navbar-title {
