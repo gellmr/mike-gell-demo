@@ -6,45 +6,46 @@
           <%= render "partials/site_title" %>
 
           <div class="col-xs-6 col-sm-8 mg-navbar-parent">
+
             <div class="row">
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "Store", "/store", class: "mg-resizable-11-14" %>
               </div>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "My Cart", "/cart", class: "mg-resizable-11-14" %>
               </div>
 
               <% if current_user %>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "My Account", "/users/#{current_user.id}/edit", class: "mg-resizable-11-14" %>
               </div>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "My Orders", "/users/#{current_user.id}/orders", class: "mg-resizable-11-14" %>
               </div>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "Change password", "/change-password", class: "mg-resizable-11-14" %>
               </div>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "Log Out", "/logout", method: :delete, class: "mg-resizable-11-14" %>
               </div>
 
               <% else %>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "Register", "/register", class: "mg-resizable-11-14" %>
               </div>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "Forgot my password", "/forgot-password", class: "mg-resizable-11-14" %>
               </div>
 
-              <div class="col-xs-12 col-sm-3 pull-right mg-navbar-item">
+              <div class="mg-navbar-item">
                 <%= link_to "Login", "/login", class: "mg-resizable-11-14" %>
               </div>
 
