@@ -20,7 +20,7 @@ var windowResizeReadyJS = function (event) {
     
   }).on("normalMode", function( e ) {
     // Normal navbar text size
-    $('.mg-resizable-11-14').css('font-size', '14px');
+    $('.mg-resizable-11-14').css('font-size', '12px');
 
   }).on("smallMode", function( e ) {
     // Shrink navbar text because window is small

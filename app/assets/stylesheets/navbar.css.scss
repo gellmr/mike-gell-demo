@@ -8,37 +8,51 @@ div.mg-navbar-parent {
   div.row {
     margin-top: 15px;
     text-align: right;
-    div.mg-navbar-item {
-      text-align: right;
-      float: right;
-      background-color: aqua;
-      padding-left: 13px;
-      padding-right: 13px;
+    a {
+      text-decoration: none;
+    }
+    a div.mg-navbar-item {
+      width: 110px;
       height: 35px;
-
-      // small mode.
-      // Display navbar items as a single column.
-      width: 130px;
       display: inline-block;
+      text-align: right;
+      padding-top: 10px;
+      padding-right: 10px;
+      background-color: #EEEEEE;
+      border-radius: 8px;
+      margin-top: 2px;
       
       @media screen and (min-width: 441px) {
-        // normal mode
-        width: 145px;
+        width: 180px;
+        height: 35px;
+        display: inline-block;
         text-align: right;
-        background-color: orange;
+        padding-right: 10px;
+        // background-color: orange;
       }
-      @media screen and (min-width: 690px) {
-        // normal mode
+      /* Small devices (tablets, 768px and up) */
+      @media screen and (min-width: 768px) {
+        width: 30%;
+        height: 40px;
+        display: inline-block;
         text-align: center;
-        background-color: yellow;
+        padding-right: 0px;
+        padding-left: 0px;
+        // background-color: yellow;
       }
-      @media screen and (min-width: 810px) {
-        // Display navbar items as a single row.
-        //display: block;
+      /* Large devices (large desktops, 1200px and up) */
+      @media screen and (min-width: 1200px) {
+        width: 16%;
+        height: 40px;
+        display: inline-block;
+        text-align: center;
+        padding-right: 0px;
+        padding-left: 0px;
+        // background-color: aqua;
       }
-      a {
-        text-decoration: none;
-      }
+    }
+    a div.mg-navbar-item:hover {
+      background-color: #D0DEEB;
     }
   }
 }
