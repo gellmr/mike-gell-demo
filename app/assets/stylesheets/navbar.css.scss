@@ -4,13 +4,22 @@
   padding-bottom: 10px;
 }
 
-nav.navbar ol.nav.navbar-nav li {
-  text-align: right;
-  border-style: dashed;
-  border-width: 1px;
-  a {
-    padding-left: 3px;
-    padding-right: 3px;
+div.mg-navbar-parent {
+  div.row {
+    div.mg-navbar-item {
+      border-style: dashed;
+      border-width: 1px;
+      text-align: center;
+      height: 50px;
+      @media screen and (max-width: 767px) {
+        text-align: right;
+        height: auto;
+      }
+      a {
+        // padding-left: 3px;
+        // padding-right: 3px;
+      }
+    }
   }
 }
 
