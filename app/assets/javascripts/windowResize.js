@@ -21,11 +21,13 @@ var windowResizeReadyJS = function (event) {
   }).on("normalMode", function( e ) {
     // Normal navbar text size
     $('.mg-resizable-11-14').css('font-size', '12px');
+    $('.mg-site-title').css('font-size', '24px');
 
   }).on("smallMode", function( e ) {
     // Shrink navbar text because window is small
     $('.mg-resizable-11-14').css('font-size', '11px');
     $('.top-level-container').css('min-width', '222px');
+    $('.mg-site-title').css('font-size', '19px');
   });
 
   // Bind the window resize event to our custom handler

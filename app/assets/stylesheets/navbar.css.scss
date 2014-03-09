@@ -1,7 +1,11 @@
 .row.loggedInAs {
   color: grey;
   font-size: 0.8em;
-  padding-bottom: 10px;
+}
+
+nav.navbar {
+  padding-right: 6px;
+  padding-bottom: 6px;
 }
 
 div.mg-navbar-parent {
@@ -12,7 +16,7 @@ div.mg-navbar-parent {
       text-decoration: none;
     }
     a div.mg-navbar-item {
-      width: 110px;
+      width: 130px;
       height: 35px;
       display: inline-block;
       text-align: right;
