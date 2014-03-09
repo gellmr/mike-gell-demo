@@ -19,7 +19,8 @@ class StoreController < ApplicationController
 
   def product_search
     if sane_search_params[:query_string].blank?
-      head :bad_request
+      Rails.logger.debug "query string was blank."      
+      redirect_to :store_index and return
     end
 
     Rails.logger.debug "\n\n"
