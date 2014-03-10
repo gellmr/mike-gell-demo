@@ -15,6 +15,9 @@ Fuzzybear::Application.routes.draw do
   resources :sessions, only: [:create]
     # POST  /sessions  sessions#create   sessions_path
 
+  get  '/forgot-password' => 'password_reset#new',    as: 'new_password_reset'
+  post '/forgot-password' => 'password_reset#create', as: 'create_password_reset'
+
   get 'session-expired-notice/' => 'sessions#expired_notice'
   delete 'logout/' => 'sessions#destroy'
   get 'login/'     => 'sessions#login_page', as: 'login'
