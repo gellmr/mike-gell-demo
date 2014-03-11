@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
       # The user has successfully logged in.
     else
       puts "-----> Authentication failed!!!"
-      if (user.account_locked)
+      if (user && user.account_locked)
         head :bad_request, { message: "Your account has been locked. Please follow the steps listed under 'Forgot my password'" } # 400
       else
         head :bad_request, { message: "Invalid login details." } # 400
