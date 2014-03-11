@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306051724) do
+ActiveRecord::Schema.define(version: 20140311072718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,9 @@ ActiveRecord::Schema.define(version: 20140306051724) do
     t.string   "billing_address_state"
     t.string   "billing_address_post_code"
     t.string   "billing_address_country_or_region"
+    t.boolean  "account_locked"
+    t.datetime "locked_at"
+    t.string   "password_reset_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -10,7 +10,7 @@ If you did not request this, then please ignore this email. Your account and pas
 If you did request a password reset, then please use the link below to set a new password.
 <br />
 <br />
-<%= link_to "Set New Password", set_new_password_url(token: @token)%>
+<%= link_to "Set New Password", set_new_password_url(token: @user.password_reset_token, email: @user.email)%>
 <br />
 <br />
 Note - the token is only valid for 10 minutes. If you dont set a new password in this time, you will need to request a new token.

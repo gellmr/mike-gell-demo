@@ -1,9 +1,8 @@
 class PasswordResetMailer < ActionMailer::Base
   default from: ENV['EMAIL_ACCOUNT']
 
-  def pw_reset_token(user, token)
+  def pw_reset_token(user)
     @user = user
-    @token = token
     mail(
       to: @user.email,
       subject: 'Password Reset Token'

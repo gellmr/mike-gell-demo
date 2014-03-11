@@ -6,6 +6,8 @@ class PasswordResetController < ApplicationController
   end
 
   def create
+    # User has submitted email address, requesting password reset token be emailed to them.
+
     email = sane_params[:email].downcase
     Rails.logger.debug "email.downcase: #{email}"
 
@@ -24,8 +26,8 @@ class PasswordResetController < ApplicationController
       # Valid email. Look up user...
       @user = User.find_by(email: email)
       if @user
-        @token = SecureRandom.urlsafe_base64
-        PasswordResetMailer.pw_reset_token(@user, @token).deliver
+        @user.password_reset_token = SecureRandom.urlsafe_base64
+        PasswordResetMailer.pw_reset_token(@user).deliver
       else
         Rails.logger.debug("Could not find user by that email.")
       end
@@ -34,8 +36,30 @@ class PasswordResetController < ApplicationController
   
   def set_new
     # User has clicked their Password Reset Token (in their email inbox)
-    token = sane_token
-    Rails.logger.debug ("Received Password Reset Token: #{token}")
+    token = sane_token_params[:token]
+    email = sane_token_params[:email]
+    Rails.logger.debug ("Received Password Reset Token: #{token} from email: #{email}")
+    
+    # Look up user by email
+    @user = User.find_by(email: email)
+
+    # Check if the token matches this user record
+    if token == @user.password_reset_token
+      # Token value is correct.
+      if @user.locked_at > 10.minutes.ago
+        # Token is fresh
+        @user.account_locked = true # Overwrite any previous value.
+        @user.locked_at = Time.now  # Overwrite any previous value.
+        # SERVE FORM - LET USER SET A NEW PASSWORD (and confirm)
+      else
+        # Token has expired
+        # Please request a new token.
+      end
+    else
+      # Token does not match user email.
+      # Token is invalid... perhaps you accidentally requested two tokens and are using the older one?
+      # Please request a new token.
+    end
   end
 
   private
@@ -57,7 +81,7 @@ class PasswordResetController < ApplicationController
     end
 
     # Strong params
-    def sane_token
-      params.permit(:token)[:token]
+    def sane_token_params
+      params.permit(:token, :email)
     end
 end
