@@ -17,6 +17,8 @@ Fuzzybear::Application.routes.draw do
 
   get  '/forgot-password' => 'password_reset#new',    as: 'new_password_reset'
   post '/forgot-password' => 'password_reset#create', as: 'create_password_reset'
+  
+  get  '/set-new-password' => 'password_reset#set_new', as: 'set_new_password'
 
   get 'session-expired-notice/' => 'sessions#expired_notice'
   delete 'logout/' => 'sessions#destroy'

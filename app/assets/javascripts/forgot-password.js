@@ -11,6 +11,10 @@ var blurforgotPwEmailInput = function(e) {
   }
 }
 
+var submitted = function(e) {
+  $(this).addClass('disabled');
+}
+
 var forgotPwReadyJs = function(e) {
 
   $('div.top-level-container').on(
@@ -22,6 +26,11 @@ var forgotPwReadyJs = function(e) {
     'blur',
     '#password-reset-email',
     blurforgotPwEmailInput
+  );
+  $('div.top-level-container').on(
+    'click',
+    '#submit_request_reset_pw',
+    submitted
   );
 };
 
