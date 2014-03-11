@@ -15,10 +15,11 @@ Fuzzybear::Application.routes.draw do
   resources :sessions, only: [:create]
     # POST  /sessions  sessions#create   sessions_path
 
-  get  '/forgot-password' => 'password_reset#new',    as: 'new_password_reset'
-  post '/forgot-password' => 'password_reset#create', as: 'create_password_reset'
+  get  '/forgot-password' => 'password_reset#new',    as: 'new_password_reset' # Serve form to request pw change token
+  post '/forgot-password' => 'password_reset#create', as: 'create_password_reset' # Submitted a form to request new token
   
-  get  '/set-new-password' => 'password_reset#set_new', as: 'set_new_password'
+  get  '/set-new-password' => 'password_reset#set_new_password', as: 'set_new_password' # Serve form to change password
+  post '/change_password' => 'password_reset#change_password', as: 'change_password' # Submit new password and confirmation
 
   get 'session-expired-notice/' => 'sessions#expired_notice'
   delete 'logout/' => 'sessions#destroy'

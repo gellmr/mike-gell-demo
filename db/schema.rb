@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311072718) do
+ActiveRecord::Schema.define(version: 20140311080331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20140311072718) do
     t.string   "billing_address_post_code"
     t.string   "billing_address_country_or_region"
     t.boolean  "account_locked"
-    t.datetime "locked_at"
+    t.datetime "token_created_at"
     t.string   "password_reset_token"
   end
 

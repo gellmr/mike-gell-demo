@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     puts "Email: #{params[:user][:email]}"
     user = User.find_by_email(params[:user][:email])
 
-    if user && user.authenticate(params[:user][:password])
+    if user && user.authenticate(params[:user][:password]) && (!user.account_locked)
 
       Rails.logger.debug "Create new session."
 
@@ -51,7 +51,11 @@ class SessionsController < ApplicationController
       # The user has successfully logged in.
     else
       puts "-----> Authentication failed!!!"
-      head :bad_request, { message: "Invalid login details." } # 400
+      if (user.account_locked)
+        head :bad_request, { message: "Your account has been locked. Please follow the steps listed under 'Forgot my password'" } # 400
+      else
+        head :bad_request, { message: "Invalid login details." } # 400
+      end
     end
   end
 
