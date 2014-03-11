@@ -2,12 +2,11 @@
   <div class="col-xs-12">
 
     <div class="row">
+      <%= render "/partials/flash_message" %>
       <div class="col-xs-12">
-        <div class="text-center">
-          <h3>
-            Request Password Reset Token
-          </h3>
-        </div>
+        <h3>
+          Request Password Reset Token
+        </h3>
       </div>
     </div>
 
@@ -63,23 +62,20 @@
         <div class="form-group">
           <%=
           text_field_tag(
-            'password-reset-email',  # name
-            "Your Email Address",    # value
+            'email',              # name
+            "Your Email Address", # value
             {
-              :type => "text",
-              :class => "form-control"
+              type:  "text",
+              class: "form-control",
+              id: 'password-reset-email'
             }
           )
           %>
         </div>
 
         <div class="form-group">
-          <%= link_to( "Submit",
-            create_password_reset_path, 
-            method: :create,
-            class: "btn btn-primary pull-right",
-            name: "password-reset-submit",
-            type: "button"
+          <%= submit_tag( "Submit",
+            class: "btn btn-primary pull-right"
           ) 
           %>
         </div>
