@@ -42,6 +42,10 @@ group :development, :test do
   gem "cucumber", "~> 1.3.11"
   gem "capybara", "~> 2.2.1"
   gem "poltergeist", "~> 1.5.0"
+  gem "selenium-webdriver", "~> 2.40.0"
+
+  # NOTE - I needed to add '~/.phantomjs/1.8.1/x86_32-linux/bin'
+  # to my PATH... I did this in the file ~/.bashrc
   gem "phantomjs", "~> 1.9.7.0", :require => 'phantomjs/poltergeist'
 end
 
