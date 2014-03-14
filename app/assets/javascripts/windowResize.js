@@ -4,8 +4,6 @@
 // We cannot use $( document ).ready
 
 var windowResizeReadyJS = function (event) {
-
-  console.log("\nwindowResizeReadyJS() " + event.type);
   
   // Make the navbar text become tiny, if the window is very small.
   var logCount = 0;
@@ -37,7 +35,6 @@ var windowResizeReadyJS = function (event) {
 
   // Init
   // Here we ensure the navbar text is the correct size when a new window is opened.
-  console.log("Trigger windowResizeHandler");
   $(document).trigger( "windowResizeHandler" );
 
 };

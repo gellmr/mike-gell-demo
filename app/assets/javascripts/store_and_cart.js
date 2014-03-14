@@ -193,9 +193,6 @@ var checkIfNoProducts = function(e) {
 
 var storeAndCartReadyJs = function(e) {
 
-  console.log("\nstoreAndCartReadyJs() " + e.type);
-  console.log("BIND keydown to--> updateCart()");
-
   $('div.top-level-container').on(
     'change keyup',
     'input.qtyToOrder-input',

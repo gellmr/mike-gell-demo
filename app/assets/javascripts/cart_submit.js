@@ -34,6 +34,5 @@ var cartSubmit = function(event, jqXHR, ajaxOptions) {
 };
 
 jQuery(document).ready(function ($) {
-  console.log("\n cart_submit.js ready handler.");
   $(document).on('ajax:complete', '#cartForm', cartSubmit);
 });

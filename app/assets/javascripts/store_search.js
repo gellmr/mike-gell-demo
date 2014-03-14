@@ -15,9 +15,6 @@ var searchStore = function(e) {
 };
 
 var storeReadyJs = function(e) {
-
-  console.log("\nstoreReadyJs() " + e.type);
-  console.log("BIND keydown to--> searchStore()");
   
   $('div.top-level-container').on(
     'click',
