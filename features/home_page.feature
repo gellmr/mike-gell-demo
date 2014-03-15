@@ -8,3 +8,4 @@ Feature: HomePage
     Then I should see Welcome
     And I should see This is a pretend online store
     And I should see you don't have to pay (and won't receive anything)
+    And I should see Go To Store
