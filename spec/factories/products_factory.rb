@@ -10,9 +10,4 @@ FactoryGirl.define do
     quantity_in_stock 100
   end
 
-  after(:create) do |product|
-    product.name = "Some Product #{product.id.to_s}"
-    product.save!
-  end
-
 end

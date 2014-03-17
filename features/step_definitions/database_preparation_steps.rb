@@ -1,5 +1,8 @@
 
+
+
 Given /^The store has three items$/ do
+  # DatabaseCleaner.clean
 
   FactoryGirl.create(:product)
   FactoryGirl.create(:product)

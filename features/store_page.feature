@@ -17,4 +17,5 @@ Feature: StorePage
 
   Scenario: Click To Add Items To Cart
     Given The store has three items
-      And I visit the store page
+    When I visit the store page
+    Then There should be 3 store lines
