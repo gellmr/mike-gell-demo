@@ -39,9 +39,7 @@ end
 
 group :development, :test do
   gem "factory_girl_rails", "~> 4.4.1"
-  
   gem 'rspec-rails', '~> 2.14.1'
-  gem "cucumber", "~> 1.3.12"
   gem "capybara", "~> 2.2.1"
   gem "poltergeist", "~> 1.5.0"
   gem "selenium-webdriver", "~> 2.40.0"
@@ -49,6 +47,13 @@ group :development, :test do
   # NOTE - I needed to add '~/.phantomjs/1.8.1/x86_32-linux/bin'
   # to my PATH... I did this in the file ~/.bashrc
   gem "phantomjs", "~> 1.9.7.0", :require => 'phantomjs/poltergeist'
+end
+
+# Helpful article:
+# https://semaphoreapp.com/blog/2013/08/14/setting-up-bdd-stack-on-a-new-rails-4-application.html
+group :test do
+  gem "cucumber-rails", "~> 1.4.0", require: false
+  gem "database_cleaner", "~> 1.2.0"
 end
 
 group :production do

@@ -14,3 +14,7 @@ Feature: StorePage
       And I should see Go To Cart
     When I click Go To Cart
     Then I should be on the cart page
+
+  Scenario: Click To Add Items To Cart
+    Given The store has three items
+      And I visit the store page
