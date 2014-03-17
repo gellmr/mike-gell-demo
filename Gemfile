@@ -38,8 +38,10 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0.beta'
-  gem "cucumber", "~> 1.3.11"
+  gem "factory_girl_rails", "~> 4.4.1"
+  
+  gem 'rspec-rails', '~> 2.14.1'
+  gem "cucumber", "~> 1.3.12"
   gem "capybara", "~> 2.2.1"
   gem "poltergeist", "~> 1.5.0"
   gem "selenium-webdriver", "~> 2.40.0"
