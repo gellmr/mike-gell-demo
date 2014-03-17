@@ -22,130 +22,137 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="railsify-with-bootstrap" note="" work="2275200" start="20140103T000000Z" end="20140311T140000Z" work-start="20140103T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="2" name="login auth" note="" work="334800" start="20140103T000000Z" end="20140204T140000Z" work-start="20140103T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="railsify-with-bootstrap" note="" work="2073600" start="20140103T000000Z" end="20140315T140000Z" work-start="20140103T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="login auth" note="" work="709200" start="20140103T000000Z" end="20140204T140000Z" work-start="20140103T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <task id="3" name="study bootstrap" note="" work="248400" start="20140103T000000Z" end="20140111T140000Z" work-start="20140103T080000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="4" name="fix login modals" note="" work="86400" start="20140201T140000Z" end="20140204T140000Z" work-start="20140201T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <task id="4" name="JQUERY study" note="" work="374400" start="20140111T140000Z" end="20140124T140000Z" work-start="20140111T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="7" type="FS" lag="691200"/>
+            <predecessor id="1" predecessor-id="3" type="FS"/>
+          </predecessors>
+          <task id="5" name="core" note="" work="316800" start="20140111T140000Z" end="20140122T140000Z" work-start="20140111T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="6" name="events" note="" work="57600" start="20140122T140000Z" end="20140124T140000Z" work-start="20140122T140000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
+            <predecessors>
+              <predecessor id="1" predecessor-id="5" type="FS"/>
+            </predecessors>
+          </task>
+        </task>
+        <task id="7" name="fix login modals" note="" work="86400" start="20140201T140000Z" end="20140204T140000Z" work-start="20140201T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="6" type="FS" lag="691200"/>
           </predecessors>
         </task>
       </task>
-      <task id="5" name="JQUERY study" note="" work="691200" start="20140111T140000Z" end="20140306T140000Z" work-start="20140111T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="3" type="FS"/>
-        </predecessors>
-        <task id="6" name="core" note="" work="316800" start="20140111T140000Z" end="20140122T140000Z" work-start="20140111T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="7" name="events" note="" work="57600" start="20140122T140000Z" end="20140124T140000Z" work-start="20140122T140000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="6" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="8" name="effects" note="" work="28800" start="20140223T140000Z" end="20140224T140000Z" work-start="20140223T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="7" type="FS" lag="2592000"/>
-          </predecessors>
-        </task>
-        <task id="9" name="ajax" note="" work="28800" start="20140224T140000Z" end="20140225T140000Z" work-start="20140224T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="8" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="10" name="plugins" note="" work="28800" start="20140225T140000Z" end="20140226T140000Z" work-start="20140225T140000Z" percent-complete="40" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="9" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="11" name="performance" note="" work="57600" start="20140226T140000Z" end="20140228T140000Z" work-start="20140226T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="10" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="12" name="code organisation" note="" work="28800" start="20140228T140000Z" end="20140301T140000Z" work-start="20140228T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="11" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="13" name="jquery ui" note="" work="57600" start="20140301T140000Z" end="20140303T140000Z" work-start="20140301T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="12" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="14" name="theming" note="" work="28800" start="20140303T140000Z" end="20140304T140000Z" work-start="20140303T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="13" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="15" name="widget factory" note="" work="28800" start="20140304T140000Z" end="20140305T140000Z" work-start="20140304T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="14" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="16" name="mobile" note="" work="28800" start="20140305T140000Z" end="20140306T140000Z" work-start="20140305T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="15" type="FS"/>
-          </predecessors>
-        </task>
-      </task>
-      <task id="17" name="POSTGRESQL study" note="" work="57600" start="20140204T140000Z" end="20140206T140000Z" work-start="20140204T140000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="4" type="FS"/>
-        </predecessors>
-      </task>
-      <task id="18" name="Heroku Study" note="" work="39600" start="20140206T140000Z" end="20140207T170000Z" work-start="20140206T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="17" type="FS"/>
-        </predecessors>
-      </task>
-      <task id="19" name="my account page" note="" work="230400" start="20140204T140000Z" end="20140212T140000Z" work-start="20140204T140000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-work">
+      <task id="8" name="my account page" note="" work="230400" start="20140204T140000Z" end="20140212T140000Z" work-start="20140204T140000Z" percent-complete="76" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="2" type="FS"/>
         </predecessors>
       </task>
-      <task id="20" name="deploy to heroku" note="" work="28800" start="20140207T170000Z" end="20140208T170000Z" work-start="20140208T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <task id="9" name="POSTGRESQL study" note="" work="57600" start="20140204T140000Z" end="20140206T140000Z" work-start="20140204T140000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="7" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="10" name="Heroku Study" note="" work="39600" start="20140206T140000Z" end="20140207T170000Z" work-start="20140206T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="9" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="11" name="deploy to heroku" note="" work="28800" start="20140207T170000Z" end="20140208T170000Z" work-start="20140208T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="10" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="12" name="content into database" note="" work="28800" start="20140208T170000Z" end="20140209T170000Z" work-start="20140209T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="11" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="13" name="login auth fail message" note="" work="28800" start="20140212T170000Z" end="20140213T170000Z" work-start="20140213T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="12" type="FS" lag="259200"/>
+        </predecessors>
+      </task>
+      <task id="14" name="remove modals" note="" work="28800" start="20140213T170000Z" end="20140214T170000Z" work-start="20140214T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="11" type="FS" lag="432000"/>
+        </predecessors>
+      </task>
+      <task id="15" name="store page" note="" work="28800" start="20140213T170000Z" end="20140214T170000Z" work-start="20140214T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="11" type="FS" lag="432000"/>
+        </predecessors>
+      </task>
+      <task id="16" name="store pagination" note="" work="57600" start="20140219T170000Z" end="20140221T170000Z" work-start="20140220T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="15" type="FS" lag="432000"/>
+        </predecessors>
+      </task>
+      <task id="17" name="cart" note="" work="316800" start="20140214T140000Z" end="20140225T140000Z" work-start="20140214T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="8" type="FS" lag="172800"/>
+        </predecessors>
+      </task>
+      <task id="18" name="order summary+index" note="" work="288000" start="20140225T140000Z" end="20140307T140000Z" work-start="20140225T140000Z" percent-complete="46" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="17" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="19" name="email notifications" note="" work="230400" start="20140307T140000Z" end="20140315T140000Z" work-start="20140307T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="18" type="FS"/>
         </predecessors>
+        <task id="20" name="Research Asset Pipeline and ActiveRecord" note="" work="115200" start="20140307T140000Z" end="20140311T140000Z" work-start="20140307T140000Z" percent-complete="55" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="21" name="ProductSearchFeature" note="" work="28800" start="20140311T140000Z" end="20140312T140000Z" work-start="20140311T140000Z" percent-complete="58" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="20" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="22" name="Make the UI nice" note="" work="28800" start="20140312T140000Z" end="20140313T140000Z" work-start="20140312T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="20" type="FS" lag="86400"/>
+          </predecessors>
+        </task>
+        <task id="23" name="Forgot Password" note="" work="28800" start="20140313T140000Z" end="20140314T140000Z" work-start="20140313T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="20" type="FS" lag="172800"/>
+          </predecessors>
+        </task>
+        <task id="24" name="Mailer" note="" work="28800" start="20140314T140000Z" end="20140315T140000Z" work-start="20140314T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="23" type="FS"/>
+          </predecessors>
+        </task>
       </task>
-      <task id="21" name="content into database" note="" work="28800" start="20140208T170000Z" end="20140209T170000Z" work-start="20140209T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="20" type="FS"/>
-        </predecessors>
+    </task>
+    <task id="25" name="Test Suite" note="" work="403200" start="20140315T140000Z" end="20140327T140000Z" work-start="20140315T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="19" type="FS"/>
+      </predecessors>
+      <task id="26" name="Actual" note="" work="57600" start="20140315T140000Z" end="20140317T140000Z" work-start="20140315T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="27" name="Cuke: Syntax hilite" note="" work="7200" start="20140315T140000Z" end="20140315T160000Z" work-start="20140315T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="28" name="Cuke: get home page" note="" work="21600" start="20140315T160000Z" end="20140316T140000Z" work-start="20140315T160000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="27" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="29" name="Cuke: fixtures setup/teardown" note="" work="28800" start="20140316T140000Z" end="20140317T140000Z" work-start="20140316T140000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="28" type="FS"/>
+          </predecessors>
+        </task>
       </task>
-      <task id="22" name="remove modals" note="" work="28800" start="20140213T170000Z" end="20140214T170000Z" work-start="20140214T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="20" type="FS" lag="432000"/>
-        </predecessors>
-      </task>
-      <task id="23" name="login auth fail message" note="" work="28800" start="20140212T170000Z" end="20140213T170000Z" work-start="20140213T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="21" type="FS" lag="259200"/>
-        </predecessors>
-      </task>
-      <task id="24" name="store page" note="" work="28800" start="20140213T170000Z" end="20140214T170000Z" work-start="20140214T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="20" type="FS" lag="432000"/>
-        </predecessors>
-      </task>
-      <task id="25" name="cart" note="" work="316800" start="20140214T140000Z" end="20140225T140000Z" work-start="20140214T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="19" type="FS" lag="172800"/>
-        </predecessors>
-      </task>
-      <task id="26" name="store pagination" note="" work="57600" start="20140219T170000Z" end="20140221T170000Z" work-start="20140220T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="24" type="FS" lag="432000"/>
-        </predecessors>
-      </task>
-      <task id="27" name="checkout" note="" work="316800" start="20140225T140000Z" end="20140308T140000Z" work-start="20140225T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="25" type="FS"/>
-        </predecessors>
-      </task>
-      <task id="28" name="email notifications" note="" work="86400" start="20140308T140000Z" end="20140311T140000Z" work-start="20140308T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="27" type="FS"/>
-        </predecessors>
+      <task id="30" name="Estimate" note="" work="345600" start="20140315T140000Z" end="20140327T140000Z" work-start="20140315T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="31" name="Store Tests" note="" work="115200" start="20140315T140000Z" end="20140319T140000Z" work-start="20140315T140000Z" percent-complete="33" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="32" name="Cart Tests" note="" work="172800" start="20140319T140000Z" end="20140325T140000Z" work-start="20140319T140000Z" percent-complete="16" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="31" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="33" name="Orders Tests" note="" work="57600" start="20140325T140000Z" end="20140327T140000Z" work-start="20140325T140000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="32" type="FS"/>
+          </predecessors>
+        </task>
       </task>
     </task>
   </tasks>
