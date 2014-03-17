@@ -38,15 +38,7 @@ group :doc do
 end
 
 group :development, :test do
-  gem "factory_girl_rails", "~> 4.4.1"
   gem 'rspec-rails', '~> 2.14.1'
-  gem "capybara", "~> 2.2.1"
-  gem "poltergeist", "~> 1.5.0"
-  gem "selenium-webdriver", "~> 2.40.0"
-
-  # NOTE - I needed to add '~/.phantomjs/1.8.1/x86_32-linux/bin'
-  # to my PATH... I did this in the file ~/.bashrc
-  gem "phantomjs", "~> 1.9.7.0", :require => 'phantomjs/poltergeist'
 end
 
 # Helpful article:
@@ -54,6 +46,15 @@ end
 group :test do
   gem "cucumber-rails", "~> 1.4.0", require: false
   gem "database_cleaner", "~> 1.2.0"
+
+  gem "capybara", "~> 2.2.1"
+  gem "factory_girl_rails", "~> 4.4.1"
+  gem "poltergeist", "~> 1.5.0"
+  gem "selenium-webdriver", "~> 2.40.0"
+
+  # NOTE - I needed to add '~/.phantomjs/1.8.1/x86_32-linux/bin'
+  # to my PATH... I did this in the file ~/.bashrc
+  gem "phantomjs", "~> 1.9.7.0", :require => 'phantomjs/poltergeist'
 end
 
 group :production do

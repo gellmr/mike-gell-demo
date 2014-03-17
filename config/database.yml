@@ -7,7 +7,7 @@ development:
   pool: 5
   password:
 
-test:
+test: &test
   adapter: postgresql
   encoding: utf8
   database: fuzzybear_test
@@ -20,3 +20,6 @@ production:
   database: fuzzybear_production
   pool: 5
   password:
+
+cucumber:
+  <<: *test
