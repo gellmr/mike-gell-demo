@@ -39,3 +39,14 @@ Feature: StorePage
       And Product 2 should have Added To Cart Icon
       And I click My Cart
     Then Cart page should have 2 lines with quantities 2,4
+
+  Scenario: Remove Item from Cart
+    Given The store has three items
+      And I visit the store page
+      And There should be 3 store lines
+      And I add Some Product 1 to cart by clicking 1 times
+      And Product 1 should have Qty To Order 1
+      And Product 1 should have Added To Cart Icon
+    When I remove Some Product 1 from cart by clicking dropdown
+    Then Product 1 should have Qty To Order 0
+      And Product 1 should not have Added To Cart Icon

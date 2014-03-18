@@ -50,14 +50,12 @@ var quantityInputField = function(event) {
 
 var removeFromCart = function (event) {
   console.log("Remove from cart!");
-    var element = $(event.currentTarget);
-    var productId = popProductId(element); // eg "23"
-    var inputElement = getInputElement(productId);
-    var qty = -1;
-    inputElement.val(0);
-    hideInCartIcon(productId);
-    console.log("Try to update product " + productId + " -> new qty: " + qty );
-    updateCart(productId, qty, inputElement);
+  var element = $(event.currentTarget);
+  var productId = popProductId(element); // eg "23"
+  var inputElement = getInputElement(productId);
+  var qty = -1;
+  console.log("Try to update product " + productId + " -> new qty: " + qty );
+  updateCart(productId, qty, inputElement);
 };
 
 var hideInCartIcon = function(productId) {

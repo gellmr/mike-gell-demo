@@ -38,7 +38,16 @@ end
 
 # Store
 Given /^Product (.*) should have Added To Cart Icon$/ do | product_id |
-  expect(page).to have_selector("div.parentalDiv-#{product_id} div.inCartIcon img")
+  within "div.parentalDiv-#{product_id}" do
+    expect(page).to have_selector("div.inCartIcon img")
+  end
+end
+
+# Store -> just removed an item from cart, via dropdown
+Given /^Product (.*) should not have Added To Cart Icon$/ do | product_id |
+  within "div.parentalDiv-#{product_id}" do
+    expect(page).not_to have_selector("div.inCartIcon img")
+  end
 end
 
 # StorePage -> Click To Add Items To Cart
