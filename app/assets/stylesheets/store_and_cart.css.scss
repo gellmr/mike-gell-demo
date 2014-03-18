@@ -78,3 +78,31 @@ hr.narrow-hr {
 img.centered-block-img {
   // border: 1px dashed;
 }
+
+
+
+
+/* DEBUG ONLY */
+div.dbug-always-visible {
+  border: 2px solid orange;
+}
+
+/* DEBUG ONLY */
+.visible-xs {
+  border: 2px solid pink;
+}
+
+/* DEBUG ONLY */
+.hidden-xs {
+  border: 2px solid red;
+}
+
+/* DEBUG ONLY */
+div.parental-div {
+  border: 2px solid cyan;
+}
+
+/* DEBUG ONLY */
+div.inCartIcon {
+  border: 2px solid yellow;
+}
