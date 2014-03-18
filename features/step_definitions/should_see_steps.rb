@@ -8,6 +8,12 @@ Given /^There should be (.*) store lines$/ do | number |
     # Should have product name
     expect(page).to have_content("Some Product #{n}")
 
+    within "div.row.well.product-#{n}" do
+
+      # Should have dropdown: remove from cart
+      expect(page).to have_selector("button.dropdown-toggle span.caret")
+    end
+
     within "div.parentalDiv-#{n}" do
 
       # Should have input field
