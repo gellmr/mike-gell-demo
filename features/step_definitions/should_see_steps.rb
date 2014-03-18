@@ -4,7 +4,21 @@ end
 
 Given /^There should be (.*) store lines$/ do | number |
   for n in 1..number.to_i
+
+    # Should have product name
     expect(page).to have_content("Some Product #{n}")
+
+    within "div.parentalDiv-#{n}" do
+
+      # Should have input field
+      expect(page).to have_selector("input#qtyToOrder-productId-#{n}")
+
+      # Input field should have value blank
+      find("input#qtyToOrder-productId-#{n}").value.should eq("")
+
+      # The in-cart icon should not be visible
+      expect(page).not_to have_selector("div.inCartIcon img")
+    end
   end
 end
 
