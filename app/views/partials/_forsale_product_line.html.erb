@@ -25,9 +25,9 @@
       $ <%= product.unit_price %> <small class="greyText"> each </small>
     </div>
   </div>
-
-  <!-- X button, visible xs -->
-  <div class="col-xs-1 visible-xs pull-right">
+  
+  <!-- X button, always visible -->
+  <div class="col-xs-1 col-sm-5 pull-right dbug-always-visible">
     <div class="row pull-right">
       <%= render "partials/x_btn_remove_from_cart", { atStore: atStore, product: product } %>
     </div>
@@ -38,13 +38,6 @@
     <%= image_tag "/images/120x120/#{product.image_url}", {
       class: "img-rounded img-responsive centered-block-img with-vert-margins"
     }%>
-  </div>
-
-  <!-- X button, hidden xs -->
-  <div class="col-sm-5 hidden-xs pull-right">
-    <div class="row pull-right">
-      <%= render "partials/x_btn_remove_from_cart", { atStore: atStore, product: product } %>
-    </div>
   </div>
 
   <%=
