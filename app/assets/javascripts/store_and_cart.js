@@ -66,6 +66,27 @@ var hideInCartIcon = function(productId) {
 var updateCart = function( productId, newQty, inputElement) {
 
   var parentalDiv = $('div.parentalDiv-' + productId);
+  var maxStockElement = parentalDiv.find('.maxStockMsg small');
+
+  var hideMaxStockElement = function() {
+    maxStockElement.html('');
+    maxStockElement.fadeIn({
+      duration: 0
+    });
+    maxStockElement.hide();
+  };
+
+  var showMaxStockElement = function(message) {
+    maxStockElement.show();
+    maxStockElement.html(message);
+    maxStockElement.fadeOut({
+      duration: 4000,
+      done: function() {
+        hideMaxStockElement();
+      }
+    });
+  };
+
   var wellDiv = $('.well.product-' + productId);
   var minusBtn = $('#qty-btn-minus-' + productId);
 
@@ -103,7 +124,7 @@ var updateCart = function( productId, newQty, inputElement) {
         switch(result) {
 
           case "removed-from-cart":
-          parentalDiv.find('.maxStockMsg small').html('');
+          hideMaxStockElement();
           parentalDiv.find('.inCartIcon').hide();
           inputElement.val(0);
           var page = document.URL.split('/').pop().split('?').shift();
@@ -114,9 +135,8 @@ var updateCart = function( productId, newQty, inputElement) {
           break;
 
           case "updated-qty":
-          parentalDiv.find('.maxStockMsg small').html('');
+          hideMaxStockElement();
           parentalDiv.find('.inCartIcon').show();
-          inputElement.val(newQty);
           if (String(newQty) == "0") {
             minusBtn.addClass("disabled", "disabled");
           } else {
@@ -127,17 +147,7 @@ var updateCart = function( productId, newQty, inputElement) {
           
           case "set-to-max":
           var max = jqXHR.getResponseHeader('max');
-          var maxStockElement = parentalDiv.find('.maxStockMsg small');
-          maxStockElement.html(message);
-          maxStockElement.fadeOut({
-            duration: 4000,
-            done: function(){
-              maxStockElement.html('');
-              maxStockElement.fadeIn({
-                duration: 0
-              });
-            }
-          });
+          showMaxStockElement(message);
           inputElement.val(max);
           parentalDiv.find('input.subtot-input').val(resultSubTot);
           break;
@@ -192,7 +202,7 @@ var checkIfNoProducts = function(e) {
 var storeAndCartReadyJs = function(e) {
 
   $('div.top-level-container').on(
-    'change keyup',
+    'keyup',
     'input.qtyToOrder-input',
     quantityInputField
   );

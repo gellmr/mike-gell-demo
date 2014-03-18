@@ -39,6 +39,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
+  gem "launchy", "~> 2.4.2"
 end
 
 # Helpful article:

@@ -1,7 +1,7 @@
 
-Given /^The store has three items$/ do
-  FactoryGirl.create(:product)
-  FactoryGirl.create(:product)
-  FactoryGirl.create(:product)
-  expect(Product.all.count).to eq(3)
+Given /^The store has (.*) items$/ do | n |
+  n.to_i.times do
+    FactoryGirl.create(:product)
+  end
+  expect(Product.all.count).to eq(n.to_i)
 end
