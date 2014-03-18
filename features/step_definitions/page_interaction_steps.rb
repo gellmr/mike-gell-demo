@@ -2,9 +2,11 @@ Given /^I click (.*)$/ do | link |
   click_on link # links or buttons
 end
 
-Given /^I add Some Product (.*) to cart by clicking$/ do | product_id |
+Given /^I add Some Product (.*) to cart by clicking (.*) times$/ do | product_id, qty |
   within("div.parentalDiv-#{product_id}") do
-    find("button#qty-btn-plus-#{product_id}").click
+    qty.to_i.times do
+      find("button#qty-btn-plus-#{product_id}").click
+    end
   end
 end
 

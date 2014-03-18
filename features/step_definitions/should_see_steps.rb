@@ -40,13 +40,21 @@ Given /^Product (.*) should have Added To Cart Icon$/ do | product_id |
 end
 
 # StorePage -> Click To Add Items To Cart
-Given /^Cart page should have (.*) line$/ do | number |
+Given /^Cart page should have (.*) lines with quantities (.*)$/ do | number, quantities |
+  quantities = quantities.split(',')
   expect(page).to have_content("My Cart - #{number} Lines")
   for n in 1..number.to_i
-    expect(page).to have_content("Some Product #{n}")
-    expect(page).to have_content("Amazing Description")
-    expect(page).to have_content("100 in stock")
-    expect(page).to have_content("$ 1.0 each")
-    expect(page).to have_content("Qty to Order")
+    within "div.row.well.product-#{n}" do
+      expect(page).to have_content("Some Product #{n}")
+      expect(page).to have_content("Amazing Description")
+      expect(page).to have_content("100 in stock")
+      expect(page).to have_content("$ 1.0 each")
+
+      within "div.parentalDiv-#{n}" do
+        # Input field should have the correct quantity value
+        qty = quantities[n-1].to_s # n is one-based... quantities is a zero based array.
+        find("input#qtyToOrder-productId-#{n}").value.should eq( qty )
+      end
+    end
   end
 end
