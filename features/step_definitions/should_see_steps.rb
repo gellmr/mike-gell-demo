@@ -2,6 +2,7 @@ Given /^I should see (.*)$/ do | page_text |
   expect(page).to have_content(page_text)
 end
 
+# Store
 Given /^There should be (.*) store lines$/ do | number |
   for n in 1..number.to_i
 
@@ -28,15 +29,17 @@ Given /^There should be (.*) store lines$/ do | number |
   end
 end
 
+# Store
+Given /^Product (.*) should have Added To Cart Icon$/ do | product_id |
+  expect(page).to have_selector("div.parentalDiv-#{product_id} div.inCartIcon img")
+end
+
 # Cart
 Given /^Product (.*) should have Qty To Order (.*)$/ do | product_id, qty |
   find("div.parentalDiv-#{product_id} input#qtyToOrder-productId-#{product_id}").value.should eq(qty)
 end
 
-Given /^Product (.*) should have Added To Cart Icon$/ do | product_id |
-  expect(page).to have_selector("div.parentalDiv-#{product_id} div.inCartIcon img")
-end
-
+# Cart
 Given /^Cart page should have (.*) line$/ do | number |
   expect(page).to have_content("My Cart - #{number} Lines")
   for n in 1..number.to_i
