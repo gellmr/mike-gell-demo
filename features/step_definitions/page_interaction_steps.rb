@@ -6,6 +6,7 @@ Given /^I add Some Product (.*) to cart by clicking (.*) times$/ do | product_id
   within("div.parentalDiv-#{product_id}") do
     qty.to_i.times do
       find("button#qty-btn-plus-#{product_id}").click
+      wait_for_ajax
     end
   end
 end

@@ -8,6 +8,9 @@ def set_selenium_window_size(width, height)
   window.resize_to(width, height)
 end
 
+DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean
+
 if ENV['BROWSER']
   # On demand: non-headless tests via Selenium/WebDriver
   # To run the scenarios in browser (default: Firefox), use the following command line:
@@ -34,7 +37,6 @@ if ENV['BROWSER']
       puts "Testing breakpoint XL (this is the default)"
       set_selenium_window_size(1280, height)
   end
-  
 
   AfterStep do
     sleep (ENV['PAUSE'] || 0).to_i
