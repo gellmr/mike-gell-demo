@@ -16,6 +16,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="input-group product-search-group">
+            
             <%=
             text_field_tag(
               'product-search-input',  # name
@@ -26,6 +27,7 @@
               }
             )
             %>
+
             <span class="input-group-btn">
               <%= link_to( store_search_path, html_options = {
                 name: "product-search-button",
@@ -36,14 +38,8 @@
                 <span class="glyphicon glyphicon-search"></span>
                 Search
               <% end %>
-
-              <!--
-              <button name="product-search-button" class="btn btn-default product-search" type="button">
-                <span class="glyphicon glyphicon-search"></span>
-                Search
-              </button>
-              -->
             </span>
+
           </div>
         </div>
       </div>
