@@ -30,16 +30,16 @@ Given /^There should be (.*) store lines$/ do | number |
 end
 
 # Store
-Given /^Product (.*) should have Added To Cart Icon$/ do | product_id |
-  expect(page).to have_selector("div.parentalDiv-#{product_id} div.inCartIcon img")
-end
-
-# Cart
 Given /^Product (.*) should have Qty To Order (.*)$/ do | product_id, qty |
   find("div.parentalDiv-#{product_id} input#qtyToOrder-productId-#{product_id}").value.should eq(qty)
 end
 
-# Cart
+# Store
+Given /^Product (.*) should have Added To Cart Icon$/ do | product_id |
+  expect(page).to have_selector("div.parentalDiv-#{product_id} div.inCartIcon img")
+end
+
+# StorePage -> Click To Add Items To Cart
 Given /^Cart page should have (.*) line$/ do | number |
   expect(page).to have_content("My Cart - #{number} Lines")
   for n in 1..number.to_i
