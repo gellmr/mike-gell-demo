@@ -22,7 +22,9 @@ div.mg-navbar-parent {
 
       width: 130px;
       height: 35px;
-      display: inline-block;
+      display: block;
+      margin-left: auto;
+      margin-right: 0px;
       text-align: right;
       padding-top: 8px;
       padding-right: 10px;
@@ -33,22 +35,13 @@ div.mg-navbar-parent {
       @media screen and (min-width: 441px) {
         width: 180px;
         height: 35px;
-        display: inline-block;
+        display: block;
+        margin-left: auto;
+        margin-right: 0px;
         text-align: right;
         padding-top: 10px;
         padding-right: 10px;
-        // background-color: orange;
-      }
-      /* Small devices (tablets, 768px and up) */
-      @media screen and (min-width: 768px) {
-        width: 30%;
-        height: 40px;
-        display: inline-block;
-        text-align: center;
-        padding-top: 10px;
-        padding-right: 0px;
-        padding-left: 0px;
-        // background-color: yellow;
+        /*background-color: orange;*/
       }
       /* Large devices (large desktops, 1200px and up) */
       @media screen and (min-width: 1200px) {
@@ -59,7 +52,7 @@ div.mg-navbar-parent {
         padding-top: 10px;
         padding-right: 0px;
         padding-left: 0px;
-        // background-color: aqua;
+        /*background-color: aqua;*/
       }
     }
     a div.mg-navbar-item:hover {
