@@ -14,13 +14,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" id="product-search-div">
           <div class="input-group product-search-group">
             
             <%=
             text_field_tag(
               'product-search-input',  # name
-              "", # value
+              @search_string, # value
               {
                 :type => "text",
                 :class => "form-control product-search"

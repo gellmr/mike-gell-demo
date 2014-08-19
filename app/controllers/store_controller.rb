@@ -25,6 +25,7 @@ class StoreController < ApplicationController
 
     Rails.logger.debug "\n\n"
     
+    @search_string = sane_search_params[:query_string]
     @products = []
     @grand_total = 0
     

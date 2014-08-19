@@ -1,28 +1,48 @@
-
-
-
-var searchStore = function(e) {
-  var str = $('input.product-search').val();
-
-  if ($(this).attr('name') == "product-search-button") {
-    console.log("Clicked product search button. " + str);
-  } else if ($(this).attr('name') == "product-search-input") {  
-    console.log("Typed some product search string. " + str);
-  }
+(function() {
   
-  var href = $('a.product-search').attr('href');
-  $('a.product-search').attr('href', href + '?query_string=' + str)
-};
-
-var storeReadyJs = function(e) {
+  var topLevelContainer;
+  var searchAnchorSel;
+  var searchAnchorJq;
+  var productSearchInput;
   
-  $('div.top-level-container').on(
-    'click',
-    'a.product-search',
-    searchStore
-  );
-};
+  var searchStore = function(e) {
+    var str = productSearchInput.val();
 
-// Gotta bind to both events, because we are using turbolinks.
-jQuery(document).ready(storeReadyJs);
-jQuery(document).on('page:load', storeReadyJs);
+    if ($(this).attr('name') == "product-search-button") {
+      console.log("Clicked product search button. " + str);
+    } else if ($(this).attr('name') == "product-search-input") {  
+      console.log("Typed some product search string. " + str);
+    }
+    
+    var href = searchAnchorJq.attr('href');
+    searchAnchorJq.attr('href', href + '?query_string=' + str);
+
+    e.preventDefault();
+    window.location = searchAnchorJq.attr('href');
+  };
+
+  var storeReadyJs = function(e) {
+
+    topLevelContainer = $('div.top-level-container');
+    productSearchInput = $('input.product-search');
+    searchAnchorSel = 'a.product-search';
+    searchAnchorJq = topLevelContainer.find(searchAnchorSel);
+
+    $('#product-search-div').on('keypress', function(event){
+      if (event.which == 13){
+         searchAnchorJq.trigger("click");
+      }
+    });
+
+    topLevelContainer.on(
+      'click',
+      searchAnchorSel,
+      searchStore
+    );
+  };
+
+  // Gotta bind to both events, because we are using turbolinks.
+  jQuery(document).ready(storeReadyJs);
+  jQuery(document).on('page:load', storeReadyJs);
+
+})();
