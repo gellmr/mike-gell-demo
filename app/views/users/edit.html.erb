@@ -4,7 +4,7 @@
     <%= render "/partials/flash_message" %>
 
     <% if flash[:just_signed_up] %>
-    <div>
+    <div class="alert alert-success">
       <h3>
         Welcome, <%= @user.email %>
       </h3>

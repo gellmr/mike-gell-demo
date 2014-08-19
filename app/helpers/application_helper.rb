@@ -7,6 +7,7 @@ module ApplicationHelper
       when :info then "alert alert-info"
       when :warning then "alert alert-warning"
       when :danger then "alert alert-danger"
+      else false
     end
   end
   
