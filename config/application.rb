@@ -19,7 +19,11 @@ module Fuzzybear
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
+    # config/application.rb
+
+    # TODO Remove this line in Rails 4.1
+    config.secret_key_base = YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]['secret_key_base']
+
     config.i18n.enforce_available_locales = true
 
     config.action_mailer.raise_delivery_errors = true
