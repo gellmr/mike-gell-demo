@@ -28,12 +28,12 @@
     <% end %>
 
     <ul class="dropdown-menu pull-right" role="menu">
-      <li>
+      <li class="<%= cssDisabled %>">
         <%=
         link_to "Remove from Cart", '#', {
           name: 'remove-from-cart',
           class: 'remove-from-cart',
-          id: "remove-from-cart-#{product.id}",
+          id: "remove-from-cart-#{product.id}"
         }
         %>
       </li>

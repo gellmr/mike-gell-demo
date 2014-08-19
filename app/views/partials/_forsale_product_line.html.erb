@@ -29,7 +29,11 @@
   <!-- X button, always visible -->
   <div class="col-xs-1 col-sm-5 pull-right dbug-always-visible">
     <div class="row pull-right">
-      <%= render "partials/x_btn_remove_from_cart", { atStore: atStore, product: product } %>
+      <%= render "partials/x_btn_remove_from_cart", {
+        atStore: atStore,
+        product: product,
+        cssDisabled: !product_qty.blank? ? '' : 'disabled'
+      } %>
     </div>
   </div>
 

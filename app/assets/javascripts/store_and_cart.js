@@ -49,6 +49,11 @@ var quantityInputField = function(event) {
 };
 
 var removeFromCart = function (event) {
+  event.preventDefault();
+
+  if ( $(this).parent().hasClass("disabled") ){
+    return false;
+  }
   console.log("Remove from cart!");
   var element = $(event.currentTarget);
   var productId = popProductId(element); // eg "23"
@@ -66,6 +71,8 @@ var hideInCartIcon = function(productId) {
 var updateCart = function( productId, newQty, inputElement) {
 
   var parentalDiv = $('div.parentalDiv-' + productId);
+  var productRowDiv = parentalDiv.parent();
+  var liBtnRemFromCart = productRowDiv.find("a.remove-from-cart").parent();
   var maxStockElement = parentalDiv.find('.maxStockMsg small');
 
   var hideMaxStockElement = function() {
@@ -119,13 +126,14 @@ var updateCart = function( productId, newQty, inputElement) {
         $("h3.content-heading").html("My Cart - " + cartTotalLines + " Lines");
         $("input.total-items").val(cartTotalItems);
         $("input.grand-total").val('$ ' + resultGrandTot);
-        console.log(message);
+        console.log("message:" + message + " result:" + result);
 
         switch(result) {
 
           case "removed-from-cart":
           hideMaxStockElement();
           parentalDiv.find('.inCartIcon').hide();
+          liBtnRemFromCart.addClass("disabled");
           inputElement.val(0);
           var page = document.URL.split('/').pop().split('?').shift();
           if (page == "cart"){
@@ -138,9 +146,12 @@ var updateCart = function( productId, newQty, inputElement) {
           hideMaxStockElement();
           parentalDiv.find('.inCartIcon').show();
           if (String(newQty) == "0") {
-            minusBtn.addClass("disabled", "disabled");
+            minusBtn.addClass("disabled");
+            parentalDiv.find('.inCartIcon').hide();
+            liBtnRemFromCart.addClass("disabled");
           } else {
-            minusBtn.removeClass("disabled", "disabled");
+            minusBtn.removeClass("disabled");
+            liBtnRemFromCart.removeClass("disabled");
           }
           parentalDiv.find('.subtot-input').val('$ ' + resultSubTot);
           break;
