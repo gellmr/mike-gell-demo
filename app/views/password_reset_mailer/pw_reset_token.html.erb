@@ -4,7 +4,7 @@ Hi <%= @user.first_name %>
 Our system has received a request to reset the password on your account.
 <br />
 <br />
-If you did not request this, then please ignore this email. Your account and password will stay the same.
+If you did not request this, then please ignore this email. Your account and password will not be affected.
 <br />
 <br />
 If you did request a password reset, then please use the link below to set a new password.
@@ -13,7 +13,7 @@ If you did request a password reset, then please use the link below to set a new
 <%= link_to "Set New Password", set_new_password_url(token: @user.password_reset_token, email: @user.email)%>
 <br />
 <br />
-Note - the token is only valid for 10 minutes. If you dont set a new password in this time, you will need to request a new token.
+Note - the token is only valid for 10 minutes. If you don't set a new password in this time, you will need to request a new token.
 <br />
 <br />
 Thanks!

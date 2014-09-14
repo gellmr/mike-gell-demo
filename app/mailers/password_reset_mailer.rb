@@ -5,6 +5,8 @@ class PasswordResetMailer < ActionMailer::Base
   def pw_reset_token(user)
     @user = user
 
+    logger.debug "user: #{user.to_yaml}"
+
     begin
       mandrill = Mandrill::API.new "#{ENV['MANDRILL_API_KEY']}"
       message = {
@@ -15,8 +17,9 @@ class PasswordResetMailer < ActionMailer::Base
           "email"=>"#{user.email}",
           "type"=>"to"
         }],
-        "html"=>"<p>Example HTML content</p>",
-        "text"=>"Example text content"
+        "track_clicks"=>false,
+        "track_opens"=>false,
+        "html"=>render
       }
       result = mandrill.messages.send message
           # [{"reject_reason"=>"hard-bounce",
