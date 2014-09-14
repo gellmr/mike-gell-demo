@@ -7,6 +7,8 @@ gem 'rails', '4.0.2'
 # gem 'sqlite3'
 gem 'pg', '0.15.1'
 
+gem 'mandrill-api'
+
 # Use SCSS for stylesheets
 # gem "less-rails", "~> 2.4.2"
 gem 'sass-rails', '~> 4.0.0'
