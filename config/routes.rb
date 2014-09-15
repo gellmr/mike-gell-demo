@@ -7,6 +7,8 @@ Fuzzybear::Application.routes.draw do
     resources :orders, only: [:index, :show, :create]
       # GET  /users/:id/orders/     orders#index  user_orders_path
       # GET  /users/:id/orders/:id  orders#show   user_order_path
+    resources :user_addresses, only: [:create, :destroy]
+      # POST  /users/:id/user_addresses/   user_addresses#create    user_user_addresses_path
   end
 
   get "home/index" => 'home#index'   # home_index_path

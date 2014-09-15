@@ -228,3 +228,14 @@ Resistance: { 200, 2k, 20k, 200k Ohms, 2M Ohms -/+ 1.2% }',
     image_url: 'pliers.jpg'
   }
 ])
+
+User.create(
+  email: "gellmr@gmail.com",
+  first_name: "Mike",
+  last_name: "Gell",
+  password: "foobar",
+  password_confirmation: "foobar",
+  home_phone: '5555 5555',
+  work_phone: '+614 5555 5555',
+  mobile_phone: '+614 5555 5555'
+)

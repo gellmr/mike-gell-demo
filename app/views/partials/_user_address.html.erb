@@ -1,0 +1,102 @@
+<!-- <label for="input_address">Address <%= address.id %></label> -->
+<div id="form-group-address" class="form-group well">
+
+  <div class="form-group ">
+    <%= link_to user_user_address_path(@user, address.id), method: :delete, class: "pull-right" do %>
+      <small>Delete Address</small>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <label for="address-line1-input"><small>Address Line 1</small></label>
+    <%=
+      text_field_tag(
+        'address-line1-input', # name
+        address.line_1,        # value
+        {
+          :type => "text",
+          :class => "form-control",
+          :id => "address-line1-input-#{address.id}"
+        }
+      )
+    %>
+  </div>
+
+  <div class="form-group">
+    <label for="address-line2-input"><small>Address Line 2</small></label>
+    <%=
+      text_field_tag(
+        'address-line2-input', # name
+        address.line_2,        # value
+        {
+          :type => "text",
+          :class => "form-control",
+          :id => "address-line2-input-#{address.id}"
+        }
+      )
+    %>
+  </div>
+
+  <div class="form-group">
+    <label for="address-city-input"><small>City</small></label>
+    <%=
+      text_field_tag(
+        'address-city-input', # name
+        address.city,        # value
+        {
+          :type => "text",
+          :class => "form-control",
+          :id => "address-city-input-#{address.id}"
+        }
+      )
+    %>
+  </div>
+
+  <div class="form-group">
+    <label for="address-state-input"><small>State</small></label>
+    <%=
+      text_field_tag(
+        'address-state-input', # name
+        address.state,        # value
+        {
+          :type => "text",
+          :class => "form-control",
+          :id => "address-state-input-#{address.id}"
+        }
+      )
+    %>
+  </div>
+
+  <div class="form-group">
+    <label for="address-postcode-input"><small>Postcode</small></label>
+    <%=
+      text_field_tag(
+        'address-postcode-input', # name
+        address.postcode,        # value
+        {
+          :type => "text",
+          :class => "form-control",
+          :id => "address-postcode-input-#{address.id}"
+        }
+      )
+    %>
+  </div>
+
+  <div class="form-group">
+    <label for="address-countryorregion-input"><small>Country or Region</small></label>
+    <%=
+      text_field_tag(
+        'address-countryorregion-input', # name
+        address.country_or_region,       # value
+        {
+          :type => "text",
+          :class => "form-control",
+          :id => "address-countryorregion-input-#{address.id}"
+        }
+      )
+    %>
+  </div>
+
+  <span class='error-message'></span>
+
+</div>

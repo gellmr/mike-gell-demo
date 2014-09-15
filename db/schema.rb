@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311080331) do
+ActiveRecord::Schema.define(version: 20140915044912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 20140311080331) do
 
   add_index "products", ["name", "description", "image_url"], name: "index_products_on_name_and_description_and_image_url", using: :btree
 
+  create_table "user_addresses", force: true do |t|
+    t.integer "user_id"
+    t.string  "line_1"
+    t.string  "line_2"
+    t.string  "city"
+    t.string  "state"
+    t.string  "postcode"
+    t.string  "country_or_region"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -53,21 +63,11 @@ ActiveRecord::Schema.define(version: 20140311080331) do
     t.string   "home_phone"
     t.string   "work_phone"
     t.string   "mobile_phone"
-    t.string   "shipping_address_line_1"
-    t.string   "shipping_address_line_2"
-    t.string   "shipping_address_city"
-    t.string   "shipping_address_state"
-    t.string   "shipping_address_post_code"
-    t.string   "shipping_address_country_or_region"
-    t.string   "billing_address_line_1"
-    t.string   "billing_address_line_2"
-    t.string   "billing_address_city"
-    t.string   "billing_address_state"
-    t.string   "billing_address_post_code"
-    t.string   "billing_address_country_or_region"
     t.boolean  "account_locked"
     t.datetime "token_created_at"
     t.string   "password_reset_token"
+    t.integer  "shipping_address"
+    t.integer  "billing_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
