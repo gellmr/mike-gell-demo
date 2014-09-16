@@ -229,6 +229,22 @@ Resistance: { 200, 2k, 20k, 200k Ohms, 2M Ohms -/+ 1.2% }',
   }
 ])
 
+# This seed script relies upon bash shell environment variables, 
+# which are are NOT AVAILABLE because we are using foreman to load the .env file.
+# Eg, the variables in .env are only available in the context of foreman.
+# So if you try to call 'bundle exec rake db:seed' ...it will fail at User.create()
+# The solution is to call db:seed, using 'foreman run ...'
+
+# To recreate the database from scratch...
+#               bundle exec rake db:drop
+#               bundle exec rake db:create
+#               bundle exec rake db:migrate
+#   foreman run bundle exec rake db:seed
+
+# The last step must be run using foreman,
+# otherwise ENV['ADMIN_LOGIN'] will not be available
+# and the User.create() command will fail.
+
 User.create(
   email: "gellmr@gmail.com",
   first_name: "Mike",
