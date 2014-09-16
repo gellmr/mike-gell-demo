@@ -27,16 +27,6 @@ module Fuzzybear
     config.i18n.enforce_available_locales = true
 
     config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address:              ENV['EMAIL_SMTP_ADDRESS'],
-      port:                 ENV['EMAIL_PORT'],
-      domain:               ENV['EMAIL_PROVIDER'],
-      user_name:            ENV['EMAIL_ACCOUNT'],
-      password:             ENV['EMAIL_PASSWORD'],
-      authentication:       'plain',
-      enable_starttls_auto: true
-    }
 
     config.generators do |g|
       g.test_framework :rspec
