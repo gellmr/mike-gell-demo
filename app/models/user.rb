@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
   has_many :orders
   has_many :user_addresses
+  accepts_nested_attributes_for :user_addresses
 end
