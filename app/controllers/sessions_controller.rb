@@ -3,8 +3,8 @@ require 'json'
 class SessionsController < ApplicationController
 
   def create
-    puts 'Try to find user by email... '
-    puts "Email: #{params[:user][:email]}"
+    logger.debug 'Try to find user by email... '
+    logger.debug "Email: #{params[:user][:email]}"
     user = User.find_by_email(params[:user][:email])
 
     if user && user.authenticate(params[:user][:password]) && (!user.account_locked)
@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
       user_cart.replace(temp_cart) # copy each hash value into the new session.
       debug_print_cart
 
-      puts "-----> Authenticated successfully!!!"
+      logger.debug "-----> Authenticated successfully!!!"
 
       # Save the user ID in the session so it can be used in subsequent requests
       session[:current_user_id] = user.id
@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
 
       # The user has successfully logged in.
     else
-      puts "-----> Authentication failed!!!"
+      logger.debug "-----> Authentication failed!!!"
       if (user && user.account_locked)
         head :bad_request, { message: "Your account has been locked. Please follow the steps listed under 'Forgot my password'" } # 400
       else

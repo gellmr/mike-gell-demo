@@ -24,6 +24,20 @@ class CartController < ApplicationController
         subtotal: subtot
       })
     end
+    @addresses = []
+
+    if current_user.nil?
+      logger.debug "User has NO addresses."
+    end
+
+    if !(current_user.nil?)
+      # current_user.addresses.each do |a|
+      #   @addresses.push({ id: a.id, line_1: a.line_1, city: a.city, state: a.state, country_or_region: a.country_or_region })
+      # end
+      @addresses = current_user.addresses
+      logger.debug "User has #{current_user.addresses.count} addresses:"
+      logger.debug @addresses.to_yaml
+    end
   end
 
   def update

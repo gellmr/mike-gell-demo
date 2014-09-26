@@ -1,3 +1,4 @@
+<a href="#formTop"></a>
 <div class="row">
   <div class="col-xs-12">
     
@@ -15,71 +16,99 @@
 
       <div class="panel panel-default">
 
-        <!-- <div class="panel-heading">
-          <h3 class="panel-title">Account Details</h3>
-        </div> -->
-
         <div class="panel-body">
           <div class="row">
 
-            <div class="col-xs-12 col-sm-6">
-              <h4>Account Details</h4>
+            <!-- Tab header -->
+            <ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
+              <li class="active">
+                <a href="#accountDetails" role="tab" data-toggle="tab">Account Details</a>
+              </li>
+              <li>
+                <a href="#myAddresses" role="tab" data-toggle="tab">Shipping / Billing Addresses</a>
+              </li>
+            </ul>
 
-              <div id="form-group-account" class="form-group well">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <%= hidden_field_tag :current_tab %>
 
-                <div id="form-group-email" class="form-group">
-                  <label for="input_email">Email address</label>
-                  <span class='error-message'></span>
-                  <%= f.text_field :email, type: 'email', id: 'input_email', :class => 'form-control'%>
-                </div>
+              <!-- Account Details -->
+              <div class="tab-pane active" id="accountDetails">
+                <div class="col-xs-12">
 
-                <div id="form-group-first-name" class="form-group">
-                  <label for="input_first_name">First Name</label>
-                  <span class='error-message'></span>
-                  <%= f.text_field :first_name, type: 'text', id: 'input_first_name', :class => 'form-control'%>
-                </div>
+                  <div id="form-group-account" class="form-group well">
 
-                <div id="form-group-last-name" class="form-group">
-                  <label for="input_last_name">Last Name</label>
-                  <span class='error-message'></span>
-                  <%= f.text_field :last_name,  type: 'text', id: 'input_last_name',  :class => 'form-control'%>
-                </div>
+                    <div id="form-group-email" class="form-group">
+                      <label for="input_email">Email address</label>
+                      <span class='error-message'></span>
+                      <%= f.text_field :email, type: 'email', id: 'input_email', :class => 'form-control'%>
+                    </div>
 
-                <div id="form-group-home-phone" class="form-group">
-                  <label for="input_home_phone">Home Phone</label>
-                  <span class='error-message'></span>
-                  <%= f.text_field :home_phone, type: 'text', id: 'input_home_phone', :class => 'form-control'%>
-                </div>
+                    <div id="form-group-first-name" class="form-group">
+                      <label for="input_first_name">First Name</label>
+                      <span class='error-message'></span>
+                      <%= f.text_field :first_name, type: 'text', id: 'input_first_name', :class => 'form-control'%>
+                    </div>
 
-                <div id="form-group-work-phone" class="form-group">
-                  <label for="input_work_phone">Work Phone</label>
-                  <span class='error-message'></span>
-                  <%= f.text_field :work_phone, type: 'text', id: 'input_work_phone', :class => 'form-control'%>
-                </div>
+                    <div id="form-group-last-name" class="form-group">
+                      <label for="input_last_name">Last Name</label>
+                      <span class='error-message'></span>
+                      <%= f.text_field :last_name,  type: 'text', id: 'input_last_name',  :class => 'form-control'%>
+                    </div>
 
-                <div id="form-group-mobile-phone" class="form-group">
-                  <label for="input_mobile_phone">Mobile Phone</label>
-                  <span class='error-message'></span>
-                  <%= f.text_field :mobile_phone, type: 'text', id: 'input_mobile_phone', :class => 'form-control'%>
+                    <div id="form-group-home-phone" class="form-group">
+                      <label for="input_home_phone">Home Phone</label>
+                      <span class='error-message'></span>
+                      <%= f.text_field :home_phone, type: 'text', id: 'input_home_phone', :class => 'form-control'%>
+                    </div>
+
+                    <div id="form-group-work-phone" class="form-group">
+                      <label for="input_work_phone">Work Phone</label>
+                      <span class='error-message'></span>
+                      <%= f.text_field :work_phone, type: 'text', id: 'input_work_phone', :class => 'form-control'%>
+                    </div>
+
+                    <div id="form-group-mobile-phone" class="form-group">
+                      <label for="input_mobile_phone">Mobile Phone</label>
+                      <span class='error-message'></span>
+                      <%= f.text_field :mobile_phone, type: 'text', id: 'input_mobile_phone', :class => 'form-control'%>
+                    </div>
+                  </div>
+
                 </div>
               </div>
-            </div>
 
-            <div class="col-xs-12 col-sm-6">
-              <h4>Shipping / Billing Information</h4>
+              <!-- My Addresses -->
+              <div class="tab-pane" id="myAddresses">
+                <div class="col-xs-12">
 
-              <% @user.user_addresses.each do |address| %>
-                <%= f.fields_for :user_addresses, address do |address_form| %>
-                  <%= render "partials/user_address", {
-                    f: address_form,
-                    address: address
-                  } %>
-                <% end %>
-              <% end %>
+                  <hr />
 
-              <%= link_to user_user_addresses_path(@user), method: :post, class: "mg-resizable-11-14" do %>
-                <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
-              <% end %>
+                  <div class="well">
+                    You currently have <%= @user.addresses.count %> addresses.
+
+                    <%= link_to user_create_address_path(@user), method: :post, class: "mg-resizable-11-14" do %>
+                      <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
+                    <% end %>
+                  </div>
+
+                  <div class="row">
+                    <% @user.addresses.each do |address| %>
+                      <%= f.fields_for :addresses, address do |address_form| %>
+                        <%= render "users/partials/user_address", {
+                          f: address_form,
+                          address: address,
+                          userForm: f,
+                          user: @user
+                        } %>
+                      <% end %>
+                    <% end %>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
 
           </div>

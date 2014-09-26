@@ -22,7 +22,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attributes!(sane_user_params)
     flash[:success] = "Successfully updated your details"
-    redirect_to edit_user_path @user
+    logger.debug "Updated user. params[:current_tab]: #{params[:current_tab]}"
+    redirect_to edit_user_path(@user, anchor: params[:current_tab])
   end
 
   # User has requested the 'my account' form.
@@ -44,7 +45,9 @@ class UsersController < ApplicationController
         :home_phone,
         :work_phone,
         :mobile_phone,
-        user_addresses_attributes: [:id, :line_1, :line_2, :city, :state, :postcode, :country_or_region]
+        :shipping_address,
+        :billing_address,
+        addresses_attributes: [:id, :line_1, :line_2, :city, :state, :postcode, :country_or_region]
       )
     end
 end

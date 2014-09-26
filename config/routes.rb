@@ -4,11 +4,13 @@ Fuzzybear::Application.routes.draw do
     # POST  /users             users#create    users_path
     # PATCH /users/:id         users#update    user_path
     # GET   /users/:id/edit    users#edit      edit_user_path
+
     resources :orders, only: [:index, :show, :create]
       # GET  /users/:id/orders/     orders#index  user_orders_path
       # GET  /users/:id/orders/:id  orders#show   user_order_path
-    resources :user_addresses, only: [:create, :destroy]
-      # POST  /users/:id/user_addresses/   user_addresses#create    user_user_addresses_path
+
+    post   '/address(.:format)'   => 'user_addresses#create',  as: 'create_address'
+    delete '/address/:id(.:format)' => 'user_addresses#destroy', as: 'delete_address'
   end
 
   get "home/index" => 'home#index'   # home_index_path

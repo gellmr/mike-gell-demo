@@ -17,4 +17,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'user_address', 'user_addresses'
+  inflect.irregular 'address', 'addresses'
 end

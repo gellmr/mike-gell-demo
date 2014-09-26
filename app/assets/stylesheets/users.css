@@ -1,0 +1,13 @@
+.address-delete{
+  display:inline-block;
+  display:block;
+  vertical-align: middle;
+  /*padding-left:20px;*/
+  float:right;
+}
+
+.address-cboxes{
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 0.7em;
+}
