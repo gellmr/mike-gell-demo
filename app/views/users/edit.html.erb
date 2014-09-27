@@ -94,7 +94,7 @@
                   </div>
 
                   <div class="row">
-                    <% @user.addresses.each do |address| %>
+                    <% @user.addresses.order(:id).each do |address| %>
                       <%= f.fields_for :addresses, address do |address_form| %>
                         <%= render "users/partials/user_address", {
                           f: address_form,

@@ -1,18 +1,19 @@
 <div class="row address-row">
 
   <div class="col-xs-12 col-sm-6">
-    #<%= address[:id] %> <%= address[:line_1] %>, <%= address[:city] %>, <%= address[:state] %> <%= address[:country_or_region] %>
+    <!-- #<%= address[:id] %> -->
+    <%= address[:line_1] %>, <%= address[:city] %>, <%= address[:state] %> <%= address[:country_or_region] %>
   </div>
 
   <div class="col-xs-12 col-sm-3">
     <label class="address-radio">
-      <%= radio_button_tag 'shippingRadioOptions', "shipTo#{address[:id]}", false %><span class="visible-xs">Ship to this address</span>
+      <%= radio_button_tag 'shippingRadioOptions', "shipTo#{address[:id]}", ( user.shipping_address == address[:id]) %><span class="visible-xs">Ship to this address</span>
     </label>
   </div>
 
   <div class="col-xs-12 col-sm-3">
     <label class="address-radio">
-      <%= radio_button_tag 'billingRadioOptions', "billTo#{address[:id]}", false %><span class="visible-xs">Use as billing address</span>
+      <%= radio_button_tag 'billingRadioOptions', "billTo#{address[:id]}", ( user.billing_address == address[:id]) %><span class="visible-xs">Use as billing address</span>
     </label>
   </div>
 

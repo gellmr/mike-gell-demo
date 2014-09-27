@@ -74,7 +74,7 @@
             <%= render 'cart/partials/addressHeader' %>
 
             <% @addresses.each do |a| %>
-              <%= render 'cart/partials/addressRow', { address: a } %>
+              <%= render 'cart/partials/addressRow', { address: a, user: current_user } %>
             <% end %>
 
           </div>

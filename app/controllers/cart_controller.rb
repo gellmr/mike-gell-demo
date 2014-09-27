@@ -34,7 +34,7 @@ class CartController < ApplicationController
       # current_user.addresses.each do |a|
       #   @addresses.push({ id: a.id, line_1: a.line_1, city: a.city, state: a.state, country_or_region: a.country_or_region })
       # end
-      @addresses = current_user.addresses
+      @addresses = current_user.addresses.order(:id)
       logger.debug "User has #{current_user.addresses.count} addresses:"
       logger.debug @addresses.to_yaml
     end
