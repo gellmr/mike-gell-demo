@@ -102,5 +102,5 @@
 
   // Gotta bind to both events, because we are using turbolinks.
   jQuery(document).ready(docReady);
-  jQuery(document).on('page:load', docReady);
+  //jQuery(document).on('page:load', docReady);
 })();

@@ -36,5 +36,5 @@ var forgotPwReadyJs = function(e) {
 
 // Gotta bind to both events, because we are using turbolinks.
 jQuery(document).ready(forgotPwReadyJs);
-jQuery(document).on('page:load', forgotPwReadyJs);
+//jQuery(document).on('page:load', forgotPwReadyJs);
 

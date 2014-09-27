@@ -40,4 +40,4 @@ var windowResizeReadyJS = function (event) {
 };
 // Gotta bind to both events, because we are using turbolinks.
 jQuery(document).ready(windowResizeReadyJS);
-jQuery(document).on('page:load', windowResizeReadyJS);
+//jQuery(document).on('page:load', windowResizeReadyJS);
