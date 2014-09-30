@@ -71,7 +71,7 @@ class SessionsController < ApplicationController
 
   # User wants to log in. Serve the login page.
   def login_page
-    render template: "/login_logout/loginPage"
+    render template: "/login_logout/login_page"
   end
 
   # User wants to register. Serve the rego page.
