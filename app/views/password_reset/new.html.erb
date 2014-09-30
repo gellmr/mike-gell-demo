@@ -1,5 +1,6 @@
-
-<%= javascript_include_tag "forgot-password" %>
+<%= if Rails.env.development?
+  javascript_include_tag "forgot-password"
+end %>
 
 <div class="row">
   <div class="col-xs-12">

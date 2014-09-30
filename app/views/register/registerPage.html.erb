@@ -1,5 +1,8 @@
 
-<%= javascript_include_tag "registerPage" %>
+<%= if Rails.env.development?
+  javascript_include_tag "registerPage"
+end %>
+
 <br />
 
 <form role="form" class="registerForm authForm">

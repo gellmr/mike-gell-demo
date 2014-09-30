@@ -1,6 +1,7 @@
-
-<%= javascript_include_tag "store_and_cart" %>
-<%= javascript_include_tag "cart_submit" %>
+<%= if Rails.env.development?
+  javascript_include_tag "store_and_cart"
+  javascript_include_tag "cart_submit"
+end %>
 
 <div class="row">
   <div class="col-xs-12">

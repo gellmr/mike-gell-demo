@@ -1,4 +1,6 @@
-<%= javascript_include_tag "user_edit" %>
+<%= if Rails.env.development?
+  javascript_include_tag "user_edit"
+end %>
 
 <a href="#formTop"></a>
 <div class="row">
