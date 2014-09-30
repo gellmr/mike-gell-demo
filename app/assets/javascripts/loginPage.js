@@ -1,5 +1,11 @@
 jQuery(document).ready(function($) {
 
+  $('input#inputPassword').on('keypress', function(event){
+    if (event.which == 13){
+       $("button#loginPageSubmit").trigger("click");
+    }
+  });
+
   $(document).on('click', '#loginPageSubmit', function() {
 
     var _user;
