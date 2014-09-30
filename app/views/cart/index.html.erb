@@ -1,7 +1,5 @@
-<%= if Rails.env.development?
-  javascript_include_tag "store_and_cart"
-  javascript_include_tag "cart_submit"
-end %>
+<%= javascript_include_tag "precompile/store_and_cart" %>
+<%= javascript_include_tag "precompile/cart_submit" %>
 
 <div class="row">
   <div class="col-xs-12">
