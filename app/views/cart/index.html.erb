@@ -71,6 +71,7 @@
 
         <% if @total_lines > 0 %>
 
+        <% if current_user.present? %>
         <div class="row">
           <div class="col-xs-12 well">
             <h3>Shipping / Billing details:</h3>
@@ -82,6 +83,7 @@
 
           </div>
         </div>
+        <% end %>
 
         <div class="row">
           <div class="col-xs-12">
