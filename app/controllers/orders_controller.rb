@@ -6,12 +6,20 @@ class OrdersController < ApplicationController
   # GET /users/:id/orders
   def index
     @orders = current_user.orders
+    @ship_addresses = {}
+    @bill_addresses = {}
+    @orders.each do | order |
+      @ship_addresses[order.id] = current_user.addresses.find_by_id(order.shipping_address)
+      @bill_addresses[order.id] = current_user.addresses.find_by_id(order.billing_address)
+    end
   end
 
   # Show the details of ONE order for this user.
   # GET /users/:id/orders/:order_id
   def show
     @order = current_user.orders.find(params[:id])
+    @shipping_address = current_user.addresses.find_by_id(@order.shipping_address)
+    @billing_address = current_user.addresses.find_by_id(@order.billing_address)
   end
 
   # User has submitted their cart.
@@ -37,6 +45,8 @@ class OrdersController < ApplicationController
       @order.order_status = "Not Shipped Yet"
       @order.user = current_user
       @order.order_date = Time.now
+      @order.shipping_address = params[:shippingRadioOptions]
+      @order.billing_address = params[:billingRadioOptions]
 
       op_arr = []
       user_cart.each_with_index do |(productId,qty),index|

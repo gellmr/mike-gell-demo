@@ -20,5 +20,21 @@
         <%= order.order_status || "Not Shipped Yet" %>
       </small>
     </p>
+    <p class="content-heading mg-resizable-11-14">
+      <% if shipping_address.nil? %>
+        <small>Shipping Address: None</small>
+      <% else %>
+        <strong>Shipping Address:</strong>
+        <small><%= shipping_address.oneLine %></small>
+      <% end %>
+    </p>
+    <p class="content-heading mg-resizable-11-14">
+      <% if billing_address.nil? %>
+        <small>Billing Address: None</small>
+      <% else %>
+        <strong>Billing Address:</strong>
+        <small><%= billing_address.oneLine %></small>
+      <% end %>
+    </p>
   </div>
 </div>

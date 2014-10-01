@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
  
     def current_user
-      @_current_user ||= session[:current_user_id] && User.find_by(id: session[:current_user_id])
+      @_current_user ||= session[:current_user_id] && User.includes(:addresses).find_by(id: session[:current_user_id])
       if @_current_user && @_current_user.account_locked
         @_current_user = nil
       end

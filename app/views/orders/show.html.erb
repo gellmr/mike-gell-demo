@@ -13,7 +13,7 @@
     </div>
 
     <div class="well solidBackground mg-hover-static">
-      <%= render "orders/partials/order_head", { order: @order } %>
+      <%= render "orders/partials/order_head", { order: @order, shipping_address: @shipping_address, billing_address: @billing_address } %>
       <%= render "orders/partials/order_line", { order: @order } %>
       <%= render "orders/partials/order_summary", { order: @order } %>
     </div>
