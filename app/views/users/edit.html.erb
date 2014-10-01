@@ -85,9 +85,7 @@
               <div class="tab-pane" id="myAddresses">
                 <div class="col-xs-12">
 
-                  <hr />
-
-                  <div class="well">
+                  <div class="well" style="margin-top: 20px;">
                     You currently have <%= @user.addresses.count %> addresses.
 
                     <%= link_to user_create_address_path(@user), method: :post, class: "mg-resizable-11-14" do %>
@@ -115,7 +113,20 @@
 
           </div>
 
-          <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
+          <div class="row" style="height: 30px;">
+            <div class="col-xs-12">
+              <!-- Empty div -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="height: 66px; position: fixed; bottom: 0px; width: 80%; background: white; border-top: 1px solid #e3e3e3;">
+        <div class="panel-body">
+          <div class="panel">
+            <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
+          </div>
         </div>
       </div>
 
