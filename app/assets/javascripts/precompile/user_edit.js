@@ -1,5 +1,10 @@
 (function() {
 
+  var winHeight = 0;
+  var fixedPanelHeight = 0;
+  var fixedPanelJq = null;
+  var threshold = 0;
+
   var anchorContainsString = function(anchor, str){
     return (anchor.toLowerCase().indexOf(str.toLowerCase()) > -1);
   }
@@ -49,6 +54,7 @@
     setPageAnchor(newAnchor);
     updateScrollPosition(newAnchor);
     $('#current_tab').val(newAnchor);
+    threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
   }
 
   var showTab = function(tabName){
@@ -78,28 +84,31 @@
     console.log("anchor: #" + anchor);
   }
 
+  var customWinResize = function(e){
+    winHeight = $(window).height();
+    threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
+    customVerticalScroll(e);
+  }
+
   var customVerticalScroll = function(e){
-    var threshold = $("div.threshold-vis:visible").offset().top + $('#fixedPanel').height(); // 373;
-    var hide = 'N';
     var wst = $(window).scrollTop();
-    var wh = $(window).height();
-    var y = '0';
-    var base = wst + wh;
-    if (base < threshold){
-      hide = 'Y';
+    if ((wst + winHeight) < threshold){
+      fixedPanelJq.css("bottom", (winHeight - threshold) + wst);
+    }else{
+      fixedPanelJq.css("bottom", '0');
     }
-    if (hide == 'Y'){
-      y = (wh - threshold) + wst;
-    }
-    $('#fixedPanel').css("bottom", y);
-    //console.log(" winheight:" + wh + " base:" + base + " hide:" + hide + " y:" + y + " scrolltop:" + wst + " th:" + threshold);
   }
 
   var docReady = function(e) {
     console.log("\n(docReady) document.URL: " + document.URL);
-    
+
+    winHeight = $(window).height();
+    fixedPanelHeight = $('#fixedPanel').height();
+    fixedPanelJq = $('#fixedPanel');
+    threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
+
+    $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
-    $( window ).resize(customVerticalScroll);
     
     // Register for the bootstrap tab 'shown' event.
     $('a[data-toggle="tab"]').on('shown.bs.tab', clickedBootStrapTab);
