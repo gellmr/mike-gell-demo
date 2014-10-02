@@ -4,6 +4,7 @@
   var fixedPanelHeight = 0;
   var fixedPanelJq = null;
   var threshold = 0;
+  var panelVisible = 1;
 
   var anchorContainsString = function(anchor, str){
     return (anchor.toLowerCase().indexOf(str.toLowerCase()) > -1);
@@ -93,9 +94,21 @@
   var customVerticalScroll = function(e){
     var wst = $(window).scrollTop();
     if ((wst + winHeight) < threshold){
-      fixedPanelJq.css("bottom", (winHeight - threshold) + wst);
+      if (panelVisible == 1){
+        // Hide
+        panelVisible = -1;
+        fixedPanelJq.animate({ bottom: 0 - fixedPanelHeight }, "fast", function(){ panelVisible = 0; });
+      }
     }else{
-      fixedPanelJq.css("bottom", '0');
+      if (panelVisible == 0){
+        // Show
+        panelVisible = -1;
+        fixedPanelJq.animate({ bottom: 0 }, "slow", function(){ panelVisible = 1; });
+      }
+      if (panelVisible == 1){
+        // Visible
+        fixedPanelJq.css("bottom", '0');
+      }
     }
   }
 
