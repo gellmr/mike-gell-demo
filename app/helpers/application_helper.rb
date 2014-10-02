@@ -11,4 +11,7 @@ module ApplicationHelper
     end
   end
   
+  def bodytag_data_attribs
+    { no_turbolink: true }
+  end
 end
