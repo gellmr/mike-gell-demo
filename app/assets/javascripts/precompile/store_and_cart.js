@@ -235,8 +235,6 @@
     );
   };
 
-  // Gotta bind to both events, because we are using turbolinks.
   jQuery(document).ready(storeAndCartReadyJs);
-  jQuery(document).on('page:load', storeAndCartReadyJs);
 
 })();

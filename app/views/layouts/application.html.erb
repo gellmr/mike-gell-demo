@@ -3,12 +3,12 @@
 
   <head>
     <title>Fuzzybear</title>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
-  <%= tag 'body', open:true, data:bodytag_data_attribs %>
+  <body>
     <%#= render "partials/sizer" %>
 
     <div class="top-level-container">

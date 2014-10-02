@@ -41,8 +41,6 @@
     );
   };
 
-  // Gotta bind to both events, because we are using turbolinks.
   jQuery(document).ready(storeReadyJs);
-  jQuery(document).on('page:load', storeReadyJs);
 
 })();
