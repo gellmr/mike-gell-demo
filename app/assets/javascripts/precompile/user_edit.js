@@ -78,8 +78,29 @@
     console.log("anchor: #" + anchor);
   }
 
+  var customVerticalScroll = function(e){
+    var threshold = 373;
+    var hide = 'N';
+    var wst = $(window).scrollTop();
+    var wh = $(window).height();
+    var y = '0';
+    var base = wst + wh;
+    if (base < threshold){
+      hide = 'Y';
+    }
+    if (hide == 'Y'){
+      y = (wh - threshold) + wst;
+    }
+    $('#fixedPanel').css("bottom", y);
+    //console.log(" winheight:" + wh + " base:" + base + " hide:" + hide + " y:" + y + " scrolltop:" + wst);
+  }
+
   var docReady = function(e) {
     console.log("\n(docReady) document.URL: " + document.URL);
+    
+    $( window ).scroll(customVerticalScroll);
+    $( window ).resize(customVerticalScroll);
+    
     // Register for the bootstrap tab 'shown' event.
     $('a[data-toggle="tab"]').on('shown.bs.tab', clickedBootStrapTab);
     // If we don't yet have an anchor in the document url, then init to 'accountDetails'
