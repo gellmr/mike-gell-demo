@@ -79,7 +79,7 @@
   }
 
   var customVerticalScroll = function(e){
-    var threshold = 373;
+    var threshold = $("div.threshold-vis:visible").offset().top + $('#fixedPanel').height(); // 373;
     var hide = 'N';
     var wst = $(window).scrollTop();
     var wh = $(window).height();
@@ -92,7 +92,7 @@
       y = (wh - threshold) + wst;
     }
     $('#fixedPanel').css("bottom", y);
-    //console.log(" winheight:" + wh + " base:" + base + " hide:" + hide + " y:" + y + " scrolltop:" + wst);
+    //console.log(" winheight:" + wh + " base:" + base + " hide:" + hide + " y:" + y + " scrolltop:" + wst + " th:" + threshold);
   }
 
   var docReady = function(e) {

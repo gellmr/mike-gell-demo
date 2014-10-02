@@ -39,6 +39,8 @@
               <div class="tab-pane active" id="accountDetails">
                 <div class="col-xs-12">
 
+                  <div class="threshold-vis" style="border:dashed 1px red; width: 80%;"></div>
+
                   <div id="form-group-account" class="form-group well" style="margin-top: 20px;">
 
                     <div id="form-group-email" class="form-group">
@@ -85,6 +87,8 @@
               <div class="tab-pane" id="myAddresses">
                 <div class="col-xs-12">
 
+                  <div class="threshold-vis" style="border:dashed 1px green; width: 80%;"></div>
+
                   <div class="well" style="margin-top: 20px;">
                     You currently have <%= @user.addresses.count %> addresses.
 
@@ -121,8 +125,6 @@
 
         </div>
       </div>
-
-      <div id="threshold-vis" style="border:dashed 1px red; position: absolute; top: 75px; width: 80%;"></div>
 
       <div id="fixedPanel" style="height: 66px; position: fixed; bottom: 0px; width: 80%; background: white; border-top: 1px solid #e3e3e3;">
         <div class="panel-body">
