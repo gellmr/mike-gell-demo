@@ -103,7 +103,7 @@
       if (panelVisible == 0){
         // Show
         panelVisible = -1;
-        fixedPanelJq.animate({ bottom: 0 }, "slow", function(){ panelVisible = 1; });
+        fixedPanelJq.animate({ bottom: 0 }, "fast", function(){ panelVisible = 1; });
       }
       if (panelVisible == 1){
         // Visible
@@ -145,5 +145,5 @@
 
   // Gotta bind to both events, because we are using turbolinks.
   jQuery(document).ready(docReady);
-  //jQuery(document).on('page:load', docReady);
+  jQuery(document).on('page:load', docReady);
 })();
