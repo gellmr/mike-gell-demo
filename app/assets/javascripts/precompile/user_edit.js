@@ -4,6 +4,7 @@
   var fixedPanelHeight = 0;
   var fixedPanelJq = null;
   var threshold = 0;
+  var formEnd = 0;
   var panelVisible = 1;
 
   var anchorContainsString = function(anchor, str){
@@ -56,6 +57,7 @@
     updateScrollPosition(newAnchor);
     $('#current_tab').val(newAnchor);
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
+    formEnd = $("div.form-end").offset().top + fixedPanelHeight;
   }
 
   var showTab = function(tabName){
@@ -88,27 +90,47 @@
   var customWinResize = function(e){
     winHeight = $(window).height();
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
+    formEnd = $("div.form-end").offset().top + fixedPanelHeight;
     customVerticalScroll(e);
   }
 
+  var panelMode = 0;
+
   var customVerticalScroll = function(e){
     var wst = $(window).scrollTop();
-    if ((wst + winHeight) < threshold){
+    var base = (wst + winHeight);
+    if (base < threshold){
       if (panelVisible == 1){
         // Hide
         panelVisible = -1;
         fixedPanelJq.animate({ bottom: 0 - fixedPanelHeight }, "fast", function(){ panelVisible = 0; });
       }
     }else{
-      if (panelVisible == 0){
-        // Show
-        panelVisible = -1;
-        fixedPanelJq.animate({ bottom: 0 }, "fast", function(){ panelVisible = 1; });
+
+      if (base < formEnd){
+        if (panelMode != 0){
+          panelMode = 0;
+          console.log("form fixed");
+        }
+        if (panelVisible == 0){
+          // Show
+          panelVisible = -1;
+          fixedPanelJq.animate({ bottom: 0 }, "fast", function(){ panelVisible = 1; });
+        }
+        if (panelVisible == 1){
+          // Visible
+          fixedPanelJq.css("bottom", '0');
+        }
       }
-      if (panelVisible == 1){
-        // Visible
-        fixedPanelJq.css("bottom", '0');
+      else
+      {
+        if (panelMode != 1){
+          panelMode = 1;
+          console.log("form end");
+        }
+        fixedPanelJq.css("bottom", base - formEnd);
       }
+      
     }
   }
 
@@ -119,6 +141,7 @@
     fixedPanelHeight = $('#fixedPanel').height();
     fixedPanelJq = $('#fixedPanel');
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
+    formEnd = $("div.form-end").offset().top + fixedPanelHeight;
 
     $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
