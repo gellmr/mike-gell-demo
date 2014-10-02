@@ -18,7 +18,8 @@ class UserAddressesController < ApplicationController
   def destroy
     @user = User.find_by(id: params[:user_id])
     address = @user.addresses.find_by(id: params[:id])
-    address.destroy!
+    address.deleted = true
+    address.save!
     redirect_to edit_user_path(@user, anchor: "myAddresses")
   end
 

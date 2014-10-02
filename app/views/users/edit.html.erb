@@ -90,7 +90,7 @@
                   <div class="threshold-vis" style="border:dashed 1px rgba(155, 155, 155, 0.15);"></div>
 
                   <div class="well" style="margin-top: 20px;">
-                    You currently have <%= @user.addresses.count %> addresses.
+                    You currently have <%= @user.addresses.where(deleted: false).count %> addresses.
 
                     <%= link_to user_create_address_path(@user), method: :post, class: "mg-resizable-11-14" do %>
                       <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
@@ -100,12 +100,14 @@
                   <div class="row">
                     <% @user.addresses.order(:id).each do |address| %>
                       <%= f.fields_for :addresses, address do |address_form| %>
-                        <%= render "users/partials/user_address", {
-                          f: address_form,
-                          address: address,
-                          userForm: f,
-                          user: @user
-                        } %>
+                        <% if address.deleted == false %>
+                          <%= render "users/partials/user_address", {
+                            f: address_form,
+                            address: address,
+                            userForm: f,
+                            user: @user
+                          } %>
+                        <% end %>
                       <% end %>
                     <% end %>
                   </div>
