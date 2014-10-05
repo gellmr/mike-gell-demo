@@ -34,8 +34,30 @@ class CartController < ApplicationController
       # current_user.addresses.each do |a|
       #   @addresses.push({ id: a.id, line_1: a.line_1, city: a.city, state: a.state, country_or_region: a.country_or_region })
       # end
-      @addresses = current_user.addresses.order(:id)
-      logger.debug "User has #{current_user.addresses.count} addresses:"
+      @addresses = current_user.addresses.where(deleted: false).order(:id)
+
+      # Make sure we have a shipping and billing address, initially selected. Use the 'default' address where possible. 
+      if @addresses.count > 0
+        gotShip = false
+        gotBill = false
+        @addresses.each do |a|
+          break if gotShip && gotBill
+          if !gotShip
+            gotShip = current_user.shipping_address == a.id
+          end
+          if !gotBill
+            gotBill = current_user.billing_address == a.id
+          end
+        end
+        if !gotShip
+          current_user.shipping_address = @addresses.first.id
+        end
+        if !gotBill
+          current_user.billing_address = @addresses.first.id
+        end
+      end
+
+      logger.debug "User has #{@addresses.count} addresses:"
       logger.debug @addresses.to_yaml
     end
   end

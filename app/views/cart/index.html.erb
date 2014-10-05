@@ -70,32 +70,54 @@
         %>
 
         <% if @total_lines > 0 %>
+          <% if current_user.present? %>
+            <% if @addresses.where(deleted: false).count > 0 %>
+              <div class="row">
+                <div class="col-xs-12 well">
+                  <h3>Shipping / Billing details:</h3>
+                  <%= render 'cart/partials/addressHeader' %>
+                  <% @addresses.each do |a| %>
+                    <% if a.deleted == false %>
+                      <%= render 'cart/partials/addressRow', { address: a, user: current_user } %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
 
-        <% if current_user.present? %>
-        <div class="row">
-          <div class="col-xs-12 well">
-            <h3>Shipping / Billing details:</h3>
-            <%= render 'cart/partials/addressHeader' %>
-
-            <% @addresses.each do |a| %>
-              <%= render 'cart/partials/addressRow', { address: a, user: current_user } %>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="text-center">
+                    <h3>
+                      <%=
+                      submit_tag "Place Order", {class: "btn btn-default cart-submit-btn"}
+                      %>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="text-center">
+                    You currently have no addresses available. Please 
+                    <%= link_to "create an Address", edit_user_path(current_user, anchor: 'myAddresses') %>
+                    under your account details.
+                  </div>
+                </div>
+              </div>
             <% end %>
 
-          </div>
-        </div>
-        <% end %>
-
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="text-center">
-              <h3>
-                <%=
-                submit_tag "Place Order", {class: "btn btn-default cart-submit-btn"}
-                %>
-              </h3>
+          <% else %>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  Please 
+                  <%= link_to "Log In", login_path, class: "" %>
+                  to place an order.
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          <% end %>
         <% end %>
         
       </form>
