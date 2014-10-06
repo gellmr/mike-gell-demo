@@ -91,6 +91,8 @@
     winHeight = $(window).height();
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
+    
+    $("#debugspan").html("winHeight: " + winHeight);
     customVerticalScroll(e);
   }
 
@@ -142,6 +144,11 @@
     fixedPanelJq = $('#fixedPanel');
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
+
+    // On mobile, the window height CHANGES when you focus on an input field,
+    // because the 'mobile keyboard' appears.
+    $( "input" ).on("focus", customWinResize);
+    $( "input" ).on("blur", customWinResize);
 
     $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
