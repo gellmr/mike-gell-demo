@@ -97,8 +97,12 @@
   var panelMode = 0;
 
   var customVerticalScroll = function(e){
+
     var wst = $(window).scrollTop();
     var base = (wst + winHeight);
+
+    $("#debugBox").height(Math.min(winHeight - 5, formEnd));
+
     if (base < threshold){
       if (panelVisible == 1){
         // Hide
