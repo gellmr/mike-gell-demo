@@ -147,8 +147,9 @@
 
     // On mobile, the window height CHANGES when you focus on an input field,
     // because the 'mobile keyboard' appears.
-    $( "input" ).on("focus", customWinResize);
-    $( "input" ).on("blur", customWinResize);
+    var mobileKeyboardDelay = 1000; // how long it takes for mobile keyboard to appear / disappear.
+    $( "input" ).on("focus", function(e){ setTimeout(customWinResize, mobileKeyboardDelay) });
+    $( "input" ).on("blur",  function(e){ setTimeout(customWinResize, mobileKeyboardDelay) });
 
     $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
