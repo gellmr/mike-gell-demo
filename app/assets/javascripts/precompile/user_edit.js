@@ -91,6 +91,7 @@
     winHeight = $(window).height();
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
+    console.log("customWinResize " + winHeight);
     customVerticalScroll(e);
   }
 
@@ -143,6 +144,7 @@
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
 
+    $( "input" ).on("focus", customWinResize);
     $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
     
