@@ -91,7 +91,7 @@
     winHeight = $(window).height();
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
-    console.log("customWinResize " + winHeight);
+    console.log("customWinResize: winHeight " + winHeight + ' keyboardCountNow: ' + keyboardCountNow);
     customVerticalScroll(e);
   }
 
@@ -135,6 +135,26 @@
     }
   }
 
+  var keyboardDelayMs = 500;
+  var keyboardCountMax = 2;
+  var keyboardCountNow = 0;
+  var keyboardInterval = null;
+
+  var keyboardDelayFn = function(e){
+
+    keyboardCountNow = keyboardCountMax;
+    keyboardInterval = setInterval( function(){
+
+      //console.log('keyboardDelayFn ' + keyboardCountNow);
+      if (keyboardCountNow == 0){ clearInterval(keyboardInterval);}
+      else
+      {
+        keyboardCountNow = keyboardCountNow -1;
+        customWinResize();  
+      }
+    }, keyboardDelayMs);
+  }
+
   var docReady = function(e) {
     console.log("\n(docReady) document.URL: " + document.URL);
 
@@ -144,8 +164,9 @@
     threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
 
-    $( "input" ).on("focus", customWinResize);
-    $( "input" ).on("blur", customWinResize);
+
+    $( "input" ).on("focus", keyboardDelayFn);
+    $( "input" ).on("blur", keyboardDelayFn);
     $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
     
