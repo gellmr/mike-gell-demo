@@ -145,6 +145,7 @@
     formEnd = $("div.form-end").offset().top + fixedPanelHeight;
 
     $( "input" ).on("focus", customWinResize);
+    $( "input" ).on("blur", customWinResize);
     $( window ).resize(customWinResize);
     $( window ).scroll(customVerticalScroll);
     
