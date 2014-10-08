@@ -1,12 +1,5 @@
 (function() {
 
-  var winHeight = 0;
-  var fixedPanelHeight = 0;
-  var fixedPanelJq = null;
-  var threshold = 0;
-  var formEnd = 0;
-  var panelVisible = 1;
-
   var anchorContainsString = function(anchor, str){
     return (anchor.toLowerCase().indexOf(str.toLowerCase()) > -1);
   }
@@ -56,8 +49,6 @@
     setPageAnchor(newAnchor);
     updateScrollPosition(newAnchor);
     $('#current_tab').val(newAnchor);
-    threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
-    formEnd = $("div.form-end").offset().top + fixedPanelHeight;
   }
 
   var showTab = function(tabName){
@@ -87,88 +78,9 @@
     console.log("anchor: #" + anchor);
   }
 
-  var customWinResize = function(e){
-    winHeight = $(window).height();
-    threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
-    formEnd = $("div.form-end").offset().top + fixedPanelHeight;
-    console.log("customWinResize: winHeight " + winHeight + ' keyboardCountNow: ' + keyboardCountNow);
-    customVerticalScroll(e);
-  }
-
-  var panelMode = 0;
-
-  var customVerticalScroll = function(e){
-    var wst = $(window).scrollTop();
-    var base = (wst + winHeight);
-    if (base < threshold){
-      if (panelVisible == 1){
-        // Hide
-        panelVisible = -1;
-        fixedPanelJq.animate({ bottom: 0 - fixedPanelHeight }, "fast", function(){ panelVisible = 0; });
-      }
-    }else{
-
-      if (base < formEnd){
-        if (panelMode != 0){
-          panelMode = 0;
-          console.log("form fixed");
-        }
-        if (panelVisible == 0){
-          // Show
-          panelVisible = -1;
-          fixedPanelJq.animate({ bottom: 0 }, "fast", function(){ panelVisible = 1; });
-        }
-        if (panelVisible == 1){
-          // Visible
-          fixedPanelJq.css("bottom", '0');
-        }
-      }
-      else
-      {
-        if (panelMode != 1){
-          panelMode = 1;
-          console.log("form end");
-        }
-        fixedPanelJq.css("bottom", base - formEnd);
-      }
-      
-    }
-  }
-
-  var keyboardDelayMs = 500;
-  var keyboardCountMax = 2;
-  var keyboardCountNow = 0;
-  var keyboardInterval = null;
-
-  var keyboardDelayFn = function(e){
-
-    keyboardCountNow = keyboardCountMax;
-    keyboardInterval = setInterval( function(){
-
-      //console.log('keyboardDelayFn ' + keyboardCountNow);
-      if (keyboardCountNow == 0){ clearInterval(keyboardInterval);}
-      else
-      {
-        keyboardCountNow = keyboardCountNow -1;
-        customWinResize();  
-      }
-    }, keyboardDelayMs);
-  }
 
   var docReady = function(e) {
     console.log("\n(docReady) document.URL: " + document.URL);
-
-    winHeight = $(window).height();
-    fixedPanelHeight = $('#fixedPanel').height();
-    fixedPanelJq = $('#fixedPanel');
-    threshold = $("div.threshold-vis:visible").offset().top + fixedPanelHeight;
-    formEnd = $("div.form-end").offset().top + fixedPanelHeight;
-
-
-    $( "input" ).on("focus", keyboardDelayFn);
-    $( "input" ).on("blur", keyboardDelayFn);
-    $( window ).resize(customWinResize);
-    $( window ).scroll(customVerticalScroll);
     
     // Register for the bootstrap tab 'shown' event.
     $('a[data-toggle="tab"]').on('shown.bs.tab', clickedBootStrapTab);
