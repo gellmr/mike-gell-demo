@@ -23,7 +23,12 @@ class UsersController < ApplicationController
     @user.update_attributes!(sane_user_params)
     flash[:success] = "Successfully updated your details"
     logger.debug "Updated user. params[:current_tab]: #{params[:current_tab]}"
-    redirect_to edit_user_path(@user, anchor: params[:current_tab])
+
+    if params[:current_tab] == 'user_addresses'
+      redirect_to user_addresses_path(@user)
+    else
+      redirect_to edit_user_path(@user)
+    end
   end
 
   # User has requested the 'my account' form.

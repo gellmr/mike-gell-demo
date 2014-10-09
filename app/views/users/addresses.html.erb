@@ -1,0 +1,76 @@
+<%= javascript_include_tag "precompile/user_edit" %>
+
+<a href="#formTop"></a>
+<div class="row">
+  <div class="col-xs-12">
+    
+    <%= render "/partials/flash_message" %>
+
+
+
+
+
+
+
+
+
+    <%= form_for @user do |f| %>
+
+      <%= hidden_field_tag :current_tab, controller_name %>
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+          <div class="row">
+
+            <%= render "users/partials/user_edit_navtabs", { user: @user} %>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <!-- My Addresses -->
+              <div class="tab-pane active" id="myAddresses">
+                <div class="col-xs-12">
+
+                  <div class="well" style="margin-top: 20px;">
+                    You currently have <%= @user.addresses.where(deleted: false).count %> addresses.
+
+                    <%= link_to user_create_address_path(@user), method: :post, class: "mg-resizable-11-14" do %>
+                      <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
+                    <% end %>
+                  </div>
+
+                  <div class="row">
+                    <% @user.addresses.order(:id).each do |address| %>
+                      <%= f.fields_for :addresses, address do |address_form| %>
+                        <% if address.deleted == false %>
+                          <%= render "users/partials/user_address", {
+                            f: address_form,
+                            address: address,
+                            userForm: f,
+                            user: @user
+                          } %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 66px;">
+        <div class="panel-body">
+          <div class="panel" style="border: none;">
+            <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

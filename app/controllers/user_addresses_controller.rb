@@ -11,7 +11,13 @@ class UserAddressesController < ApplicationController
     address.postcode = "postcode"
     address.country_or_region = "country or region"
     address.save!
-    redirect_to edit_user_path(@user, anchor: "address#{address.id}")
+    redirect_to user_addresses_path(@user, anchor: "address#{address.id}")
+  end
+
+  # User wants the form for editing addresses
+  def edit
+    @user = User.find_by(id: params[:user_id])
+    render 'users/addresses'
   end
 
   # User wants to delete an address
@@ -20,7 +26,7 @@ class UserAddressesController < ApplicationController
     address = @user.addresses.find_by(id: params[:id])
     address.deleted = true
     address.save!
-    redirect_to edit_user_path(@user, anchor: "myAddresses")
+    redirect_to user_addresses_path(@user)
   end
 
 end

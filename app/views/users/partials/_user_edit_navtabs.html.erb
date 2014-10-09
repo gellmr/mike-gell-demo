@@ -1,0 +1,12 @@
+<!-- Tab header -->
+<ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
+
+  <%= navtab_li 'users' %>
+    <!-- <a href="#accountDetails" role="tab" data-toggle="tab">Account Details</a> -->
+    <%= link_to edit_user_path(user) do %> Account Details <% end %>
+  </li>
+  <%= navtab_li 'user_addresses' %>
+    <!-- <a href="#myAddresses" role="tab" data-toggle="tab">Shipping / Billing Addresses</a> -->
+    <%= link_to user_addresses_path(user) do %> Shipping / Billing Addresses <% end %>
+  </li>
+</ul>

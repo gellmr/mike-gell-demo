@@ -9,6 +9,7 @@ Fuzzybear::Application.routes.draw do
       # GET  /users/:id/orders/     orders#index  user_orders_path
       # GET  /users/:id/orders/:id  orders#show   user_order_path
 
+    get    '/addresses'           => 'user_addresses#edit',  as: 'addresses'
     post   '/address(.:format)'   => 'user_addresses#create',  as: 'create_address'
     delete '/address/:id(.:format)' => 'user_addresses#destroy', as: 'delete_address'
   end

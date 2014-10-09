@@ -16,30 +16,21 @@
 
     <%= form_for @user do |f| %>
 
+      <%= hidden_field_tag :current_tab, controller_name %>
+
       <div class="panel panel-default">
 
         <div class="panel-body">
           <div class="row">
 
-            <!-- Tab header -->
-            <ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
-              <li class="active">
-                <a href="#accountDetails" role="tab" data-toggle="tab">Account Details</a>
-              </li>
-              <li>
-                <a href="#myAddresses" role="tab" data-toggle="tab">Shipping / Billing Addresses</a>
-              </li>
-            </ul>
+            <%= render "users/partials/user_edit_navtabs", { user: @user} %>
 
             <!-- Tab panes -->
             <div class="tab-content">
-              <%= hidden_field_tag :current_tab %>
 
               <!-- Account Details -->
               <div class="tab-pane active" id="accountDetails">
                 <div class="col-xs-12">
-
-                  <div class="threshold-vis" style="border:dashed 1px rgba(155, 155, 155, 0.15);"></div>
 
                   <div id="form-group-account" class="form-group well" style="margin-top: 20px;">
 
@@ -82,43 +73,8 @@
 
                 </div>
               </div>
-
-              <!-- My Addresses -->
-              <div class="tab-pane" id="myAddresses">
-                <div class="col-xs-12">
-
-                  <div class="threshold-vis" style="border:dashed 1px rgba(155, 155, 155, 0.15);"></div>
-
-                  <div class="well" style="margin-top: 20px;">
-                    You currently have <%= @user.addresses.where(deleted: false).count %> addresses.
-
-                    <%= link_to user_create_address_path(@user), method: :post, class: "mg-resizable-11-14" do %>
-                      <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
-                    <% end %>
-                  </div>
-
-                  <div class="row">
-                    <% @user.addresses.order(:id).each do |address| %>
-                      <%= f.fields_for :addresses, address do |address_form| %>
-                        <% if address.deleted == false %>
-                          <%= render "users/partials/user_address", {
-                            f: address_form,
-                            address: address,
-                            userForm: f,
-                            user: @user
-                          } %>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                  </div>
-
-                </div>
-              </div>
-
             </div>
-
           </div>
-
         </div>
       </div>
 
