@@ -13,6 +13,9 @@
       <div class="panel panel-default">
 
         <div class="panel-body">
+
+          <h4><%= link_to "Manage Customers", manage_customers_path %> / <%= @customer.first_name %> <%= @customer.last_name %> <span class="very-feint"><%= @customer.email %></span></h4>
+
           <div class="row">
 
             <%= render "users/partials/customer_edit_navtabs", { customer: @customer} %>
