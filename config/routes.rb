@@ -14,8 +14,24 @@ Fuzzybear::Application.routes.draw do
     delete '/address/:id(.:format)' => 'user_addresses#destroy', as: 'delete_address'
   end
 
-  # Staff only - get index page of existing customer users
+
+  # Staff only - get index page of existing customers
   get '/manage-customers' => 'users#index', as: 'manage_customers'
+
+  # Staff only - get edit page for existing customer
+  get '/edit-customer/:id(.:format)' => 'users#edit_customer', as: 'edit_customer'
+  get '/customer-addresses/:id(.:format)' => 'users#customer_addresses', as: 'customer_addresses'
+
+  # Staff only - update the details of an existing customer
+  patch '/update-customer/:id(.:format)' => 'users#update_customer', as: 'update_customer'
+
+  # Staff only - create a new address for an existing customer
+  post '/customer/:customer_id/address(.:format)' => 'user_addresses#create_customer_address', as: 'customer_create_address'
+
+  # Staff only - delete an existing customer address
+  delete '/customer/:customer_id/address/:id(.:format)' => 'user_addresses#destroy_customer_address', as: 'customer_delete_address'
+
+
 
   get "home/index" => 'home#index'   # home_index_path
   get 'home/'      => 'home#index'   # home_path

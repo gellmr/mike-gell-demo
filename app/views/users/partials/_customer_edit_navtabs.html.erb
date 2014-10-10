@@ -1,0 +1,10 @@
+<!-- Tab header -->
+<ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
+
+  <%= navtab_li 'users/edit_customer' %>
+    <%= link_to edit_customer_path(customer) do %> Customer Details <% end %>
+  </li>
+  <%= navtab_li 'users/customer_addresses' %>
+    <%= link_to customer_addresses_path(customer) do %> Customer Addresses <% end %>
+  </li>
+</ul>

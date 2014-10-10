@@ -10,8 +10,10 @@
 
       <% @customers.each do |customer| %>
 
-        <%= render '/users/partials/customer_list', { customer: customer } %>
-
+        <%= link_to edit_customer_path(customer) do %>
+          <%= render '/users/partials/customer_list', { customer: customer } %>
+        <% end %>
+        
       <% end %>
 
     </div>
