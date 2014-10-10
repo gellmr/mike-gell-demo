@@ -28,8 +28,8 @@ Fuzzybear::Application.routes.draw do
 
   get 'session-expired-notice/' => 'sessions#expired_notice'
   delete 'logout/' => 'sessions#destroy'
-  get 'login/'     => 'sessions#login_page', as: 'login'
-  get 'register/'  => 'sessions#register_page', as: 'register'
+  get 'login/'     => 'sessions#login_page'
+  get 'register/'  => 'sessions#register_page'
 
   get 'store/'       => 'store#index', as: 'store_index'
   get 'store/search' => 'store#product_search', as: 'store_search'

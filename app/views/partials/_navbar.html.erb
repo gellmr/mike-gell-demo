@@ -9,13 +9,13 @@
 
             <div class="row">
 
-              <%= link_to "/store", class: "mg-resizable-11-14" do %>
+              <%= link_to store_index_path, class: "mg-resizable-11-14" do %>
                 <div class="mg-navbar-item">
                   Store
                 </div>
               <% end %>
 
-              <%= link_to "/cart", class: "mg-resizable-11-14" do %>
+              <%= link_to cart_index_path, class: "mg-resizable-11-14" do %>
                 <div class="mg-navbar-item">
                   My Cart
                 </div>
@@ -23,25 +23,19 @@
 
               <% if current_user %>
 
-                <%= link_to "/users/#{current_user.id}/orders", class: "mg-resizable-11-14" do %>
+                <%= link_to user_orders_path(current_user), class: "mg-resizable-11-14" do %>
                   <div class="mg-navbar-item">
                     My Orders
                   </div>
                 <% end %>
 
-                <%= link_to "/users/#{current_user.id}/edit", class: "mg-resizable-11-14" do %>
+                <%= link_to edit_user_path(current_user), class: "mg-resizable-11-14" do %>
                   <div class="mg-navbar-item">
                     My Account
                   </div>
                 <% end %>
 
-                <%#= link_to "/change-password", class: "mg-resizable-11-14" do %>
-                  <!-- <div class="mg-navbar-item"> -->
-                    <!-- Change Password -->
-                  <!-- </div> -->
-                <%# end %>
-
-                <%= link_to "/logout", method: :delete, class: "mg-resizable-11-14" do %>
+                <%= link_to logout_path, method: :delete, class: "mg-resizable-11-14" do %>
                   <div class="mg-navbar-item">
                     Log Out
                   </div>
@@ -49,7 +43,7 @@
 
               <% else %>
 
-                <%= link_to "/register", class: "mg-resizable-11-14" do %>
+                <%= link_to register_path, class: "mg-resizable-11-14" do %>
                   <div class="mg-navbar-item">
                     Register
                   </div>
@@ -61,7 +55,7 @@
                   </div>
                 <% end %>
 
-                <%= link_to "/login", class: "mg-resizable-11-14" do %>
+                <%= link_to login_path, class: "mg-resizable-11-14" do %>
                   <div class="mg-navbar-item">
                     Login
                   </div>
