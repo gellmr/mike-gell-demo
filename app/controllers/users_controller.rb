@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
   before_action :require_logged_in, except: [:create]
+  before_action :require_staff, only: [:index]
+
+  def index
+    @customers = User.all
+  end
 
   # Try to register a new user account.
   def create

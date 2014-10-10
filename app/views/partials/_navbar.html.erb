@@ -35,6 +35,14 @@
                   </div>
                 <% end %>
 
+                <% if current_user.usertype == 'staff' %>
+                  <%= link_to manage_customers_path, class: "mg-resizable-11-14" do %>
+                    <div class="mg-navbar-item">
+                      Manage Customers
+                    </div>
+                  <% end %>
+                <% end %>
+
                 <%= link_to logout_path, method: :delete, class: "mg-resizable-11-14" do %>
                   <div class="mg-navbar-item">
                     Log Out

@@ -248,7 +248,20 @@ Resistance: { 200, 2k, 20k, 200k Ohms, 2M Ohms -/+ 1.2% }',
 User.create(
   email: "gellmr@gmail.com",
   first_name: "Mike",
-  last_name: "Gell",
+  last_name: "LeStaff",
+  usertype: 'staff',
+  password: ENV['ADMIN_LOGIN'],
+  password_confirmation: ENV['ADMIN_LOGIN'],
+  home_phone: '5555 5555',
+  work_phone: '+614 5555 5555',
+  mobile_phone: '+614 5555 5555'
+)
+
+User.create(
+  email: "gellmr@live.com",
+  first_name: "Mike",
+  last_name: "LeCustomer",
+  usertype: 'customer',
   password: ENV['ADMIN_LOGIN'],
   password_confirmation: ENV['ADMIN_LOGIN'],
   home_phone: '5555 5555',

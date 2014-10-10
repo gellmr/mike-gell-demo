@@ -14,6 +14,9 @@ Fuzzybear::Application.routes.draw do
     delete '/address/:id(.:format)' => 'user_addresses#destroy', as: 'delete_address'
   end
 
+  # Staff only - get index page of existing customer users
+  get '/manage-customers' => 'users#index', as: 'manage_customers'
+
   get "home/index" => 'home#index'   # home_index_path
   get 'home/'      => 'home#index'   # home_path
 

@@ -48,6 +48,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def require_staff
+      unless current_user && current_user.usertype == 'staff'
+        redirect_to login_path # halts request cycle 
+      end
+    end
+
     def debug_print_cart
       old_log_level = ActiveRecord::Base.logger.level
       ActiveRecord::Base.logger.level = 1
