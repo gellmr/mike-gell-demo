@@ -21,6 +21,12 @@
                 </div>
               <% end %>
 
+              <%= link_to checkout_path, class: "mg-resizable-11-14" do %>
+                <div class="mg-navbar-item">
+                  Checkout
+                </div>
+              <% end %>
+
               <% if current_user %>
 
                 <%= link_to user_orders_path(current_user), class: "mg-resizable-11-14" do %>
