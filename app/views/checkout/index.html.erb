@@ -2,9 +2,26 @@
 <div class="row">
   <div class="col-xs-12">
 
-    <h3>Checkout</h3>
+    <div class="row">
+      <div class="col-sm-12">
+
+        <div class="text-center">
+          <h3 class="content-heading">
+            <%= image_tag "/images/cartLogo.png"%> <span>Checkout</span>
+          </h3>
+        </div>
+
+      </div>
+    </div>
+
 
     <% if @total_lines > 0 %>
+
+      <h4>In Your Cart</h4>
+      <br />
+
+      <%= render "checkout/partials/cartSummary" %>
+
       <% if current_user.present? %>
         <% if @addresses.where(deleted: false).count > 0 %>
 
@@ -29,6 +46,6 @@
       submit_tag "Place Order", {class: "btn btn-default"}
       %>
     </h3>
-    
+
   </div>
 </div>
