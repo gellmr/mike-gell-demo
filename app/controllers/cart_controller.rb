@@ -1,65 +1,15 @@
 require 'json'
 
-class CartController < ApplicationController
+class CartController < CartApplicationController
 
   def is_empty
     head :ok, { message: user_cart.count }
   end
 
   def index
-    # Get all products in the user's cart
     debug_print_cart()
-    @products = []
-    @grand_total = 0
-    @total_items = 0
-    @total_lines = 0
-    user_cart.each_with_index do |(productId,qty),index|
-      @prod = Product.find(productId.to_s)
-      @grand_total += subtot = @prod.unit_price * qty.to_i
-      @total_items += qty.to_i
-      @total_lines += 1
-      @products.push({
-        record: @prod,
-        cart_qty: qty,
-        subtotal: subtot
-      })
-    end
-    @addresses = []
-
-    if current_user.nil?
-      logger.debug "User has NO addresses."
-    end
-
-    if !(current_user.nil?)
-      # current_user.addresses.each do |a|
-      #   @addresses.push({ id: a.id, line_1: a.line_1, city: a.city, state: a.state, country_or_region: a.country_or_region })
-      # end
-      @addresses = current_user.addresses.where(deleted: false).order(:id)
-
-      # Make sure we have a shipping and billing address, initially selected. Use the 'default' address where possible. 
-      if @addresses.count > 0
-        gotShip = false
-        gotBill = false
-        @addresses.each do |a|
-          break if gotShip && gotBill
-          if !gotShip
-            gotShip = current_user.shipping_address == a.id
-          end
-          if !gotBill
-            gotBill = current_user.billing_address == a.id
-          end
-        end
-        if !gotShip
-          current_user.shipping_address = @addresses.first.id
-        end
-        if !gotBill
-          current_user.billing_address = @addresses.first.id
-        end
-      end
-
-      logger.debug "User has #{@addresses.count} addresses:"
-      logger.debug @addresses.to_yaml
-    end
+    get_cart_products()
+    # get_user_addresses()
   end
 
   def update
@@ -126,7 +76,7 @@ class CartController < ApplicationController
   end
 
   def destroy
-    clear_cart()
+    super
     redirect_to action: 'index'
   end
 
@@ -142,30 +92,5 @@ class CartController < ApplicationController
         cartTotalItems: cart_total_items,
         cartTotalLines: cart_total_lines
       })
-    end
-
-    def cart_grand_total
-      @grand_total = 0
-      user_cart.each_with_index do |(productId,qty),index|
-        @prod = Product.find(productId.to_s)
-        @grand_total += @prod.unit_price * qty.to_i
-      end
-      @grand_total
-    end
-
-    def cart_total_items
-      @cart_total_items = 0
-      user_cart.each_with_index do |(productId,qty),index|
-        @cart_total_items += qty.to_i
-      end
-      @cart_total_items
-    end
-
-    def cart_total_lines
-      @cart_total_lines = 0
-      user_cart.each do | p |
-        @cart_total_lines += 1
-      end
-      @cart_total_lines
     end
 end

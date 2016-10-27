@@ -13,11 +13,24 @@
       <%= render "/partials/flash_message" %>
 
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-sm-12 hidden-xs">
           <div class="text-center">
             <h3 class="content-heading">
-              My Cart - <%= @total_lines %> Lines
+              <%= image_tag "/images/cartLogo.png"%> <span>My Cart: <%= @total_lines %> Lines</span>
             </h3>
+          </div>
+        </div>
+
+        <div class="col-xs-12 visible-xs">
+          <div class="row">
+            <div class="col-xs-5" style='margin-top:15px'>
+              <%= image_tag "/images/cartLogo.png"%>
+            </div>
+            <div class="col-xs-7">
+              <h3 class="content-heading">
+               My Cart: <%= @total_lines %> Lines
+              </h3>
+            </div>
           </div>
         </div>
       </div>
@@ -71,41 +84,18 @@
 
         <% if @total_lines > 0 %>
           <% if current_user.present? %>
-            <% if @addresses.where(deleted: false).count > 0 %>
-              <div class="row">
-                <div class="col-xs-12 well">
-                  <h3>Shipping / Billing details:</h3>
-                  <%= render 'cart/partials/addressHeader' %>
-                  <% @addresses.each do |a| %>
-                    <% if a.deleted == false %>
-                      <%= render 'cart/partials/addressRow', { address: a, user: current_user } %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
 
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="text-center">
-                    <h3>
-                      <%=
-                      submit_tag "Place Order", {class: "btn btn-default cart-submit-btn"}
-                      %>
-                    </h3>
-                  </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  <h3>
+                    <%= link_to checkout_path(current_user), class: "btn btn-default cart-submit-btn" do %>
+                      <div class="">Proceed to checkout</div>
+                    <% end %>
+                  </h3>
                 </div>
               </div>
-            <% else %>
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="text-center">
-                    You currently have no addresses available. Please 
-                    <%= link_to "create an Address", user_addresses_path(current_user) %>
-                    under your account details.
-                  </div>
-                </div>
-              </div>
-            <% end %>
+            </div>
 
           <% else %>
             <div class="row">
@@ -113,7 +103,7 @@
                 <div class="text-center">
                   Please 
                   <%= link_to "Log In", login_path, class: "" %>
-                  to place an order.
+                  first.
                 </div>
               </div>
             </div>

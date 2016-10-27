@@ -2,29 +2,52 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  private
+  def get_user_addresses
+    unless current_user.nil?
+      @addresses = current_user.addresses.where(deleted: false).order(:id)
 
-
- 
-    def current_user
-      @_current_user ||= session[:current_user_id] && User.includes(:addresses).find_by(id: session[:current_user_id])
-      if @_current_user && @_current_user.account_locked
-        @_current_user = nil
+      # Make sure we have a shipping and billing address, initially selected. Use the 'default' address where possible. 
+      if @addresses.count > 0
+        gotShip, gotBill = false, false
+        @addresses.each do |a|
+          break if gotShip && gotBill
+          if !gotShip
+            gotShip = current_user.shipping_address == a.id
+          end
+          if !gotBill
+            gotBill = current_user.billing_address == a.id
+          end
+        end
+        if !gotShip
+          current_user.shipping_address = @addresses.first.id
+        end
+        if !gotBill
+          current_user.billing_address = @addresses.first.id
+        end
       end
-      @_current_user
+
+      logger.debug "User has #{@addresses.count} addresses:"
+      logger.debug @addresses.to_yaml
+    else
+      logger.debug "User has NO addresses."
     end
+  end
+
+  private
 
     def destroy_session
       session[:current_user_id] = nil
       @_current_user = nil
     end
 
-    def user_cart
-      @_user_cart = session[:cart] ||= {}
-    end
+    # user related
 
-    def clear_cart
-      @_user_cart = session[:cart] = {}
+    def current_user
+      @_current_user ||= session[:current_user_id] && User.includes(:addresses).find_by(id: session[:current_user_id])
+      if @_current_user && @_current_user.account_locked
+        @_current_user = nil
+      end
+      @_current_user
     end
 
     def require_logged_in
@@ -52,6 +75,16 @@ class ApplicationController < ActionController::Base
       unless current_user && current_user.usertype == 'staff'
         redirect_to login_path # halts request cycle 
       end
+    end
+
+    # cart related
+
+    def user_cart
+      @_user_cart = session[:cart] ||= {}
+    end
+
+    def clear_cart
+      @_user_cart = session[:cart] = {}
     end
 
     def debug_print_cart
