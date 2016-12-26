@@ -35,55 +35,58 @@
         </div>
       </div>
 
-      <div class="row content-header-row">
+      <% if @cart_is_empty %>
+        <%= render "partials/pageGoBack", {goback_message: "Your cart is empty!", goback_btn_text:"Go back to Store", goback_btn_path: store_index_path} %>
+      <% else %>
+        
+        <div class="row content-header-row">
 
-        <div class="col-xs-6">
-          <div class="row">
-            <%= link_to "Back To Store", store_index_path, class: "btn btn-default content-header-btn" %>
-          </div>
-        </div>
-
-        <div class="col-xs-6">
-          <div class="row">
-            <div class="pull-right">
-              <%=
-              if @total_lines > 0
-                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", id: "clearMyCartBtn", :method => 'delete' 
-              else
-                link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn disabled", id: "clearMyCartBtn", :method => 'delete'  
-              end
-              %>
+          <div class="col-xs-6">
+            <div class="row">
+              <%= link_to "Back To Store", store_index_path, class: "btn btn-default content-header-btn" %>
             </div>
           </div>
-        </div>
-        
-      </div>
 
-      <%
-      # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
-      # A remote form automatically gets its authenticity token from the page's meta tag.
-      %>
-      <%= form_tag '/cart/submit', remote: true, id: "cartForm" %>
-        <% @products.each do |product| %>
+          <div class="col-xs-6">
+            <div class="row">
+              <div class="pull-right">
+                <%=
+                if @total_lines > 0
+                  link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn", id: "clearMyCartBtn", :method => 'delete' 
+                else
+                  link_to "Clear My Cart", clear_cart_path, class: "btn btn-default content-header-btn disabled", id: "clearMyCartBtn", :method => 'delete'  
+                end
+                %>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <%
+        # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
+        # A remote form automatically gets its authenticity token from the page's meta tag.
+        %>
+        <%= form_tag '/cart/submit', remote: true, id: "cartForm" %>
+          <% @products.each do |product| %>
+            <%=
+            render "partials/forsale_product_line", {
+              product: product[:record],
+              product_qty: product[:cart_qty],
+              subtotal: product[:subtotal],
+              atStore: false
+            }
+            %>
+          <% end %>
+
           <%=
-          render "partials/forsale_product_line", {
-            product: product[:record],
-            product_qty: product[:cart_qty],
-            subtotal: product[:subtotal],
-            atStore: false
+          render "cart/partials/summaryRow", {
+            total_items: @total_items,
+            grand_total: @grand_total
           }
           %>
-        <% end %>
 
-        <%=
-        render "cart/partials/summaryRow", {
-          total_items: @total_items,
-          grand_total: @grand_total
-        }
-        %>
-
-        <% if @total_lines > 0 %>
-          <% if current_user.present? %>
+          <% if @total_lines > 0 %>
 
             <div class="row">
               <div class="col-xs-12">
@@ -97,21 +100,11 @@
               </div>
             </div>
 
-          <% else %>
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="text-center">
-                  Please 
-                  <%= link_to "Log In", login_path, class: "" %>
-                  first.
-                </div>
-              </div>
-            </div>
           <% end %>
-        <% end %>
-        
-      </form>
+          
+        </form>
 
+      <% end %>
     </div>
   </div>
 </div>

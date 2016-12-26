@@ -11,6 +11,7 @@ class CartApplicationController < ApplicationController
       @grand_total = 0
       @total_items = 0
       @total_lines = 0
+      @cart_is_empty = user_cart.count == 0
       user_cart.each_with_index do |(productId,qty),index|
         @prod = Product.find(productId.to_s)
         @grand_total += subtot = @prod.unit_price * qty.to_i

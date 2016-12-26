@@ -15,10 +15,13 @@
     </div>
 
 
-    <% if @total_lines > 0 %>
+    <% if @cart_is_empty %>
 
-      <h4>In Your Cart</h4>
-      <br />
+      <%= render "partials/pageGoBack", {goback_message: "Your cart is empty!", goback_btn_text:"Go back to Store", goback_btn_path: store_index_path} %>
+
+    <% else %>
+
+      <h4>In Your Cart...</h4>
 
       <%= render "checkout/partials/cartSummary" %>
 
@@ -34,18 +37,18 @@
                   <%= render 'cart/partials/addressRow', { address: a, user: current_user } %>
                 <% end %>
               <% end %>
+
             </div>
           </div>
           
         <% end %>
       <% end %>
-    <% end %>
 
-    <h3>
-      <%=
-      submit_tag "Place Order", {class: "btn btn-default"}
-      %>
-    </h3>
+      <div class='text-center'>
+        <%= submit_tag "Place Order", {class: "btn btn-default go-next-btn"} %>
+      </div>
+
+    <% end %>
 
   </div>
 </div>
