@@ -1,0 +1,20 @@
+<div class="row row-order-line-item">
+  <div class="col-xs-5 mg-table-feint">
+    <%= ordered_product.product.name %>
+  </div>
+
+  <div class="col-xs-3 mg-table-feint">
+    <div class="row">
+      <div class="text-center">
+        <%= ordered_product.qty || 0 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-4 mg-table-feint">
+    <div class="pull-right">
+      <% uprice = ordered_product.product.unit_price %>
+      $<%= sprintf '%.2f', ordered_product.qty.to_i * uprice || 0 %>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@ end
 
     <div class="col-xs-5 mg-table-feint">
       <strong>
-        Grand Total:
+        Total Products:
       </strong>
     </div>
 
@@ -26,7 +26,10 @@ end
     
     <div class="col-xs-4 mg-table-feint">
       <div class="pull-right">
-        $<%= sprintf '%.2f', @grand_total || 0 %>
+        Grand Total:&nbsp
+        <b>
+          $<%= sprintf '%.2f', @grand_total || 0 %>
+        </b>
       </div>
     </div>
 

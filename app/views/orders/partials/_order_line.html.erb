@@ -1,50 +1,9 @@
-
 <div class="mg-resizable-11-14">
   
-  <!-- <div class="row mg-border-bottom"> -->
-  <div class="row row-order-line-item">
-    <div class="col-xs-5 mg-table-feint">
-      <strong><small>Product</small></strong>
-    </div>
-
-    <div class="col-xs-3 mg-table-feint">
-      <div class="row">
-        <div class="text-center">
-          <strong><small>Quantity</small></strong>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xs-4 mg-table-feint">
-      <div class="pull-right">
-        <strong><small>Sub Total</small></strong>
-      </div>
-    </div>
-
-  </div>
+  <%= render "orders/partials/order_detail_header", { order: order } %>
 
   <% order.ordered_products.each do |ordered_product| %>
-  
-  <div class="row row-order-line-item">
-    <div class="col-xs-5 mg-table-feint">
-      <%= ordered_product.product.name %>
-    </div>
-
-    <div class="col-xs-3 mg-table-feint">
-      <div class="row">
-        <div class="text-center">
-          <%= ordered_product.qty || 0 %>
-        </div>
-      </div>
-    </div>
-    
-    <div class="col-xs-4 mg-table-feint">
-      <div class="pull-right">
-        <% uprice = ordered_product.product.unit_price %>
-        $<%= sprintf '%.2f', ordered_product.qty.to_i * uprice || 0 %>
-      </div>
-    </div>
-  </div>
+    <%= render "orders/partials/order_detail_line", { ordered_product: ordered_product } %>
   <% end %>
 
 </div>
