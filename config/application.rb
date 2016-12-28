@@ -28,14 +28,6 @@ module Fuzzybear
 
     config.action_mailer.raise_delivery_errors = true
 
-    config.assets.precompile += %w( precompile/cart_submit.js )
-    config.assets.precompile += %w( precompile/forgot-password.js )
-    config.assets.precompile += %w( precompile/login_page.js )
-    config.assets.precompile += %w( precompile/registerPage.js )
-    config.assets.precompile += %w( precompile/store_and_cart.js )
-    config.assets.precompile += %w( precompile/store_search.js )
-    config.assets.precompile += %w( precompile/user_edit.js )
-
     config.generators do |g|
       g.test_framework :rspec
     end
