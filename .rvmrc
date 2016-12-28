@@ -1,2 +1,2 @@
-rvm use ruby-2.0.0-p247@fuzzybear
+rvm use ruby-2.3.3-p222@fuzzybear
 rvm gemset list
