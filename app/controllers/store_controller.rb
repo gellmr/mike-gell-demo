@@ -1,5 +1,7 @@
 class StoreController < ApplicationController
+
   def index
+    store_recent_url
     # Get all products in the store.
     # debug_print_cart()
     @products = []

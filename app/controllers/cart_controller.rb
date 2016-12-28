@@ -7,6 +7,7 @@ class CartController < CartApplicationController
   end
 
   def index
+    store_recent_url
     debug_print_cart()
     get_cart_products()
     # get_user_addresses()

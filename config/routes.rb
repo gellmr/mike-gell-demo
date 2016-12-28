@@ -5,7 +5,7 @@ Fuzzybear::Application.routes.draw do
     # PATCH /users/:id         users#update    user_path
     # GET   /users/:id/edit    users#edit      edit_user_path
 
-    resources :orders, only: [:index, :show, :create]
+    resources :orders, only: [:index, :show]
       # GET  /users/:id/orders/     orders#index  user_orders_path
       # GET  /users/:id/orders/:id  orders#show   user_order_path
 
@@ -58,11 +58,11 @@ Fuzzybear::Application.routes.draw do
   get 'cart/is-empty' => 'cart#is_empty', as: 'cart_is_empty'
   put 'cart/'      => 'cart#update'
   delete 'cart/'     => 'cart#destroy', as: 'clear_cart'
-  # post 'cart/submit' => 'orders#create' # cart_submit_path
 
   root 'home#index'
 
   get 'checkout/' => 'checkout#index'
+  post 'checkout/submit' => 'orders#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

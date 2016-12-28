@@ -22,9 +22,6 @@ class OrdersController < ApplicationController
     @billing_address = current_user.addresses.find_by_id(@order.billing_address)
   end
 
-  # User has submitted their cart.
-  # cart_submit_path
-  # POST /cart/submit
   def create
     if place_order
       clear_cart()

@@ -33,6 +33,54 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_login_destination
+    # once logged in...
+    # Go to where i was trying to get to. If there is a forwarding url then we will use it.
+    redirection = get_forwarding_url
+    if ! redirection.nil?
+      return redirection
+    end
+
+    # Or, go to where i just was.
+    # It only remembers certain pages like Store, Cart, and Checkout, ...not pages like Register and Login.
+    # Please just use store_recent_url in the controller index action, to remember a page in this way.
+    redirection = get_recent_url
+    if ! redirection.nil?
+      return redirection
+    end
+
+    # or, by default go to the account page
+    redirection ||= "/users/#{current_user.id}/edit" # My Account
+    return redirection
+  end
+
+  # Stores the page we were just on, in case the application logic wants to go back there in the near future.
+  # The 'recent url' is meant for redirecting the user to a non-restricted url, after they successfully log in.
+  # The 'recent url' is also meant for redirecting the user back to 'where i just was' if the application logic needs to.
+  def store_recent_url
+    session[:recent_url] = request.original_fullpath
+    Rails.logger.debug "store_recent_url() session[:recent_url]: #{session[:recent_url]}"
+  end
+
+  def get_recent_url
+    url = session[:recent_url]
+    session.delete(:recent_url)
+    return url
+  end
+
+  # Stores the URL trying to be accessed.
+  # Eg, if we try to checkout when not logged in, we are prompted to login, and then directed back to the 'forwarding url'.
+  # The 'forwarding url' is meant for redirecting the user to a restricted url, after they successfully log in.
+  def store_forwarding_url
+    session[:forwarding_url] = request.original_fullpath
+  end
+
+  def get_forwarding_url
+    url = session[:forwarding_url]
+    session.delete(:forwarding_url)
+    return url
+  end
+
   private
 
     def destroy_session
@@ -53,11 +101,10 @@ class ApplicationController < ActionController::Base
     def require_logged_in
       unless current_user
 
+        store_forwarding_url
+
         @message = "Please login first."
-        if request.path == cart_submit_path
-          @message = "You need to login before you can place an order."  
-        end
-        Rails.logger.debug @message
+        Rails.logger.debug "#{@message} request.path: #{request.path}"
         flash[:warning] = @message
 
         respond_to do |format|
@@ -108,6 +155,6 @@ class ApplicationController < ActionController::Base
       ActiveRecord::Base.logger.level = old_log_level
     end
 
-    # Allows the view to access controller methods.
+    # Makes the controller methods available to the View
     helper_method :current_user, :destroy_session, :user_cart
 end

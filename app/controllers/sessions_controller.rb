@@ -3,50 +3,39 @@ require 'json'
 class SessionsController < ApplicationController
 
   def create
-    logger.debug 'Try to find user by email... '
-    logger.debug "Email: #{params[:user][:email]}"
+    Rails.logger.debug 'Try to find user by email... '
+    Rails.logger.debug "Email: #{params[:user][:email]}"
     user = User.find_by_email(params[:user][:email])
 
     if user && user.authenticate(params[:user][:password]) && (!user.account_locked)
 
-      Rails.logger.debug "Create new session."
+      Rails.logger.debug "-----> Authenticated successfully!!! Create new session."
 
-      # Retain cart, if the user has only just logged in.
-      # Note - it would be inconvenient for the user if they lost all their cart when they log in.
-      # But clearing the session on login is 'security best practice'
-      # Not sure if this is a major security issue... Needs attention.
-      temp_cart = {}
-      user_cart.each_with_index do |(productId,qty),index|
-        quantity = qty.to_i
-        @prod = Product.find(productId.to_s)
-        if @prod.quantity_in_stock >= quantity
-          temp_cart[productId] = quantity # get the number requested.
-        else
-          temp_cart[productId] = @prod.quantity_in_stock # get as many as are available.
-        end
-      end
-      Rails.logger.debug "Clear session, to prevent session fixation attack..."
-      reset_session # Clears to an empty hash.
-      clear_cart
-      debug_print_cart
-
-      Rails.logger.debug "Restore cart contents for user convenience..."
-      user_cart.replace(temp_cart) # copy each hash value into the new session.
-      debug_print_cart
-
-      logger.debug "-----> Authenticated successfully!!!"
+      clear_and_retain_cart
 
       # Save the user ID in the session so it can be used in subsequent requests
       session[:current_user_id] = user.id
 
       flash[:success] = "You are now logged in as #{current_user.email}"
-      redirection = "/cart" # My Cart
-      if user_cart.empty?
-        redirection = "/users/#{user.id}/edit" # My Account
+
+      # Tell the client where to go now they are logged in.
+      # The client page has some ajax waiting to receive json from us, telling 'you are logged in, please navigate to xyz url'
+      # We do this instead of performing a redirect on the server side.
+      destination_url = get_login_destination
+
+      # destination_url:      http://localhost:3000/checkout/submit
+      # checkout_submit_path: /checkout/submit
+      # checkout_path:        /checkout
+
+      if destination_url == checkout_submit_path
+        # The user tried to go thru checkout.
+        # Take them back to the checkout once the login is completed.
+        destination_url = checkout_path
       end
 
+      # Now we just send some json back to the javascript on the login page, and let it make another request, rather than doing a redirect.
       # TODO: make a serialiser instead.
-      render json: {redirection: redirection, user: {id: user.id}}, :status => 201 # created
+      render json: {redirection: destination_url, user: {id: user.id}}, :status => 201 # created
 
       # The user has successfully logged in.
     else
@@ -86,4 +75,38 @@ class SessionsController < ApplicationController
     render template: "/session/sessionExpired"
   end
 
+  private
+    def clear_and_retain_cart
+      # Clear the session, except for the user cart and other session vars that we want to retain.
+      # It would be a big inconvenience for the user if they lost all their cart when they log in.
+      # I need to read about "session fixation attack" and security and stuff, and see if this code needs some attention.
+      # Is it a 'security best practice' to clear the session on login?
+      # Does this actually prevent 'session fixation attack' or other attacks?
+
+      temp_cart = {}
+      user_cart.each_with_index do |(productId,qty),index|
+        quantity = qty.to_i
+        @prod = Product.find(productId.to_s)
+        if @prod.quantity_in_stock >= quantity
+          temp_cart[productId] = quantity # get the number requested.
+        else
+          temp_cart[productId] = @prod.quantity_in_stock # get as many as are available.
+        end
+      end
+      retain_forwarding_url = session[:forwarding_url]
+      retain_recent_url = session[:recent_url]
+
+      Rails.logger.debug "Clear session."
+      reset_session # Clears to an empty hash.
+      clear_cart
+      debug_print_cart
+
+      Rails.logger.debug "Restore cart contents for user convenience..."
+      user_cart.replace(temp_cart) # copy each hash value into the new session.
+      debug_print_cart
+
+      # im sure there must be better way to do this.
+      session[:forwarding_url] = retain_forwarding_url
+      session[:recent_url] = retain_recent_url
+    end
 end

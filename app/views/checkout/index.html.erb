@@ -1,3 +1,11 @@
+<%= javascript_include_tag "precompile/checkout_submit" %>
+
+<%
+# Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
+# A remote form automatically gets its authenticity token from the page's meta tag.
+%>
+<%= form_tag '/checkout/submit', remote: true, id: "checkoutForm" %>
+
 
 <div class="row">
   <div class="col-xs-12">
@@ -52,3 +60,6 @@
 
   </div>
 </div>
+
+
+</form>

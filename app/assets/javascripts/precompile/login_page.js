@@ -27,6 +27,7 @@
 
         statusCode: {
 
+          // session created
           201: function(response) {
             _user = response.user;
           },
@@ -44,7 +45,11 @@
           //console.log("Login XHR COMPLETED with status " + textStatus + "\n");
           if (textStatus == "success") {
             console.log("redirection: " + xhr.responseJSON.redirection);
-            window.location.href = xhr.responseJSON.redirection;
+
+            var newLocation = "http://" + window.location.hostname + ':' + window.location.port + xhr.responseJSON.redirection;
+
+            // Browser navigate to given url. Forget current page from history. Avoids 'endless back button' fiasco.
+            window.location.replace(newLocation);
           }
         }
 

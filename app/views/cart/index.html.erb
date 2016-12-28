@@ -1,11 +1,16 @@
 <%= javascript_include_tag "precompile/store_and_cart" %>
-<%= javascript_include_tag "precompile/cart_submit" %>
+
+<%
+# Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
+# A remote form automatically gets its authenticity token from the page's meta tag.
+%>
+<%#= form_tag '/cart/submit', remote: true, id: "cartForm" %>
+
 
 <div class="row">
   <div class="col-xs-12">
-
     <div class="centeredProducts">
-      
+
       <div class="alert alert-warning" id="serverError" style="display:none;">
         There was a server error.
       </div>
@@ -20,7 +25,6 @@
             </h3>
           </div>
         </div>
-
         <div class="col-xs-12 visible-xs">
           <div class="row">
             <div class="col-xs-5" style='margin-top:15px'>
@@ -40,13 +44,11 @@
       <% else %>
         
         <div class="row content-header-row">
-
           <div class="col-xs-6">
             <div class="row">
               <%= link_to "Back To Store", store_index_path, class: "btn btn-default content-header-btn" %>
             </div>
           </div>
-
           <div class="col-xs-6">
             <div class="row">
               <div class="pull-right">
@@ -60,51 +62,45 @@
               </div>
             </div>
           </div>
-          
         </div>
 
-        <%
-        # Remote: This will make the form submit via ajax (Through unobtrusive javaScript)
-        # A remote form automatically gets its authenticity token from the page's meta tag.
-        %>
-        <%= form_tag '/cart/submit', remote: true, id: "cartForm" %>
-          <% @products.each do |product| %>
-            <%=
-            render "partials/forsale_product_line", {
-              product: product[:record],
-              product_qty: product[:cart_qty],
-              subtotal: product[:subtotal],
-              atStore: false
-            }
-            %>
-          <% end %>
-
+        <% @products.each do |product| %>
           <%=
-          render "cart/partials/summaryRow", {
-            total_items: @total_items,
-            grand_total: @grand_total
+          render "partials/forsale_product_line", {
+            product: product[:record],
+            product_qty: product[:cart_qty],
+            subtotal: product[:subtotal],
+            atStore: false
           }
           %>
+        <% end %>
 
-          <% if @total_lines > 0 %>
+        <%=
+        render "cart/partials/summaryRow", {
+          total_items: @total_items,
+          grand_total: @grand_total
+        }
+        %>
 
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="text-center">
-                  <h3>
-                    <%= link_to checkout_path(current_user), class: "btn btn-default cart-submit-btn" do %>
-                      <div class="">Proceed to checkout</div>
-                    <% end %>
-                  </h3>
-                </div>
+        <% if @total_lines > 0 %>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="text-center">
+                <h3>
+                  <%= link_to checkout_path(current_user), class: "btn btn-default cart-submit-btn" do %>
+                    <div class="">Proceed to checkout</div>
+                  <% end %>
+                </h3>
               </div>
             </div>
-
-          <% end %>
+          </div>
+        <% end %>
           
-        </form>
-
       <% end %>
+
     </div>
   </div>
 </div>
+
+
+<!-- </form> -->
