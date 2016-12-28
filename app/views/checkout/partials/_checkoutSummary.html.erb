@@ -12,7 +12,7 @@
 
     <% @products.each do |product| %>
       <%=
-      render "checkout/partials/cartSummaryRow", {
+      render "checkout/partials/checkoutSummaryRow", {
             product: product[:record],
             product_qty: product[:cart_qty],
             subtotal: product[:subtotal]
