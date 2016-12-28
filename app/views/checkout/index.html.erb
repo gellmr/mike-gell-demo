@@ -29,9 +29,9 @@
 
     <% else %>
 
-      <h4>In Your Cart...</h4>
+      <h4>In Your Cart...</h4><br/>
 
-      <%= render "checkout/partials/cartSummary" %>
+      <%= render "checkout/partials/checkoutSummary" %>
 
       <% if current_user.present? %>
         <% if @addresses.where(deleted: false).count > 0 %>
