@@ -1,26 +1,15 @@
-<div class="row">
+<div class="row tiny-font">
   <div class="col-xs-12">
-    <p class="content-heading mg-resizable-11-14">
-      <strong>Order #</strong><%= order.id %>
-    </p>
-  </div>
 
-  <div class="col-xs-12">
-    <p class="mg-resizable-11-14">
+    <p>
+      <strong>Order #</strong><%= order.id %>
+      &nbsp
       <% t = order.order_date %>
       <% ampm = t.strftime("%p").downcase %>
-      <strong>Date:</strong> <%= t.strftime("#{t.day.ordinalize} %B %Y %l:%M#{ampm} UTC") || "none" %>
+      <strong>Date:</strong> <%= t.strftime("#{t.day.ordinalize} %b %Y %l:%M#{ampm} UTC") || "none" %>
     </p>
-  </div>
 
-  <div class="col-xs-12">
-    <p class="content-heading mg-resizable-11-14">
-      <strong>Status:</strong>
-      <small>
-        <%= order.order_status || "Not Shipped Yet" %>
-      </small>
-    </p>
-    <p class="content-heading mg-resizable-11-14">
+    <p>
       <% if shipping_address.nil? %>
         <small>Shipping Address: None</small>
       <% else %>
@@ -28,7 +17,8 @@
         <small><%= shipping_address.oneLine %></small>
       <% end %>
     </p>
-    <p class="content-heading mg-resizable-11-14">
+
+    <p>
       <% if billing_address.nil? %>
         <small>Billing Address: None</small>
       <% else %>
@@ -36,5 +26,13 @@
         <small><%= billing_address.oneLine %></small>
       <% end %>
     </p>
+
+    <p>
+      <strong>Status:</strong>
+      <small>
+        <%= order.order_status || "Not Shipped Yet" %>
+      </small>
+    </p>
+
   </div>
 </div>
