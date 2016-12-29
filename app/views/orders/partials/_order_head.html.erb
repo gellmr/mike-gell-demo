@@ -1,6 +1,13 @@
 <%
-  t = order.order_date
-  ampm = t.strftime("%p").downcase
+@total_items = 0
+@grand_total = 0
+order.ordered_products.each do |ordered_product|
+  @total_items += ordered_product.qty.to_i
+  @grand_total += ordered_product.qty.to_i * ordered_product.product.unit_price
+end
+
+t = order.order_date
+ampm = t.strftime("%p").downcase
 %>
 
 <div class="row tiny-font">
@@ -13,26 +20,25 @@
       <%= t.strftime("#{t.day.ordinalize} %b %Y %l:%M#{ampm} UTC") || "none" %>
     </p>
 
-    <p>
-      <small>
+    <small>
+      <p>
         <strong>Shipping Address:</strong>
         <%= shipping_address.nil? ? "None" : shipping_address.oneLine %>
-      </small>
-    </p>
+      </p>
 
-    <p>
-    <small>
-      <strong>Billing Address:</strong>
-      <%= billing_address.nil? ? "None" : billing_address.oneLine %>
+      <p>
+        <strong>Billing Address:</strong>
+        <%= billing_address.nil? ? "None" : billing_address.oneLine %>
+      </p>
+
+      <p>
+        <strong>Product Lines:</strong> <%= order.ordered_products.count || 0 %>
+        &nbsp
+        <strong>Total Items:</strong> <%= @total_items || 0 %>
+        &nbsp
+        <strong>Invoice Total:</strong> $<%= sprintf '%.2f', @grand_total || 0 %>
+      </p>
     </small>
-    </p>
-
-    <!-- <p>
-      <small>
-        <%= order.ordered_products.count || 0 %>
-        Product Lines
-      </small>
-    </p> -->
 
     <p>
       <strong>Status:</strong>

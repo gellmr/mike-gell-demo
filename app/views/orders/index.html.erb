@@ -22,7 +22,6 @@
             <%= render "orders/partials/order_head", {
               order: order, shipping_address: @ship_addresses[order.id], billing_address: @bill_addresses[order.id]
             } %>
-            <%= render "orders/partials/order_summary", { order: order } %>
           </div>
 
         <% end %>
