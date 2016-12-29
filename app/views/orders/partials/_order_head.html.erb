@@ -1,11 +1,14 @@
+<%
+  t = order.order_date
+  ampm = t.strftime("%p").downcase
+%>
+
 <div class="row tiny-font">
   <div class="col-xs-12">
 
     <p>
       <strong>Order #</strong><%= order.id %>
       &nbsp
-      <% t = order.order_date %>
-      <% ampm = t.strftime("%p").downcase %>
       <strong>Created:</strong>
       <%= t.strftime("#{t.day.ordinalize} %b %Y %l:%M#{ampm} UTC") || "none" %>
     </p>
