@@ -1,39 +1,30 @@
 <%
 @total_items = 0
 @grand_total = 0
-@total_lines = 0
 order.ordered_products.each do |ordered_product|
-  @total_lines += 1
   @total_items += ordered_product.qty.to_i
   @grand_total += ordered_product.qty.to_i * ordered_product.product.unit_price
 end
 %>
 
-<div class="tiny-font">
-  <div class="row row-order-line-item mg-table-feint">
+<div class="">
+  <div class="row tiny-font row-order-line-item mg-table-feint">
 
     <div class="col-xs-5">
-      <%= @total_lines || 0 %>
-      &nbsp
-      Product Lines
     </div>
 
-    <div class="col-xs-3">
-      <div class="text-left">
+    <div class="col-xs-3 text-center">
+      <strong>
         <%= @total_items || 0 %>
-        &nbsp
-        Items
-      </div>
+      </strong>
     </div>
     
-    <div class="col-xs-4">
-      <div class="pull-right">
-        Total:
-        &nbsp
-        <b>
-          $<%= sprintf '%.2f', @grand_total || 0 %>
-        </b>
-      </div>
+    <div class="col-xs-4 text-right">
+      Total:
+      &nbsp
+      <b>
+        $<%= sprintf '%.2f', @grand_total || 0 %>
+      </b>
     </div>
 
   </div>

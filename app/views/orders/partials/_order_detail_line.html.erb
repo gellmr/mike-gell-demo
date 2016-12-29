@@ -1,20 +1,16 @@
-<div class="row row-order-line-item mg-table-feint">
+<div class="row tiny-font row-order-line-item mg-table-feint">
 
   <div class="col-xs-5">
     <%= ordered_product.product.name %>
   </div>
 
-  <div class="col-xs-3">
-    <div class="text-left">
-      <%= ordered_product.qty || 0 %>
-    </div>
+  <div class="col-xs-3 text-center">
+    <%= ordered_product.qty || 0 %>
   </div>
 
-  <div class="col-xs-4">
-    <div class="pull-right">
-      <% uprice = ordered_product.product.unit_price %>
-      $<%= sprintf '%.2f', ordered_product.qty.to_i * uprice || 0 %>
-    </div>
+  <div class="col-xs-4 text-right">
+    <% uprice = ordered_product.product.unit_price %>
+    $<%= sprintf '%.2f', ordered_product.qty.to_i * uprice || 0 %>
   </div>
 
 </div>

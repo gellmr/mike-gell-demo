@@ -6,32 +6,34 @@
       &nbsp
       <% t = order.order_date %>
       <% ampm = t.strftime("%p").downcase %>
-      <strong>Date:</strong> <%= t.strftime("#{t.day.ordinalize} %b %Y %l:%M#{ampm} UTC") || "none" %>
+      <strong>Created:</strong>
+      <%= t.strftime("#{t.day.ordinalize} %b %Y %l:%M#{ampm} UTC") || "none" %>
     </p>
 
     <p>
-      <% if shipping_address.nil? %>
-        <small>Shipping Address: None</small>
-      <% else %>
+      <small>
         <strong>Shipping Address:</strong>
-        <small><%= shipping_address.oneLine %></small>
-      <% end %>
+        <%= shipping_address.nil? ? "None" : shipping_address.oneLine %>
+      </small>
     </p>
 
     <p>
-      <% if billing_address.nil? %>
-        <small>Billing Address: None</small>
-      <% else %>
-        <strong>Billing Address:</strong>
-        <small><%= billing_address.oneLine %></small>
-      <% end %>
+    <small>
+      <strong>Billing Address:</strong>
+      <%= billing_address.nil? ? "None" : billing_address.oneLine %>
+    </small>
     </p>
+
+    <!-- <p>
+      <small>
+        <%= order.ordered_products.count || 0 %>
+        Product Lines
+      </small>
+    </p> -->
 
     <p>
       <strong>Status:</strong>
-      <small>
-        <%= order.order_status || "Not Shipped Yet" %>
-      </small>
+      <small><%= order.order_status || "Not Shipped Yet" %></small>
     </p>
 
   </div>
