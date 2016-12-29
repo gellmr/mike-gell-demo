@@ -1,8 +1,5 @@
-<div>
-  <%= render "orders/partials/order_detail_header", { order: order } %>
+<%= render "orders/partials/order_detail_header", { order: order } %>
 
-  <% order.ordered_products.each do |ordered_product| %>
-    <%= render "orders/partials/order_detail_line", { ordered_product: ordered_product } %>
-  <% end %>
-
-</div>
+<% order.ordered_products.each do |ordered_product| %>
+  <%= render "orders/partials/order_detail_line", { ordered_product: ordered_product } %>
+<% end %>
