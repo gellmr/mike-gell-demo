@@ -8,20 +8,16 @@ end
 %>
 
 <div class="">
-  <div class="row tiny-font row-order-line-item mg-table-feint">
+  <div class="row  row-order-line-item mg-table-feint">
 
     <div class="col-xs-5">
+    <b>Total</b>
     </div>
 
     <div class="col-xs-3 text-center">
-      <strong>
-        <%= @total_items || 0 %>
-      </strong>
     </div>
     
     <div class="col-xs-4 text-right">
-      Total:
-      &nbsp
       <b>
         $<%= sprintf '%.2f', @grand_total || 0 %>
       </b>
