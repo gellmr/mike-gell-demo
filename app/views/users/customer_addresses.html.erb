@@ -36,7 +36,7 @@
                   <div class="well" style="margin-top: 20px;">
                     This customer currently has <%= @customer.addresses.where(deleted: false).count %> addresses.
 
-                    <%= link_to customer_create_address_path(@customer), method: :post, class: "mg-resizable-11-14" do %>
+                    <%= link_to customer_create_address_path(@customer), method: :post do %>
                       <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
                     <% end %>
                   </div>

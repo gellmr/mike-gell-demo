@@ -33,7 +33,7 @@
                   <div class="well" style="margin-top: 20px;">
                     You currently have <%= @user.addresses.where(deleted: false).count %> addresses.
 
-                    <%= link_to user_create_address_path(@user), method: :post, class: "mg-resizable-11-14" do %>
+                    <%= link_to user_create_address_path(@user), method: :post do %>
                       <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
                     <% end %>
                   </div>
