@@ -10,5 +10,12 @@ module ApplicationHelper
       else false
     end
   end
-  
+
+  def navigation_li(text, path)
+    active_class = path == request.path ? 'active' : ''
+    tag = content_tag :li, class: "#{active_class}" do
+      link_to text, path
+    end
+    return tag
+  end
 end
