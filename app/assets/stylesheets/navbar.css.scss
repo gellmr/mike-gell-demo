@@ -1,22 +1,10 @@
 .mg-site-title {
-  /*border: solid 1px grey;*/
   display:inline-block;
   max-width: 260px;
   min-width: 221px;
   padding: 15px;
-  /*
-  margin-bottom: 9px;
-  margin-left: 4px;
-  margin-top: 4px;
-  */
-
   a {
-    /*border: 1px solid green;*/
     display: inline-block;
-    /*
-    margin-top: 5px;
-    margin-left: 10px;
-    */
     font-size: 20px;
     color: #666666;
   }
@@ -25,18 +13,12 @@
     text-decoration: none;
   }
   .loggedInAs {
-    /*border: 1px solid pink;*/
-    /*
-    margin-left: 10px;
-    margin-bottom: 3px;
-    */
     font-size: 0.8em;
     color: grey;
     .dark-text{
       color: #3F3B4F;
     }
-    div{
-      /*border: 1px solid brown;*/
+    div {
       display: inline-block;
     }
   }
