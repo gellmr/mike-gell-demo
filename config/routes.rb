@@ -1,6 +1,6 @@
 Fuzzybear::Application.routes.draw do
 
-  resources :users, only: [:create, :update, :edit] do
+  resources :users, only: [:create, :update, :edit, :destroy] do
     # POST  /users             users#create    users_path
     # PATCH /users/:id         users#update    user_path
     # GET   /users/:id/edit    users#edit      edit_user_path

@@ -3,17 +3,15 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
+  
+    <%= render "/partials/flash_message" %>
 
     <h4>Manage Customers</h4>
 
     <div class="row">
 
       <% @customers.each do |customer| %>
-
-        <%= link_to edit_customer_path(customer) do %>
-          <%= render '/users/partials/customer_list', { customer: customer } %>
-        <% end %>
-
+        <%= render '/users/partials/customer_list', { customer: customer } %>
       <% end %>
 
     </div>

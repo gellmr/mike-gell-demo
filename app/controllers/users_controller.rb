@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   before_action :require_logged_in, except: [:create]
-  before_action :require_staff, only: [:index, :edit_customer,:update_customer]
+  before_action :require_staff, only: [:index, :edit_customer,:update_customer, :destroy]
 
   def index
-    @customers = User.where.not(id: current_user.id)
+    @customers = User.where.not(id: current_user.id).order(:email)
   end
 
   def edit_customer
@@ -63,6 +63,25 @@ class UsersController < ApplicationController
   def edit
     @user = User.find_by(id: params[:id])
     # Serve the 'my account' form.
+  end
+
+  # Staff wants to delete a user
+  def destroy
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      flash[:notice] = "User #{params[:id]} not found."
+      redirect_to manage_customers_path
+    else
+      if @user.addresses.count > 0
+        @user.addresses.each do |address|
+          address.destroy
+        end
+      end
+      deletedUser = "#{@user.id} (Name: #{@user.first_name} #{@user.last_name}, Email: #{@user.email})."
+      @user.destroy
+      flash[:success] = "Deleted user #{deletedUser}"
+      redirect_to manage_customers_path
+    end
   end
 
   private
