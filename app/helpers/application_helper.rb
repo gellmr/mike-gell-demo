@@ -11,10 +11,10 @@ module ApplicationHelper
     end
   end
 
-  def navigation_li(text, path)
+  def navigation_li(text, path, link_attribs={})
     active_class = path == request.path ? 'active' : ''
     tag = content_tag :li, class: "#{active_class}" do
-      link_to text, path
+      link_to text, path, link_attribs
     end
     return tag
   end

@@ -1,28 +1,10 @@
-         
-
-<!-- Site Title -->
-<div class="col-xs-6 col-sm-3">
-
-  <div class="row">
-    <h3 style="margin-left: 15px; z-index:99999; position: relative;">
-      <%= link_to "Fuzzy Bear Electronics", root_path, class: "mg-site-title" %>
-    </h3>
-  </div>
-
+<div class="mg-site-title">
+  <%= link_to "Fuzzy Bear Electronics", root_path %>
   <% if current_user %>
-  <div class="row loggedInAs">
-    <div class="col-xs-12">
-      Logged in as <span class="dark-text"><%= current_user.email %></span>
+    <div class="loggedInAs">
+      <div>Signed in as </div>
+      <div class="dark-text"><%= current_user.email %></div>
+      <div><%= current_user.usertype == 'staff' ? "(Customer)" : "(Customer)" %></div>
     </div>
-
-    <div class="col-xs-12">
-      <% if current_user.usertype == 'staff' %>
-        (Staff Member)
-      <% else %>
-        (Customer)
-      <% end %>
-    </div>
-  </div>
   <% end%>
-
 </div>

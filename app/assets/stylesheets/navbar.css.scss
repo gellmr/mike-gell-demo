@@ -1,75 +1,47 @@
-.row.loggedInAs {
-  color: grey;
-  font-size: 0.8em;
-}
+.mg-site-title {
+  /*border: solid 1px grey;*/
+  display:inline-block;
+  max-width: 260px;
+  min-width: 221px;
+  padding: 15px;
+  /*
+  margin-bottom: 9px;
+  margin-left: 4px;
+  margin-top: 4px;
+  */
 
-span.dark-text{
-  color: #3F3B4F;
-}
-
-nav.navbar {
-  padding-right: 6px;
-  padding-bottom: 6px;
-}
-
-div.mg-navbar-parent {
-  div.row {
-    margin-top: 15px;
-    text-align: right;
-    a {
-      text-decoration: none;
+  a {
+    /*border: 1px solid green;*/
+    display: inline-block;
+    /*
+    margin-top: 5px;
+    margin-left: 10px;
+    */
+    font-size: 20px;
+    color: #666666;
+  }
+  a:hover {
+    color: black;
+    text-decoration: none;
+  }
+  .loggedInAs {
+    /*border: 1px solid pink;*/
+    /*
+    margin-left: 10px;
+    margin-bottom: 3px;
+    */
+    font-size: 0.8em;
+    color: grey;
+    .dark-text{
+      color: #3F3B4F;
     }
-    a div.mg-navbar-item {
-      border-style: solid;
-      border-width: 1px;
-      border-color: rgb(230, 230, 230);
-
-      width: 130px;
-      height: 35px;
-      display: block;
-      margin-left: auto;
-      margin-right: 0px;
-      text-align: right;
-      padding-top: 8px;
-      padding-right: 10px;
-      background-color: #EEEEEE;
-      border-radius: 8px;
-      margin-top: 2px;
-      
-      @media screen and (min-width: 441px) {
-        width: 180px;
-        height: 35px;
-        display: block;
-        margin-left: auto;
-        margin-right: 0px;
-        text-align: right;
-        padding-top: 10px;
-        padding-right: 10px;
-        /*background-color: orange;*/
-      }
-      /* Large devices (large desktops, 1200px and up) */
-      @media screen and (min-width: 1200px) {
-        width: 16%;
-        height: 40px;
-        display: inline-block;
-        text-align: center;
-        padding-top: 10px;
-        padding-right: 0px;
-        padding-left: 0px;
-        /*background-color: aqua;*/
-      }
-    }
-    a div.mg-navbar-item:hover {
-      background-color: #D0DEEB;
+    div{
+      /*border: 1px solid brown;*/
+      display: inline-block;
     }
   }
 }
 
-a.mg-site-title {
-  color: #666666;
-}
-
-a.mg-site-title:hover {
-  color: black;
-  text-decoration: none;
+button.navbar-toggle{
+  margin: 10px;
 }
