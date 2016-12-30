@@ -1,3 +1,5 @@
+<%= form_for @user do |f| %>
+
 <a href="#formTop"></a>
 <div class="row">
   <div class="col-xs-12">
@@ -11,8 +13,6 @@
       </h3>
     </div>
     <% end %>
-
-    <%= form_for @user do |f| %>
 
       <%= hidden_field_tag :current_tab, controller_name %>
 
@@ -31,6 +31,12 @@
                 <div class="col-xs-12">
 
                   <div id="form-group-account" class="form-group well" style="margin-top: 20px;">
+
+                    <div id="form-group-usertype" class="form-group">
+                      <label for="input_usertype">User Type: </label>
+                      <span class='error-message'></span>
+                      <%= @user.usertype %>
+                    </div>
 
                     <div id="form-group-email" class="form-group">
                       <label for="input_email">Email address</label>
@@ -69,6 +75,9 @@
                     </div>
                   </div>
 
+                  <div class="form-group">
+                    <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,14 +85,7 @@
         </div>
       </div>
 
-      <div style="height: 66px;">
-        <div class="panel-body">
-          <div class="panel" style="border: none;">
-            <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
-          </div>
-        </div>
-      </div>
-
-    <% end %>
   </div>
 </div>
+
+<% end %>

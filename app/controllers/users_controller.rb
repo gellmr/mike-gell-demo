@@ -72,6 +72,7 @@ class UsersController < ApplicationController
         :email,
         :password,
         :password_confirmation,
+        :usertype,
         :first_name,
         :last_name,
         :home_phone,

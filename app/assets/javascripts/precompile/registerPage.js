@@ -72,11 +72,17 @@
 
       console.log("\n registerForm submit button - clicked");
 
+      var usertype = "customer";
+      if ($("#usertype-checkbox").prop('checked') == true) {
+        usertype = "staff";
+      }
+
       var params = {
         user: {
           email: $("form.registerForm div.email input").val(),
           password: $("form.registerForm div.password input").val(),
-          password_confirmation: $("form.registerForm div.passwordConfirmation input").val()
+          password_confirmation: $("form.registerForm div.passwordConfirmation input").val(),
+          usertype: usertype
         }
       }
       console.log("Try to register...");
