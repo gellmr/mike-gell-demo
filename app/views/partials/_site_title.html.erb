@@ -4,7 +4,7 @@
     <div class="loggedInAs">
       <div>Signed in as </div>
       <div class="dark-text"><%= current_user.email %></div>
-      <div><%= current_user.usertype == 'staff' ? "(Customer)" : "(Customer)" %></div>
+      <div><%= current_user.usertype == 'staff' ? "(Staff)" : "(Customer)" %></div>
     </div>
   <% end%>
 </div>
