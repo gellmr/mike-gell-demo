@@ -2,16 +2,17 @@
   <div class="well manage-customers-page tiny-font">
 
     <div class="row">
-      <div class="col-xs-8 showme">
-        <span class="feint">Name: </span>
-        <%= customer.first_name %>
-        <%= customer.last_name %>
-      </div>
-
-      <div class="col-xs-4 showme">
-        <%= link_to user_path(customer), method: :delete, class: 'customer-delete pull-right', style:"text-decoration:none;" do %>
-          <span class="glyphicon glyphicon-remove"></span>
-        <% end %>
+      <div class="col-xs-12">
+        <div>
+          <%= link_to user_path(customer), method: :delete, class: 'customer-delete pull-right', style:"text-decoration:none;" do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </div>
+        <div>
+          <span class="feint">Name: </span>
+          <%= customer.first_name %>
+          <%= customer.last_name %>
+        </div>
       </div>
     </div>
 
