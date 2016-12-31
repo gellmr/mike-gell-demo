@@ -6,14 +6,22 @@
   
     <%= render "/partials/flash_message" %>
 
-    <h4>Manage Customers</h4>
-
     <div class="row">
+      <div class="hidden-xs col-sm-2"></div>
+      <div class="col-xs-12 col-sm-8">
 
-      <% @customers.each do |customer| %>
-        <%= render '/users/partials/customer_list', { customer: customer } %>
-      <% end %>
+        <h4>Manage Customers</h4>
+        <div class="row breakpoint-text">
 
+        <% @customers.each do |customer| %>  
+          <%= render '/users/partials/customer_list', { customer: customer } %>
+        <% end %>
+
+        </div>
+
+      </div>
+      <div class="hidden-xs col-sm-2"></div>
     </div>
+
   </div>
 </div>

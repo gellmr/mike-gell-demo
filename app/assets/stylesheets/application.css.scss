@@ -27,3 +27,23 @@ $font-folder: '/fonts';
 nav.pagination a.btn {
   font-size: 10px;
 }
+
+.feint{
+  color: grey;
+}
+
+.very-feint{
+  color: rgb(200, 200, 200);
+}
+
+div.breakpoint-text .tiny-font{
+  font-size: 14px;
+
+  @media screen and (max-width: 430px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 345px) {
+    font-size: 9px;
+  }
+}
