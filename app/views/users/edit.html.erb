@@ -34,8 +34,20 @@
 
                     <div id="form-group-usertype" class="form-group">
                       <label for="input_usertype">User Type: </label>
-                      <span class='error-message'></span>
-                      <%= @user.usertype %>
+                      <%=
+                      f.select(
+                        :usertype,
+                        options_for_select(
+                          [
+                            ['Staff', "staff", {}],
+                            ['Customer', "customer", {}]
+                          ],
+                          @user.usertype
+                        ),
+                        {},
+                        {class: "btn btn-default"}
+                      )
+                      %>
                     </div>
 
                     <div id="form-group-email" class="form-group">
