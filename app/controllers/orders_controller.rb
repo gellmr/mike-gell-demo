@@ -29,8 +29,21 @@ class OrdersController < ApplicationController
       flash[:success] = "Your order was created successfully."
       head :created, {message: "Order created successfully", userId: current_user.id, orderId: @order.id}
     else
-      Rails.logger.debug "Could not create order."
-      head :bad_request, {message: "Could not create order"}
+      Rails.logger.debug "Could not create order. #{@order.errors.full_messages}"
+      if @order.errors.any?
+        if @order.errors['shipping_address'].any? || @order.errors['billing_address'].any?
+          # tell client javascript to redirect to addresses page.
+          flashMessage = "You don't have any Shipping Address or Billing Address. Please add them"
+          flash.keep
+          flash[:danger] = flashMessage
+          json = {
+            userId: current_user.id,
+            redirect: user_addresses_path(current_user),
+            flashMessage: flashMessage
+          }
+        end
+      end
+      render :json => json, :status => 400 # bad request
     end
   end
 

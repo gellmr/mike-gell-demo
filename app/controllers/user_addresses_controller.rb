@@ -19,7 +19,6 @@ class UserAddressesController < ApplicationController
   # User wants the form for editing addresses
   def edit
     @user = User.find_by(id: params[:user_id])
-    render 'users/addresses'
   end
 
   # User wants to delete an address

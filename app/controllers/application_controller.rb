@@ -72,6 +72,7 @@ class ApplicationController < ActionController::Base
   # Eg, if we try to checkout when not logged in, we are prompted to login, and then directed back to the 'forwarding url'.
   # The 'forwarding url' is meant for redirecting the user to a restricted url, after they successfully log in.
   def store_forwarding_url
+    Rails.logger.debug "Store forwarding url: #{request.original_fullpath}"
     session[:forwarding_url] = request.original_fullpath
   end
 
