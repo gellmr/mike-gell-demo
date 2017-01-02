@@ -5,7 +5,7 @@
       <%= render "/partials/flash_message" %>
       <div class="col-xs-12">
         <h3>
-          Request Password Reset Token
+          Password Reset
         </h3>
       </div>
     </div>
@@ -13,49 +13,8 @@
     <div class="row well solidBackground">
 
       <p>
-        This will send a single-use token to your email address. The token will be a randomly generated sequence of digits.
+        Please provide your email address below.
       </p>
-
-      <p>
-        Your account will not be affected. You can ignore the email and everything will be fine.
-      </p>
-
-      <p>
-        Or you can use the token, and provide a new password.
-      </p>
-      
-      <small>
-        <p>
-          To use the token, click the link in the email provided. This will cause the following to happen:
-          <ul>
-            <li>
-              Your account will be logged out.
-            </li>
-            <li>
-              Your account will be deactivated. Nobody will be able to log in as you.
-            </li>
-            <li>
-              You will see a page like this one, asking for you to provide a new password.
-            </li>
-          </ul>
-        </p>
-
-        <p>
-          The reset token is only valid for ten minutes.
-        </p>
-        
-        <p>
-           <b>If you don't click the token</b> - it will expire and nothing will happen to your account. You can log in as usual.
-        </p>
-
-        <p>
-          <b>If you click the token but don't provide a new password (within ten minutes)</b> - then the token expires and your account stays deactivated. You need to request a new token.
-        </p>
-
-        <p>
-          <b>If you click the token and provide a new password</b> - you will have successfully reset your password.
-        </p>
-      </small>
 
       <%= form_tag create_password_reset_path %>
 
