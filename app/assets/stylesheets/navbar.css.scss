@@ -29,5 +29,14 @@ button.navbar-toggle{
 }
 
 ul.nav.navbar-nav li{
-  width: 146px;
+  // border: 1px solid pink;
+  // width: 146px;
+}
+
+// when the screen is small, hide the site logo that is inside the navbar.
+#navbar-site-title{
+  color: @brand-danger;
+  // @media screen and (min-width: @grid-float-breakpoint) {
+  //   display: hidden;
+  // }
 }

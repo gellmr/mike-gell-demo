@@ -5,36 +5,35 @@
 
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <div id="navbar-site-title">Fuzzy Bear Electronics</div>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsible-navbar-content" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         Main Menu <span class="caret"></span>
       </button>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" style="margin-left: -15px;" id="collapsible-navbar-content">
 
       <ul class="nav navbar-nav">
         <%= navigation_li "Shop for gadgets", store_index_path %>
         <%= navigation_li "View my Cart", cart_index_path %>
         <%= navigation_li "Go to Checkout", checkout_path %>
-        
-        <% if current_user %>
+      </ul>
 
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
           <%= navigation_li "My Orders", user_orders_path(current_user) %>
           <%= navigation_li "My Account", edit_user_path(current_user) %>
-
           <% if current_user.usertype == 'staff' %>
             <% c = manage_customers_path == request.path ? 'active' : '' %>
             <li class: "#{c}" style="width: 155px;">
               <%= link_to "Manage Customers", manage_customers_path %>
             </li>
           <% end %>
-
           <%= navigation_li "Log Out", logout_path, method: :delete %>
-
         <% else %>
-          <%= navigation_li "Create an Account", register_path %>
+          <%= navigation_li "Create Account", register_path %>
           <%= navigation_li "Forgot password", new_password_reset_path %>
           <%= navigation_li "Login", login_path %>
         <% end %>
