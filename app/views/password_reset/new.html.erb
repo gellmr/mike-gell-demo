@@ -4,45 +4,46 @@
     <div class="row">
       <%= render "/partials/flash_message" %>
       <div class="col-xs-12">
-        <h3>
-          Password Reset
-        </h3>
+        <div class="alert alert-danger"><b>Password Reset</b> - This feature is not currently supported.</div>
       </div>
-    </div>
 
-    <div class="row well solidBackground">
+      <!-- <div class="row well solidBackground"> -->
+      <div class="col-xs-12" style="color: rgba(0,0,0,0.3);">
 
-      <p>
-        Please provide your email address below.
-      </p>
+        <p>
+          Please provide your email address below.
+        </p>
 
-      <%= form_tag create_password_reset_path %>
+        <%= form_tag create_password_reset_path %>
 
-        <div class="form-group">
-          <%=
-          text_field_tag(
-            'email',              # name
-            "Your Email Address", # value
-            {
-              type:  "text",
-              class: "form-control",
-              id: 'password-reset-email'
-            }
-          )
-          %>
-        </div>
+          <div class="form-group">
+            <%=
+            text_field_tag(
+              'email',              # name
+              "Your Email Address", # value
+              {
+                type:  "text",
+                class: "form-control",
+                id: 'password-reset-email',
+                disabled: 'disabled'
+              }
+            )
+            %>
+          </div>
 
-        <div class="form-group">
-          <%=
-          submit_tag(
-            "Submit",
-            id: 'submit_request_reset_pw',
-            class: "btn btn-primary pull-right"
-          )
-          %>
-        </div>
+          <div class="form-group">
+            <%=
+            submit_tag(
+              "Send me a link",
+              id: 'submit_request_reset_pw',
+              class: "btn btn-primary pull-right",
+              disabled: 'disabled'
+            )
+            %>
+          </div>
 
-      </form>
+        </form>
+      </div>
     </div>
 
   </div>
