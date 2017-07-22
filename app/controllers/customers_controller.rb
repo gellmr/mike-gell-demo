@@ -9,4 +9,9 @@ class CustomersController < UsersController
     @customer = User.find(params[:id])
   end
 
+  def customer_addresses
+    @user = User.find(params[:id])
+    render "user_addresses/edit"
+  end
+
 end

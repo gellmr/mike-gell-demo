@@ -1,12 +1,24 @@
 <!-- Tab header -->
-<div class="col-xs-12" style="height:30px;"><b>Editing User:</b> <span class="feint"><%= user.first_name %>&nbsp<%= user.last_name %></span>
+<div class="col-xs-12" style="height:30px;"><b>Editing <%= controller_name.singularize %>:</b> <span class="feint"><%= user.first_name %>&nbsp<%= user.last_name %></span>
 </div>
 
 <ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
-  <%= navtab_li 'users/edit' %>
-    <%= link_to edit_user_path(user) do %> Details <% end %>
-  </li>
-  <%= navtab_li 'user_addresses/edit' %>
-    <%= link_to user_addresses_path(user) do %> Shipping / Billing Addresses <% end %>
-  </li>
+  controller_name: <%= controller_name %>
+  <% if controller_name == "users" || controller_name == "user_addresses" %>
+    <%= navtab_li 'users/edit' %>
+      <%= link_to edit_user_path(user) do %> Details <% end %>
+    </li>
+    <%= navtab_li 'user_addresses/edit' %>
+      <%= link_to user_addresses_path(user) do %> Shipping / Billing Addresses <% end %>
+    </li>
+  <% end %>
+
+  <% if controller_name == "customers" %>
+    <%= navtab_li 'customers/edit' %>
+      <%= link_to edit_customer_path(user) do %> Details <% end %>
+    </li>
+    <%= navtab_li 'customers/customer_addresses' %>
+      <%= link_to customer_addresses_path(user) do %> Shipping / Billing Addresses <% end %>
+    </li>
+  <% end %>
 </ul>
