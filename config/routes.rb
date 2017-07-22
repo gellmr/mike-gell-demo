@@ -16,7 +16,9 @@ Fuzzybear::Application.routes.draw do
 
 
   # Staff only - get index page of existing customers
-  get '/manage-customers' => 'users#index', as: 'manage_customers'
+  get '/manage-users'     => 'users#index',     as: 'manage_users'
+  get '/manage-customers' => 'customers#index', as: 'manage_customers'
+  get '/manage-staff'     => 'staff#index',     as: 'manage_staff'
 
   # Staff only - get edit page for existing customer
   get '/edit-customer/:id(.:format)' => 'users#edit_customer', as: 'edit_customer'

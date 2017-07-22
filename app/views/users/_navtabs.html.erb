@@ -1,0 +1,12 @@
+<!-- Tab header -->
+<div class="col-xs-12" style="height:30px;"><b>Editing User:</b> <span class="feint"><%= user.first_name %>&nbsp<%= user.last_name %></span>
+</div>
+
+<ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
+  <%= navtab_li 'users/edit' %>
+    <%= link_to edit_user_path(user) do %> Details <% end %>
+  </li>
+  <%= navtab_li 'user_addresses/edit' %>
+    <%= link_to user_addresses_path(user) do %> Shipping / Billing Addresses <% end %>
+  </li>
+</ul>

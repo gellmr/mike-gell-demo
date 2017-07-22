@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :require_staff, only: [:index, :edit_customer,:update_customer, :destroy]
 
   def index
-    @customers = User.where.not(id: current_user.id).order(:email)
+    @users = User.where.not(id: current_user.id).order(:email)
   end
 
   def edit_customer

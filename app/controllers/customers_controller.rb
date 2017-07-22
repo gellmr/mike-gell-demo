@@ -1,0 +1,2 @@
+class CustomersController < UsersController
+end

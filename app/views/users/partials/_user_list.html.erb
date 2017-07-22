@@ -1,0 +1,63 @@
+<div class="col-xs-12">
+  <div class="well manage-users-page tiny-font">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div>
+          <%= link_to user_path(user), method: :delete, class: 'user-delete pull-right', style:"text-decoration:none;" do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </div>
+        <div>
+          <span class="feint">Name: </span>
+          <%= user.first_name %>
+          <%= user.last_name %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="feint datahead">Email: </span>
+        <span class="datarow"><%= user.email %></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="feint datahead">Home Ph: </span>
+        <span class="datarow"><%= user.home_phone %></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="feint datahead">Work Ph: </span>
+        <span class="datarow"><%= user.work_phone %></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="feint datahead">Mobile Ph: </span>
+        <span class="datarow"><%= user.mobile_phone %></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="feint datahead">User Type: </span>
+        <span class="datarow"><%= user.usertype %></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= link_to edit_user_path(user), class: 'pull-right' do %>
+          <button id=<%="editUser#{user.id}"%> type="button" class="btn btn-default">Edit User</button>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>

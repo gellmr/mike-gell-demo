@@ -21,7 +21,7 @@
         <div class="panel-body">
           <div class="row">
 
-            <%= render "users/partials/user_edit_navtabs", { user: @user} %>
+            <%= render partial: "navtabs", locals: {user: @user} %>
 
             <!-- Tab panes -->
             <div class="tab-content">
