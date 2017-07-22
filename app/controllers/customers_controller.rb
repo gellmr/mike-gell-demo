@@ -14,4 +14,19 @@ class CustomersController < UsersController
     render "user_addresses/edit"
   end
 
+  # Try to update an existing customer record.
+  # Must be logged in
+  def update
+    @customer = User.find(params[:id])
+    @customer.update_attributes!(sane_user_params)
+    flash[:success] = "Successfully updated customer details"
+    logger.debug "Updated customer. params[:current_tab]: #{params[:current_tab]}"
+
+    if params[:current_tab] == 'customer_addresses'
+      redirect_to customer_addresses_path(@customer)
+    else
+      redirect_to edit_customer_path(@customer)
+    end
+  end
+
 end

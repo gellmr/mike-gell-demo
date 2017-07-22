@@ -24,7 +24,7 @@ Fuzzybear::Application.routes.draw do
   get '/customer-addresses/:id(.:format)' => 'customers#customer_addresses', as: 'customer_addresses'
 
   # Staff only - update the details of an existing customer
-  patch '/update-customer/:id(.:format)' => 'users#update_customer', as: 'update_customer'
+  patch '/customers/:id(.:format)' => 'customers#update', as: 'update_customer'
 
   # Staff only - create a new address for an existing customer
   post '/customer/:customer_id/address(.:format)' => 'user_addresses#create_customer_address', as: 'customer_create_address'
