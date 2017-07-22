@@ -1,4 +1,4 @@
-<%= form_for @user do |f| %>
+<%= form_for @customer do |f| %>
 
 <a href="#formTop"></a>
 
@@ -8,8 +8,6 @@
     
     <%= render "/partials/flash_message" %>
 
-    <%= render "/users/partials/just_signed_up", {user: @user} %>
-
     <%= hidden_field_tag :current_tab, controller_name %>
 
     <div class="panel panel-default">
@@ -18,7 +16,7 @@
 
         <div class="row">
 
-          <%= render partial: "navtabs", locals: {user: @user} %>
+          <%= render partial: "/customers/navtabs", locals: {customer: @customer} %>
 
           <!-- Tab panes -->
           <div class="tab-content">
@@ -28,9 +26,7 @@
 
               <div class="col-xs-12">
 
-                <%= render '/users/partials/usertype', { user: @user, f: f } %>
-
-                <%= render '/users/partials/edit_basic_details', { user: @user, f: f } %>
+                <%= render '/users/partials/edit_basic_details', { user: @customer, f: f } %>
 
                 <div class="form-group">
                   <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>

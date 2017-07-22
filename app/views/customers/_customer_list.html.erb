@@ -4,13 +4,6 @@
     <div class="row">
       <div class="col-xs-10">
         <%= render "/users/partials/list_basic", {user:user} %>
-        <hr>
-        <div class="row">
-          <div class="col-xs-12">
-            <span class="feint datahead">User Type: </span>
-            <span class="datarow"><%= user.usertype %></span>
-          </div>
-        </div>
       </div>
       <div class="col-xs-2">
         <%= link_to user_path(user), method: :delete, class: 'user-delete pull-right', style:"text-decoration:none;" do %>
@@ -21,8 +14,8 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <%= link_to edit_user_path(user), class: 'pull-right' do %>
-          <button id=<%="editUser#{user.id}"%> type="button" class="btn btn-default">Edit User</button>
+        <%= link_to edit_customer_path(user), class: 'pull-right' do %>
+          <button id=<%="editUser#{user.id}"%> type="button" class="btn btn-default">Edit Customer</button>
         <% end %>
       </div>
     </div>

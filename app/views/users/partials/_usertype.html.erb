@@ -1,0 +1,22 @@
+
+<div class="well" style="margin-top: 20px;">
+  <div id="form-group-usertype">
+
+    <label for="input_usertype">User Type: </label>
+    <%=
+    f.select(
+      :usertype,
+      options_for_select(
+        [
+          ['Staff', "staff", {}],
+          ['Customer', "customer", {}]
+        ],
+        @user.usertype
+      ),
+      {},
+      {class: "btn btn-default"}
+    )
+    %>
+
+  </div>
+</div>

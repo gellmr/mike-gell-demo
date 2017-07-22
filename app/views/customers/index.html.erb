@@ -14,7 +14,7 @@
         <div class="row breakpoint-text">
 
         <% @customers.each do |customer| %>  
-          <%= render '/users/partials/customer_list', { customer: customer } %>
+          <%= render '/customers/customer_list', { user: customer } %>
         <% end %>
 
         </div>

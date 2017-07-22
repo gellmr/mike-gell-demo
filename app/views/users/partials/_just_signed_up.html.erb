@@ -1,0 +1,11 @@
+
+
+<% if flash[:just_signed_up] %>
+
+<div class="alert alert-success">
+  <h3>
+    Welcome, <%= @user.email %>
+  </h3>
+</div>
+
+<% end %>

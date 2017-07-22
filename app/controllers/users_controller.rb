@@ -7,10 +7,6 @@ class UsersController < ApplicationController
     @users = User.where.not(id: current_user.id).order(:email)
   end
 
-  def edit_customer
-    @customer = User.find(params[:id])
-  end
-
   def customer_addresses
     @customer = User.find(params[:id])
   end
