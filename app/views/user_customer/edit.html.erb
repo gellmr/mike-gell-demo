@@ -1,0 +1,50 @@
+<div>USER CUSTOMER</div>
+
+<%= form_for user, url: {:controller => "user_customer", :action => "update"} do |f| %>
+
+
+<a href="#formTop"></a>
+
+<div class="row">
+
+  <div class="col-xs-12">
+    
+    <%= render "/partials/flash_message" %>
+
+    <%= render "/user_partials/just_signed_up", {user: user} %>
+
+    <%= hidden_field_tag :current_tab, controller_name %>
+
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+
+        <div class="row">
+
+          <%= render partial: "/user_customer/navtabs", locals: {user: user} %>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+
+            <!-- Account Details -->
+            <div class="tab-pane active" id="accountDetails">
+
+              <div class="col-xs-12">
+
+                <%= render '/user_customer/partials/usertype', { user: user, f: f } %>
+
+                <%= render '/user_partials/edit_basic_details', { user: user, f: f } %>
+
+                <div class="form-group">
+                  <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

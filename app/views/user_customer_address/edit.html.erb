@@ -1,0 +1,68 @@
+<div>USER CUSTOMER ADDRESS</div>
+
+<a href="#formTop"></a>
+<div class="row">
+  <div class="col-xs-12">
+    
+    <%= render "/partials/flash_message" %>
+
+    <%= form_for user, url: update_my_address_path(user) do |f| %>
+
+      <%= hidden_field_tag :current_tab, controller_name %>
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+          <div class="row">
+
+            <%= render partial: "/user_customer/navtabs", locals: {user: user} %>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <!-- My Addresses -->
+              <div class="tab-pane active" id="myAddresses">
+                <div class="col-xs-12">
+
+                  <div class="well userwell" style="margin-top: 20px;">
+                    You currently have <%= user.addresses.where(deleted: false).count %> addresses.
+
+                    <%= link_to create_address_path(user), method: :post do %>
+                      <button id="createAddress" type="button" class="btn btn-default">Add Another Address</button>
+                    <% end %>
+                  </div>
+
+                  <div class="row">
+                    <% user.addresses.order(:id).each do |address| %>
+                      <%= f.fields_for :addresses, address do |address_form| %>
+                        <% if address.deleted == false %>
+                          <%= render "/user_customer/partials/address", {
+                            f: address_form,
+                            address: address,
+                            userForm: f,
+                            user: user
+                          } %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 66px;">
+        <div class="panel-body">
+          <div class="panel" style="border: none;">
+            <button id="submitButton" type="submit" class="btn btn-primary pull-right">Update Details</button>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

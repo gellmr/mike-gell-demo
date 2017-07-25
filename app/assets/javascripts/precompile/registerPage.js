@@ -87,7 +87,7 @@
       }
       console.log("Try to register...");
       $.ajax({
-        url:"/users",
+        url:"/user-customer",
         type:'POST',
         dataType:"json",
         data: params,
@@ -96,7 +96,7 @@
 
           201: function(user) {
             console.log("success! user: " + user.id);
-            window.location.href = '/users/' + user.id + '/edit';
+            window.location.href = '/user-customer/' + user.id + '/edit';
           },
 
           // bad request

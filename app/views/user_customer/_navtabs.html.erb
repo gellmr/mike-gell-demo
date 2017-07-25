@@ -1,0 +1,19 @@
+<!-- Tab header -->
+<div class="col-xs-12" style="height:30px;"><b>Editing <%= controller_name.singularize %>:</b> <span class="feint"><%= user.first_name %>&nbsp<%= user.last_name %></span>
+</div>
+
+<ul class="nav nav-tabs" role="tablist" id="accountDetailTabs">
+
+  controller_name: <%= controller_name %> </br>
+  action: <%= params[:action] %></br>
+
+  <% if controller_name == "user_customer" || controller_name == "user_customer_address" %>
+    <%= navtab_li 'user_customer/edit' %>
+      <%= link_to edit_my_account_path(user) do %> Details <% end %>
+    </li>
+    <%= navtab_li 'user_customer_address/edit' %>
+      <%= link_to edit_my_addresses_path(user) do %> Shipping / Billing Addresses <% end %>
+    </li>
+  <% end %>
+  
+</ul>

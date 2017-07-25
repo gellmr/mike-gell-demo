@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     end
 
     # or, by default go to the account page
-    redirection ||= "/users/#{current_user.id}/edit" # My Account
+    redirection ||= "/user_customer/#{current_user.id}" # My Account
     return redirection
   end
 

@@ -4,7 +4,9 @@
     
     <%= render "/partials/flash_message" %>
 
-    <%= form_for @user do |f| %>
+    <% @form_submit_url ||= user_path(@user) %>
+
+    <%= form_for @user, url: @form_submit_url do |f| %>
 
       <%= hidden_field_tag :current_tab, controller_name %>
 
@@ -13,7 +15,7 @@
         <div class="panel-body">
           <div class="row">
 
-            <%= render partial: "users/navtabs", locals: {user: @user} %>
+            <%= render partial: "/user/navtabs", locals: {user: @user} %>
 
             <!-- Tab panes -->
             <div class="tab-content">
@@ -22,7 +24,7 @@
               <div class="tab-pane active" id="myAddresses">
                 <div class="col-xs-12">
 
-                  <div class="well" style="margin-top: 20px;">
+                  <div class="well userwell" style="margin-top: 20px;">
                     You currently have <%= @user.addresses.where(deleted: false).count %> addresses.
 
                     <%= link_to user_create_address_path(@user), method: :post do %>

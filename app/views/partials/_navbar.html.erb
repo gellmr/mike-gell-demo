@@ -22,22 +22,15 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <%= navigation_li "My Orders", user_orders_path(current_user) %>
-          <%= navigation_li "My Account", edit_user_path(current_user) %>
+          <%#= navigation_li "My Orders", user_orders_path(current_user) %>
+          <%= navigation_li "My Account", edit_my_account_path(current_user) %>
           <% if current_user.usertype == 'staff' %>
             
-            <li class="<%= manage_users_path == request.path ? 'active' : '' %>" >
-              <%= link_to "Manage Users", manage_users_path %>
+            <%# staff edit customer %>
+            <li class="<%= staff_edit_customers_path == request.path ? 'active' : '' %>" >
+              <%= link_to "Manage Customers", staff_edit_customers_path %>
             </li>
-
-            <li class="<%= manage_customers_path == request.path ? 'active' : '' %>" >
-              <%= link_to "Manage Customers", manage_customers_path %>
-            </li>
-
-            <li class="<%= manage_staff_path == request.path ? 'active' : '' %>" >
-              <%= link_to "Manage Staff", manage_staff_path %>
-            </li>
-
+            
           <% end %>
           <%= navigation_li "Log Out", logout_path, method: :delete %>
         <% else %>

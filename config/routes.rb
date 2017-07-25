@@ -1,69 +1,116 @@
 Fuzzybear::Application.routes.draw do
 
-  resources :users, only: [:create, :update, :edit, :destroy] do
-    # POST  /users             users#create    users_path
-    # PATCH /users/:id         users#update    user_path
-    # GET   /users/:id/edit    users#edit      edit_user_path
+  root   'home#index'
 
-    resources :orders, only: [:index, :show]
-      # GET  /users/:id/orders/     orders#index  user_orders_path
-      # GET  /users/:id/orders/:id  orders#show   user_order_path
+  get    "/home/index"             => 'home#index',             as: 'home_index'
+  get    '/home'                   => 'home#index',             as: 'home'
 
-    get    '/addresses'           => 'user_addresses#edit',  as: 'addresses'
-    post   '/address(.:format)'   => 'user_addresses#create',  as: 'create_address'
-    delete '/address/:id(.:format)' => 'user_addresses#destroy', as: 'delete_address'
-  end
+  get    '/register'               => 'sessions#register_page', as: 'register'
+  post   '/sessions'               => 'sessions#create',        as: 'sessions_path'
+  get    '/session-expired-notice' => 'sessions#expired_notice'
 
-  # Staff only - get index page of existing customers
-  get '/manage-users'     => 'users#index',     as: 'manage_users'
-  get '/manage-customers' => 'customers#index', as: 'manage_customers'
-  get '/manage-staff'     => 'staff#index',     as: 'manage_staff'
+  get    '/login/'                 => 'sessions#login_page',    as: 'login'
+  delete '/logout/'                => 'sessions#destroy',       as: 'logout'
 
-  # Staff only - get edit page for existing customer
-  get '/edit-customer/:id(.:format)' => 'customers#edit', as: 'edit_customer'
-  get '/customer-addresses/:id(.:format)' => 'customers#customer_addresses', as: 'customer_addresses'
+  get    '/forgot-password'        => 'password_reset#new',              as: 'new_password_reset' # Serve form to request pw change token
+  post   '/forgot-password'        => 'password_reset#create',           as: 'create_password_reset' # Submitted a form to request new token
+  get    '/set-new-password'       => 'password_reset#set_new_password', as: 'set_new_password' # Serve form to change password
+  post   '/change_password'        => 'password_reset#change_password',  as: 'change_password' # Submit new password and confirmation
 
-  # Staff only - update the details of an existing customer
-  patch '/customers/:id(.:format)' => 'customers#update', as: 'update_customer'
+  get    '/store/'                 => 'store#index',                     as: 'store_index'
+  get    '/store/search'           => 'store#product_search',            as: 'store_search'
 
-  # Staff only - create a new address for an existing customer
-  post '/customer/:customer_id/address(.:format)' => 'user_addresses#create_customer_address', as: 'customer_create_address'
+  #resources :cart, only: [:update]
+  get    '/cart/'                  => 'cart#index',                      as: 'cart_index'
+  get    '/cart/is-empty'          => 'cart#is_empty',                   as: 'cart_is_empty'
+  put    '/cart/'                  => 'cart#update',                     as: 'cart_update'
+  delete '/cart/'                  => 'cart#destroy',                    as: 'clear_cart'
 
-  # Staff only - delete an existing customer address
-  delete '/customer/:customer_id/address/:id(.:format)' => 'user_addresses#destroy_customer_address', as: 'customer_delete_address'
+  get  '/checkout/'                => 'checkout#index'
+  post '/checkout/submit'          => 'orders#create'
 
 
 
-  get "home/index" => 'home#index'   # home_index_path
-  get 'home/'      => 'home#index'   # home_path
 
-  resources :sessions, only: [:create]
-    # POST  /sessions  sessions#create   sessions_path
+  # CUSTOMER ROUTES
 
-  get  '/forgot-password' => 'password_reset#new',    as: 'new_password_reset' # Serve form to request pw change token
-  post '/forgot-password' => 'password_reset#create', as: 'create_password_reset' # Submitted a form to request new token
-  
-  get  '/set-new-password' => 'password_reset#set_new_password', as: 'set_new_password' # Serve form to change password
-  post '/change_password' => 'password_reset#change_password', as: 'change_password' # Submit new password and confirmation
+  # create an account                         create
+  # get my account details                    read
+  # update my account details                 update
+  # delete my account                         delete
+  post   '/user-customer'                    => 'user_customer#create',  as: 'create_my_account'
+  get    '/user-customer/:id(.:format)/edit' => 'user_customer#edit',    as: 'edit_my_account'
+  patch  '/user-customer/:id(.:format)'      => 'user_customer#update',  as: 'update_my_account'
+  delete '/user-customer/:id'                => 'user_customer#destroy', as: 'delete_my_account'
 
-  get 'session-expired-notice/' => 'sessions#expired_notice'
-  delete 'logout/' => 'sessions#destroy'
-  get 'login/'     => 'sessions#login_page'
-  get 'register/'  => 'sessions#register_page'
+  # create an address                         create
+  # get my addresses                          read
+  # update my addresses                       update
+  # delete an address                         delete
+  post   '/user-customer-address'               => 'user_customer_address#create',  as: 'create_address'
+  get    '/user-customer-address/:id(.:format)' => 'user_customer_address#edit',    as: 'edit_my_addresses'
+  patch  '/user-customer-address/:id(.:format)' => 'user_customer_address#update',  as: 'update_my_address'
+  delete '/user-customer-address/:id'           => 'user_customer_address#destroy', as: 'delete_address'
 
-  get 'store/'       => 'store#index', as: 'store_index'
-  get 'store/search' => 'store#product_search', as: 'store_search'
+  # get a list of my orders
+  # show the details of an order
+  get  '/customer/:id/orders'                   => 'orders#index',    as: 'customer_orders'
+  get  '/customer/:id/order/:id'                => 'orders#show',     as: 'customer_order'
 
-  resources :cart, only: [:update]
-  get 'cart/'      => 'cart#index', as: 'cart_index'
-  get 'cart/is-empty' => 'cart#is_empty', as: 'cart_is_empty'
-  put 'cart/'      => 'cart#update'
-  delete 'cart/'     => 'cart#destroy', as: 'clear_cart'
 
-  root 'home#index'
 
-  get 'checkout/' => 'checkout#index'
-  post 'checkout/submit' => 'orders#create'
+
+
+  # STAFF ONLY
+
+  # get a list of existing customers          read
+  # get    a customer's account details page  read
+  # update a customer's account details       update
+  # delete a customer account                 delete
+  get    '/staff-edit-customer'               => 'staff_edit_customer#index',   as: 'staff_edit_customers'
+  get    '/staff-edit-customer/:id(.:format)' => 'staff_edit_customer#edit',    as: 'staff_edit_customer'
+  patch  '/staff-edit-customer/:id(.:format)' => 'staff_edit_customer#update',  as: 'staff_update_customer'
+  delete '/staff-edit-customer/:id'           => 'staff_edit_customer#destroy', as: 'staff_delete_customer'
+
+  # create a customer's address               create
+  # get      customer's addresses             read
+  # update a customer's address               update
+  # delete a customer's address               delete
+  post   '/staff-edit-customer-address'               => 'staff_edit_customer_address#create',  as: 'staff_create_customer_address'
+  get    '/staff-edit-customer-address/:id(.:format)' => 'staff_edit_customer_address#edit',    as: 'staff_edit_customer_addresses'
+  patch  '/staff-edit-customer-address/:id(.:format)' => 'staff_edit_customer_address#update',  as: 'staff_update_customer_address'
+  delete '/staff-edit-customer-address/:id'           => 'staff_edit_customer_address#destroy', as: 'staff_delete_customer_address'
+
+
+
+
+  # ADMIN ONLY
+
+  # create an admin account                   create
+  # get a list of existing admin              read
+  # get    account details for an admin       read
+  # update account details for an admin       update
+  # delete an admin account                   delete
+  # post   '/admin-edit-admin'                => 'admin_edit_admin#create',  as: 'create_admin'
+  # get    '/admin-edit-admin'                => 'admin_edit_admin#index',   as: 'admin'
+  # get    '/admin-edit-admin/:id(.:format)'  => 'admin_edit_admin#edit',    as: 'edit_admin'
+  # patch  '/admin-edit-admin/:id(.:format)'  => 'admin_edit_admin#update',  as: 'update_admin'
+  # delete '/admin-edit-admin/:id(.:format)'  => 'admin_edit_admin#destroy', ad: 'delete_admin'
+
+  # create a staff account                    create
+  # get a list of existing staff              read
+  # get    account details for a staff        read
+  # update account details for a staff        update
+  # delete a staff account                    delete
+  post   '/admin-edit-staff'               => 'admin_edit_staff#create',  as: 'create_staff'
+  get    '/admin-edit-staff'               => 'admin_edit_staff#index',   as: 'staff'
+  get    '/admin-edit-staff/:id(.:format)' => 'admin_edit_staff#edit',    as: 'edit_staff'
+  patch  '/admin-edit-staff/:id(.:format)' => 'admin_edit_staff#update',  as: 'update_staff'
+  delete '/admin-edit-staff/:id'           => 'admin_edit_staff#destroy', as: 'delete_staff'
+
+
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

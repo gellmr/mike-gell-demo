@@ -1,0 +1,3 @@
+class UserCustomerBaseController < UserBaseController
+
+end
