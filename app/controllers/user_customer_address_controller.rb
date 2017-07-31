@@ -7,7 +7,7 @@ class UserCustomerAddressController < UserCustomerBaseController
 
   # Customer wants to create a new address
   def create
-    @customer = User.find_by(id: params[:customer_id])
+    @customer = User.find_by(id: current_user.id)
     address = @customer.addresses.create(
       line_1: "Address line 1",
       line_2: "",
@@ -18,7 +18,7 @@ class UserCustomerAddressController < UserCustomerBaseController
     )
     address.line_1 = "Address##{address.id}"
     address.save!
-    #redirect_to customer_addresses_path(@customer, anchor: "address#{address.id}")
+    redirect_to edit_my_addresses_path(@customer, anchor: "address#{address.id}")
   end
 
   # Customer wants to edit his existing addresses.
@@ -41,12 +41,12 @@ class UserCustomerAddressController < UserCustomerBaseController
 
   # Customer wants to delete one of his existing addresses
   def destroy
-    puts "try to delete address... customer_id:#{customer_id}"
-    @customer = User.find_by(id: params[:customer_id])
-    address = @customer.addresses.find_by(id: params[:id])
+    puts "try to delete address... current_user.id:#{current_user.id}"
+    @customer = User.find_by(id: params[:id])
+    address = @customer.addresses.find_by(id: params[:format])
     address.deleted = true
     address.save!
     puts "Successfully!"
-    #redirect_to customer_addresses_path(@customer)
+    redirect_to edit_my_addresses_path(@customer)
   end
 end

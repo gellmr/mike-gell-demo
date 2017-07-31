@@ -23,27 +23,42 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if place_order
-      clear_cart()
-      Rails.logger.debug "Order created successfully."
-      flash[:success] = "Your order was created successfully."
-      head :created, {message: "Order created successfully", userId: current_user.id, orderId: @order.id}
+    puts "TRY TO CREATE AN ORDER..."
+    if ! current_user.addresses.any?
+      puts "user has got no addresses."
+
+      # tell client javascript to redirect to addresses page.
+      flashMessage = "You don't have any Shipping Address or Billing Address. Please add them"
+      flash.keep
+      flash[:danger] = flashMessage
+      json = {
+        userId: current_user.id,
+        redirect: edit_my_addresses_path(current_user),
+        flashMessage: flashMessage
+      }
+      render :json => json, :status => 400 # bad request
     else
-      Rails.logger.debug "Could not create order. #{@order.errors.full_messages}"
-      if @order.errors.any?
-        if @order.errors['shipping_address'].any? || @order.errors['billing_address'].any?
-          # tell client javascript to redirect to addresses page.
-          flashMessage = "You don't have any Shipping Address or Billing Address. Please add them"
+
+      puts "user has got an address"
+
+      if place_order
+        clear_cart()
+        puts "Order created successfully."
+        flash[:success] = "Your order was created successfully."
+        head :created, {message: "Order created successfully", userId: current_user.id, orderId: @order.id}
+      else
+        Rails.logger.debug "Could not create order. #{@order.errors.full_messages}"
+        if @order.errors.any?
+          flashMessage = @order.errors.to_s
           flash.keep
           flash[:danger] = flashMessage
           json = {
             userId: current_user.id,
-            redirect: user_addresses_path(current_user),
             flashMessage: flashMessage
           }
         end
+        render :json => json, :status => 400 # bad request
       end
-      render :json => json, :status => 400 # bad request
     end
   end
 
@@ -64,6 +79,7 @@ class OrdersController < ApplicationController
         ordered_product.order = @order
         ordered_product.product = Product.find(productId)
         ordered_product.qty = qty
+
         if ordered_product.valid?
           op_arr.push ordered_product # Don't save yet.
         else
@@ -75,6 +91,7 @@ class OrdersController < ApplicationController
 
       # Save the order, if all parts are valid.
       if all_valid && @order.valid?
+
         op_arr.each do |op|
           op.save!
           Rails.logger.debug "Created ordered_product #{op.id}"

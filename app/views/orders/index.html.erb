@@ -16,7 +16,7 @@
     <% else %>
 
       <% @orders.each do |order| %>
-        <%= link_to("/users/#{current_user.id}/orders/#{order.id}", html_options = {class: "noUnderline"}) do %>
+        <%= link_to("/customer/#{current_user.id}/order/#{order.id}", html_options = {class: "noUnderline"}) do %>
 
           <div class="well solidBackground mg-hover">
             <%= render "orders/partials/order_head", {

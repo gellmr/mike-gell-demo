@@ -13,7 +13,7 @@
       console.log("userId: "  + userId);
       console.log("orderId: " + orderId);
       // redirect self...
-      window.location.href = '/users/' + userId + '/orders/' + orderId;
+      window.location.href = '/customer/' + userId + '/order/' + orderId;
       break;
     }
   };
