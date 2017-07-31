@@ -13,8 +13,8 @@ ADMIN EDIT STAFF
         <h4>Staff List</h4>
         <div class="row breakpoint-text">
 
-        <% @staff.each do |staff| %>
-          <%= render '/admin_edit_staff/partials/staff_list', { user: staff } %>
+        <% staff.each do |s| %>
+          <%= render '/admin_edit_staff/partials/staff_list', { user: s } %>
         <% end %>
 
         </div>

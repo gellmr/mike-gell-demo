@@ -24,7 +24,7 @@
               <div class="tab-pane active" id="myAddresses">
                 <div class="col-xs-12">
 
-                  <div class="well userwell" style="margin-top: 20px;">
+                  <div class="well customerwell" style="margin-top: 20px;">
                     You currently have <%= user.addresses.where(deleted: false).count %> addresses.
 
                     <%= link_to create_address_path(user), method: :post do %>

@@ -1,6 +1,6 @@
-<div>USER CUSTOMER</div>
+<div>ADMIN EDIT STAFF</div>
 
-<%= form_for user, url: {:controller => "user_customer", :action => "update"} do |f| %>
+<%= form_for user, url: {:controller => "admin_edit_staff", :action => "update"} do |f| %>
 
 
 <a href="#formTop"></a>
@@ -11,8 +11,6 @@
     
     <%= render "/partials/flash_message" %>
 
-    <%= render "/user_partials/just_signed_up", {user: user} %>
-
     <%= hidden_field_tag :current_tab, controller_name %>
 
     <div class="panel panel-default">
@@ -21,7 +19,7 @@
 
         <div class="row">
 
-          <%= render partial: "/user_customer/navtabs", locals: {user: user} %>
+          <%#= render partial: "/user_customer/navtabs", locals: {user: user} %>
 
           <!-- Tab panes -->
           <div class="tab-content">

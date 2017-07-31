@@ -29,7 +29,7 @@ nav.pagination a.btn {
 }
 
 .feint{
-  color: grey;
+  color: rgba(39, 39, 39, 0.68);
 }
 
 .very-feint{
@@ -48,10 +48,14 @@ div.breakpoint-text .tiny-font{
   }
 }
 
-.well.userwell{
-  background-color: #2FA0E2; // blue
+.well.customerwell{
+  background-color: #97CC97; //green
 }
 
-.well.customerwell{
-  background-color: rgb(250,140,65); //bright orange
+.well.staffwell{
+  background-color: rgb(243, 133, 59); //bright orange
+}
+
+.well.adminwell{
+  background-color: #C54B48; //red
 }
