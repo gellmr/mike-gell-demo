@@ -26,6 +26,7 @@ class StaffEditCustomerController < StaffEditCustomerBaseController
 
   # Staff wants to delete an existing customer.
   def destroy
+    puts "DELETE CUSTOMER #{params[:id]}"
     @customer = User.find_by(id: params[:id])
     if @customer.nil?
       flash[:notice] = "Customer #{params[:id]} not found."
@@ -39,7 +40,8 @@ class StaffEditCustomerController < StaffEditCustomerBaseController
       deletedCustomer = "#{@customer.id} (Name: #{@customer.first_name} #{@customer.last_name}, Email: #{@customer.email})."
       @customer.destroy
       flash[:success] = "Deleted Customer #{deletedCustomer}"
-      #redirect_to manage_customers_path
+      puts "redirecting to customer list..."
+      redirect_to staff_edit_customers_path
     end
   end
 end

@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col-xs-10">
-        <%= render "/legacyusers/partials/list_basic", {user:user} %>
+        <%= render "/admin_edit_staff/partials/list_basic", {user:user} %>
         <hr>
         <div class="row">
           <div class="col-xs-12">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col-xs-2">
-        <%= link_to staff_delete_customer_path(user), method: :delete, class: 'user-delete pull-right', style:"text-decoration:none;" do %>
+        <%= link_to delete_staff_path(user), method: :delete, class: 'user-delete pull-right', style:"text-decoration:none;" do %>
           <span class="glyphicon glyphicon-remove"></span>
         <% end %>
       </div>
@@ -21,7 +21,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <%= link_to staff_edit_customer_path(user), class: 'pull-right' do %>
+        <%= link_to edit_staff_path(user), class: 'pull-right' do %>
           <button id=<%="editUser#{user.id}"%> type="button" class="btn btn-default">Edit User</button>
         <% end %>
       </div>

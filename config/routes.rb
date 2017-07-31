@@ -103,11 +103,10 @@ Fuzzybear::Application.routes.draw do
   # update account details for a staff        update
   # delete a staff account                    delete
   post   '/admin-edit-staff'               => 'admin_edit_staff#create',  as: 'create_staff'
-  get    '/admin-edit-staff'               => 'admin_edit_staff#index',   as: 'staff'
+  get    '/admin-edit-staff'               => 'admin_edit_staff#index',   as: 'staff_index'
   get    '/admin-edit-staff/:id(.:format)' => 'admin_edit_staff#edit',    as: 'edit_staff'
   patch  '/admin-edit-staff/:id(.:format)' => 'admin_edit_staff#update',  as: 'update_staff'
   delete '/admin-edit-staff/:id'           => 'admin_edit_staff#destroy', as: 'delete_staff'
-
 
 
 

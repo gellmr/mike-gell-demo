@@ -120,8 +120,16 @@ class ApplicationController < ActionController::Base
     end
 
     def require_staff
-      unless current_user && current_user.usertype == 'staff'
+      # if you are an admin, then you can also access staff only pages
+      # because an admin is a staff.
+      unless current_user && (current_user.usertype == 'staff' || current_user.usertype == 'admin')
         redirect_to login_path # halts request cycle 
+      end
+    end
+
+    def require_admin
+      unless current_user && current_user.usertype == 'admin'
+        redirect_to login_path # halts request cycle
       end
     end
 

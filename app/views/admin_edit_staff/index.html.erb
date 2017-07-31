@@ -1,0 +1,27 @@
+
+ADMIN EDIT STAFF
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  
+    <%= render "/partials/flash_message" %>
+
+    <div class="row">
+      <div class="hidden-xs col-sm-2"></div>
+      <div class="col-xs-12 col-sm-8">
+
+        <h4>Staff List</h4>
+        <div class="row breakpoint-text">
+
+        <% @staff.each do |staff| %>
+          <%= render '/admin_edit_staff/partials/staff_list', { user: staff } %>
+        <% end %>
+
+        </div>
+
+      </div>
+      <div class="hidden-xs col-sm-2"></div>
+    </div>
+
+  </div>
+</div>
