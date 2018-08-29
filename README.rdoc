@@ -1,3 +1,6 @@
 == Online Electronics Retailer
 
 This application simulates an online store. The site is designed to be easy to use on mobile or desktop. It allows users to add products to cart, place an order, view previous orders, edit their account details, and manage customer account details if you are a staff user.
+
+The application is online here:
+https://mike-gell-demo.herokuapp.com/
